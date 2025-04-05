@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=6 format=3 uid="uid://vq3ebi483wyn"]
 
 [ext_resource type="Texture2D" uid="uid://dupu7ujxmxhm4" path="res://Assets/Circle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/MenuHud.gd" id="3_btcbx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -28,3 +29,10 @@ sprite_frames = SubResource("SpriteFrames_i3pqv")
 shape = SubResource("CircleShape2D_onrkg")
 
 [node name="MainCam" type="Camera2D" parent="."]
+
+[node name="Panel" type="Panel" parent="MainCam"]
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 300.0
+offset_bottom = 300.0
+script = ExtResource("3_btcbx")
