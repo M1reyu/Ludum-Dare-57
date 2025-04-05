@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn6yxmildf0j7"]
+
+[ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_cguwc"]
+[ext_resource type="Script" uid="uid://dv67aw8xfdo14" path="res://GameApp.gd" id="1_wicfy"]
+[ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_wicfy"]
+
+[node name="TestScene" type="Node2D" node_paths=PackedStringArray("ground")]
+script = ExtResource("1_wicfy")
+ground = NodePath("Ground")
+
+[node name="Player" parent="." instance=ExtResource("1_cguwc")]
+
+[node name="Ground" parent="." instance=ExtResource("2_wicfy")]
