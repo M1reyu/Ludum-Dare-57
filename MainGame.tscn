@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1d377qbu0m2h"]
+[gd_scene load_steps=3 format=4 uid="uid://b1d377qbu0m2h"]
 
 [ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_e3m3f"]
-[ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="2_ws5ob"]
+[ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
 
 [node name="MainGame" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_e3m3f")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-215, -215.5)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_ws5ob")
+[node name="Ground" parent="." instance=ExtResource("2_e3m3f")]
+tile_map_data = PackedByteArray("AAD9/wEAAQABAAAAAAD+/wEAAQABAAAAAAD//wEAAQABAAAAAAAAAAEAAQABAAAAAAABAAEAAQABAAAAAAACAAEAAQABAAAAAAD9/wIAAQABAAEAAAD+/wIAAQABAAEAAAD//wIAAQABAAEAAAAAAAIAAQABAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAAEAAQAAQABAAEAAAADAAQAAQABAAEAAAACAAQAAQABAAEAAAABAAQAAQABAAEAAAAAAAQAAQABAAEAAAD//wQAAQABAAEAAAD+/wQAAQABAAEAAAD9/wQAAQABAAEAAAD8/wQAAQABAAEAAAD7/wQAAQABAAEAAAD7/wUAAQABAAEAAAD8/wUAAQABAAEAAAD9/wUAAQABAAEAAAD+/wUAAQABAAEAAAD//wUAAQABAAEAAAAAAAUAAQABAAEAAAABAAUAAQABAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAD7/wEAAQABAAAAAAAEAAEAAQABAAAAAAAEAAIAAQABAAEAAAD7/wIAAQABAAEAAAA=")
