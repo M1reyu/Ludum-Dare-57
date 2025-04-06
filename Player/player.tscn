@@ -1,17 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=11 format=3 uid="uid://vq3ebi483wyn"]
 
-[ext_resource type="Texture2D" uid="uid://dupu7ujxmxhm4" path="res://Assets/Circle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
+[ext_resource type="Texture2D" uid="uid://befjlexrbepi2" path="res://Assets/Player/Player_SmallDrill02.png" id="3_00tjw"]
 [ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/MenuHud.gd" id="3_btcbx"]
+[ext_resource type="Texture2D" uid="uid://f8to3g72oacr" path="res://Assets/Player/Player_BigDrill01.png" id="4_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
+[ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
+[ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4flbx")
+"texture": ExtResource("2_od3ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_00tjw")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Drill 1 Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_x3vf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_apopc")
+}],
+"loop": true,
+"name": &"Drill 2 Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5htga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p5o4e")
+}],
+"loop": true,
+"name": &"Idle",
 "speed": 5.0
 }]
 
@@ -22,13 +52,14 @@ radius = 63.0317
 script = ExtResource("1_onrkg")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
+animation = &"Drill 2 Down"
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_onrkg")
 
 [node name="MainCam" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
 
 [node name="Panel" type="Panel" parent="MainCam"]
 anchors_preset = 8
@@ -36,10 +67,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -300.0
-offset_top = -300.0
-offset_right = 300.0
-offset_bottom = 300.0
+offset_left = -600.0
+offset_top = -600.0
+offset_right = 600.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_btcbx")
