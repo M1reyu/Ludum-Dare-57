@@ -11,7 +11,7 @@ var MenuSection2Count : int = 0
 var MenuSection3Count : int = 0
 
 const shopItem = preload("res://globalVars.gd").shopBuyables
-signal buyShopSelection(itemType : shopItem)
+signal buyShopSelection(itemIndex : int)
 
 func _ready() -> void:
 	MenuSection1 = $Utilities
@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex = MenuSection1Count + MenuSection2Count + 1
 		else: menuIndex = 1
 	elif (Input.is_action_just_pressed('Use')):
-		buyShopSelection.emit(shopItem.get(menuIndex))
+		buyShopSelection.emit(menuIndex)
 	else: return
 	
 	highlightMenu()

@@ -15,8 +15,13 @@ var strength : int = 2
 var inMenu : bool = false
 
 var curHealth : int = 1
-var curTank : int = 100
+var curTank : float = 100.0
 var curCargo : int = 0
+var shielded : bool = false
+var bombCount : int = 0
+var minerCount : int = 0
+var scannerBought : bool = false
+var mineRangeBought : bool = true
 
 @onready var menuHud : Control = $MainCam/MenuHud
 
@@ -27,12 +32,8 @@ func _ready() -> void:
 	curTank = maxTank
 
 var posTimeout = 0
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (!menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
-	if posTimeout > 0: posTimeout -= delta
-	else:
-		posTimeout = 1.0
-		print(position)
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
@@ -40,6 +41,7 @@ func _physics_process(delta: float) -> void:
 	
 	if (!menuHud.visible): 
 		dir = Input.get_vector("Left", "Right", "Up", "Down")
+		if dir != Vector2.ZERO: curTank -= delta
 		
 		if (dir.x != 0):
 			dir.x *= speed * delta * 2
@@ -91,24 +93,27 @@ func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
 		shopItem.Repair:
 			curHealth = maxHealth
 		shopItem.Refuel:
-			pass
+			curTank = maxTank
 		shopItem.Shield:
-			pass
+			shielded = true
 		shopItem.Bomb:
-			pass
+			bombCount += 1
 		shopItem.Miner:
-			pass
+			minerCount += 1
 		shopItem.HealthUp:
-			pass
+			maxHealth += 1
+			curHealth = maxHealth
 		shopItem.SpeedUp:
-			pass
+			speed += 200
 		shopItem.StrengthUp:
-			pass
+			strength *= 2
+			print("StrengthUp: " + str(strength))
 		shopItem.TankUp:
-			pass
+			maxTank *= 2
+			curTank = maxTank
 		shopItem.CargoUp:
-			pass
+			maxCargo *= 2
 		shopItem.Scanner:
-			pass
+			scannerBought = true
 		shopItem.RangeMine:
-			pass
+			mineRangeBought = true

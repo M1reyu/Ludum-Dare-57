@@ -67,7 +67,6 @@ shape = SubResource("CapsuleShape2D_od3ui")
 zoom = Vector2(0.4, 0.4)
 
 [node name="MenuHud" type="Control" parent="MainCam"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,13 +146,13 @@ scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_00tjw")
 centered = false
 
-[node name="Tank" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Drill" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
 position = Vector2(375, 25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_00tjw")
 centered = false
 
-[node name="Drill" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Tank" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
 position = Vector2(550, 25)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("9_00tjw")
