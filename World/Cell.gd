@@ -2,9 +2,10 @@ extends Object
 class_name Cell
 
 var _baseHealth: int = 2
-var _resistance: int = 0 # todo
+var _resistance: int = 0
 
 var healthPoints: int = 0
+var value: int = 0
 
 func _init(section: int = 0) -> void:
     if section == 0:
