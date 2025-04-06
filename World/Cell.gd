@@ -21,3 +21,9 @@ func isMined() -> bool:
     
 func isDamaged() -> bool:
     return healthPoints < _baseHealth && isMined() == false
+    
+func drill(damage: int = 1) -> void:
+    damage -= _resistance
+    if damage > 0:
+        healthPoints -= damage
+    

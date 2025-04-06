@@ -65,7 +65,7 @@ func drill(cellPosition: Vector2i) -> void:
     if cell.isMined():
         return
 
-    cell.healthPoints -= 1
+    cell.drill(1)
     setCellTile(cellPosition)
 
 func printWorld() -> void:
