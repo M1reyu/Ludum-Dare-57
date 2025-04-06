@@ -4,11 +4,10 @@
 [ext_resource type="Script" uid="uid://dv67aw8xfdo14" path="res://GameApp.gd" id="1_wicfy"]
 [ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_wicfy"]
 
-[node name="TestScene" type="Node2D" node_paths=PackedStringArray("ground")]
+[node name="TestScene" type="Node2D"]
 script = ExtResource("1_wicfy")
-ground = NodePath("Ground")
 
 [node name="Player" parent="." instance=ExtResource("1_cguwc")]
-position = Vector2(0, -73)
+position = Vector2(0, -200)
 
 [node name="Ground" parent="." instance=ExtResource("2_wicfy")]

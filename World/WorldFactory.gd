@@ -9,7 +9,7 @@ const SECTION_COLUMNS: int = 7
 const SECTION_ROWS: int = 3
 const SECTION_COUNT = 2
 
-const TILE_GROUND: Vector2i = Vector2i(1, 0)
+const TILE_GROUND: Vector2i = Vector2i(0, 0)
 const TILE_MINED: Vector2i = Vector2i(1, 2)
 
 func _init(tml: TileMapLayer) -> void:
@@ -55,15 +55,22 @@ func addCell(row: int, column: int, cell: Cell) -> void:
     worldState[row][column] = cell
     ground.set_cell(Vector2i(row, column), 1, TILE_GROUND)
 
-func drill(row: int, column: int) -> void:
+func drill(cellPosition: Vector2i) -> void:
+    var row: int = cellPosition.x
+    var column: int = cellPosition.y
     var cell: Cell = worldState[row][column]
+    print("Drill: (%d, %d), health: %d" % [row, column, cell.healthPoints])
+    
     if cell.isMined():
         return
+        
+    if cell.getBaseHealthPoints() == cell.healthPoints:
+        ground.set_cell(cellPosition, 1, TILE_GROUND, 1)
     
     cell.healthPoints -= 1
     if cell.isMined():
         # print another tile image
-        ground.set_cell(Vector2i(row, column), 1, TILE_MINED)
+        ground.set_cell(cellPosition, 1, TILE_MINED)
 
 func printWorld() -> void:
     print("World state:")

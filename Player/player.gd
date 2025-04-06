@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal collides(collision: KinematicCollision2D)
+
 @export var speed : int = 800
 @export var maxSpeed : int = 1500
 @export var bounceForce : int = 1000
@@ -41,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	velocity = dir
 	var pos = position
 	if(move_and_slide()):
+		collides.emit(get_last_slide_collision())
 		dir = dir.normalized()
 		pos = abs(pos - position) / abs(dir)
 		dir = (dir / abs(dir)) * bounceForce * -1

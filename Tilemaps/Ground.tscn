@@ -5,8 +5,12 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2tqa"]
 texture = ExtResource("1_e2tqa")
 texture_region_size = Vector2i(250, 250)
+0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+0:0/1 = 1
+0:0/1/modulate = Color(0.513726, 1, 0, 1)
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 1:1/0 = 0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 1:0/0 = 0
