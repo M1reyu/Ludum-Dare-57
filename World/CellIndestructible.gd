@@ -3,4 +3,4 @@ class_name Indestructible
 
 func _init() -> void:
     super._init()
-    resistance = 9000
+    _resistance = 9000
