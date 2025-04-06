@@ -1,18 +1,21 @@
 extends CharacterBody2D
 
-@export var speed : int = 500
-@export var bounceForce : int = 400
-@export var gravity : int = 300
+@export var speed : int = 800
+@export var maxSpeed : int = 1500
+@export var bounceForce : int = 1000
+#@export var gravity : int = 300
 
 var strength : int = 2
 var inMenu : bool = false
 
+@onready var menuHud : Control = $MainCam/MenuHud
+
 func _process(_delta: float) -> void:
-	if (!$MainCam/Panel.visible && Input.is_action_just_pressed("MenuTrigger")): $MainCam/Panel.show()
+	if (!menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
-	if (!$MainCam/Panel.visible): 
+	if (!menuHud.visible): 
 		dir = Input.get_vector("Left", "Right", "Up", "Down")
 		
 		if (dir.x != 0):
@@ -33,6 +36,8 @@ func _physics_process(delta: float) -> void:
 		elif (abs(velocity.y) > 10): dir.y = velocity.y * 0.8
 		else: dir.y = 0 
 	
+	if (abs(dir.x) > maxSpeed): dir.x = maxSpeed * (dir.x / abs(dir.x))
+	if (abs(dir.y) > maxSpeed): dir.y = maxSpeed * (dir.y / abs(dir.y))
 	velocity = dir
 	var pos = position
 	if(move_and_slide()):
