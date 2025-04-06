@@ -17,7 +17,7 @@ func _init(tml: TileMapLayer) -> void:
     random = RandomNumberGenerator.new()
     random.randomize()
     buildWorld()
-    print_debug(worldState)
+    printWorld()
     
 
 func buildWorld() -> void:
@@ -27,12 +27,12 @@ func buildWorld() -> void:
     worldState.resize(totalRows)
     
     # the first row contains just base dirt cells
-    buildRow(0, -1)
+    buildRow(0, -1.0)
     
     for row in range(1, totalRows):
         buildRow(row)
         
-func buildRow(row: int, randModifier: int = 0) -> void:
+func buildRow(row: int, randModifier: float = 0.0) -> void:
     @warning_ignore("integer_division")
     var currentSection: int = row / SECTION_ROWS
     worldState[row] = Array()
@@ -41,12 +41,12 @@ func buildRow(row: int, randModifier: int = 0) -> void:
     for column in range(SECTION_COLUMNS):
         addCell(row, column, buildCell(currentSection, randModifier))
 
-func buildCell(section: int, randModifier: int) -> Cell:
-    var randF: float = random.randf() - randModifier
+func buildCell(section: int, randModifier: float) -> Cell:
+    var randF: float = random.randf() + randModifier
     
-    if randF > 0.95:
+    if randF > (0.95 - (section * 0.01)):
         return Mine.new(section)
-    elif randF > 0.7:
+    elif randF > (0.7 - (section * 0.05)):
         return Ore.new(section)
     
     return Cell.new(section)
@@ -64,3 +64,16 @@ func drill(row: int, column: int) -> void:
     if cell.isMined():
         # print another tile image
         ground.set_cell(Vector2i(row, column), 1, TILE_MINED)
+
+func printWorld() -> void:
+    print("World state:")
+    for row in worldState:
+        var out = ""
+        for cell in row:
+            if is_instance_of(cell, Ore):
+                out += "O"
+            elif is_instance_of(cell, Mine):
+                out += "M"
+            else:
+                out += "X"
+        print(out)
