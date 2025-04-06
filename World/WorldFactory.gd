@@ -12,7 +12,7 @@ const SECTION_ROWS: int = 3
 const SECTION_COUNT = 4
 
 const TILE_GROUND: Vector2i = Vector2i(0, 0)
-const TILE_MINED: Vector2i = Vector2i(1, 2)
+const TILE_MINED: Vector2i = Vector2i(-1, -1)
 
 func _init(tml: TileMapLayer) -> void:
     ground = tml
