@@ -12,8 +12,15 @@ var inMenu : bool = false
 
 @onready var menuHud : Control = $MainCam/MenuHud
 
-func _process(_delta: float) -> void:
+const shopItem = preload("res://globalVars.gd")
+
+var posTimeout = 0
+func _process(delta: float) -> void:
 	if (!menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
+	if posTimeout > 0: posTimeout -= delta
+	else:
+		posTimeout = 1.0
+		print(position)
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
@@ -50,3 +57,9 @@ func _physics_process(delta: float) -> void:
 		if (pos.x > pos.y): velocity.y = dir.y
 		elif (pos.x < pos.y): velocity.x = dir.x
 		else: velocity = dir
+		
+		if (abs(dir.x) > maxSpeed): dir.x = maxSpeed * (dir.x / abs(dir.x))
+		if (abs(dir.y) > maxSpeed): dir.y = maxSpeed * (dir.y / abs(dir.y))
+
+func _on_menu_hud_buy_shop_selection(itemType: RefCounted) -> void:
+	pass # Replace with function body.
