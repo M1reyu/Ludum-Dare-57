@@ -7,7 +7,7 @@ extends CharacterBody2D
 var strength : int = 2
 var inMenu : bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (!$MainCam/Panel.visible && Input.is_action_just_pressed("MenuTrigger")): $MainCam/Panel.show()
 
 func _physics_process(delta: float) -> void:
