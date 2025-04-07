@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="MineDigger"
+run/main_scene="uid://xv75whi5jajw"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/bg_color=Color(0.984314, 0.909804, 0.917647, 1)
 config/icon="uid://dwurb7gsrfo2s"
 
 [autoload]
@@ -81,3 +83,4 @@ limits/message_queue/max_size_mb=819200
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.984314, 0.909804, 0.917647, 1)
