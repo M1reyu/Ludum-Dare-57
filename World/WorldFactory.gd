@@ -42,9 +42,9 @@ func buildCell(section: int, randModifier: float) -> Cell:
     var randF: float = random.randf() + randModifier
     
     # the first section contains no mines
-    if section > 1 && randF > (0.95 - (section * 0.01)):
+    if section > 1 && randF > (0.96 - (section * 0.01)):
         return Mine.new(section)
-    elif randF > (0.7 - (section * 0.05)):
+    elif randF > (0.75 - (section * 0.05)):
         return Ore.new(section)
     elif randF < -0.95:
         # the first row could have already mined cells
