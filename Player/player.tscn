@@ -1,19 +1,32 @@
-[gd_scene load_steps=18 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=31 format=3 uid="uid://vq3ebi483wyn"]
 
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
 [ext_resource type="Texture2D" uid="uid://befjlexrbepi2" path="res://Assets/Player/Player_SmallDrill02.png" id="3_00tjw"]
-[ext_resource type="Script" path="res://Player/ShopHud.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/ShopHud.gd" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://f8to3g72oacr" path="res://Assets/Player/Player_BigDrill01.png" id="4_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
 [ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://dqqi5lxhhvmly" path="res://Assets/ShopUI01.png" id="9_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://b365uue3ib0sw" path="res://Assets/ShopiconAutominer.png" id="10_sm0op"]
 [ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopSelector.png" id="10_x3vf3"]
-[ext_resource type="Script" path="res://Player/player_ui.gd" id="11_apopc"]
+[ext_resource type="Texture2D" uid="uid://qqwuseclnc26" path="res://Assets/ShopiconCargo.png" id="11_76lrf"]
+[ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Player/player_ui.gd" id="11_apopc"]
+[ext_resource type="Texture2D" uid="uid://bfhiltsspnm6s" path="res://Assets/ShopiconDrill.png" id="12_efx54"]
+[ext_resource type="Texture2D" uid="uid://bkc4fom7rcbxa" path="res://Assets/ShopiconFlag.png" id="13_755ss"]
 [ext_resource type="StyleBox" uid="uid://qsf04kvwe00c" path="res://Assets/Resources/FillBarBackground.tres" id="13_gu6f8"]
 [ext_resource type="StyleBox" uid="uid://btqodgj00flxw" path="res://Assets/Resources/FillBar.tres" id="13_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://bjvgkphpeor8o" path="res://Assets/ShopiconFuel.png" id="14_bbimk"]
+[ext_resource type="Texture2D" uid="uid://du1j1ip5ri6lh" path="res://Assets/ShopiconHealth.png" id="15_m0h3t"]
+[ext_resource type="Texture2D" uid="uid://bgkkxulgosqpc" path="res://Assets/ShopiconRange.png" id="16_i4o1l"]
+[ext_resource type="Texture2D" uid="uid://cmytxdhavk5rv" path="res://Assets/ShopiconRefuel.png" id="17_j2n6q"]
+[ext_resource type="Texture2D" uid="uid://b80vamks4ousr" path="res://Assets/ShopiconRepair.png" id="18_c6x0f"]
+[ext_resource type="Texture2D" uid="uid://b5mt30blfjb6p" path="res://Assets/ShopiconScanner.png" id="19_jp1hh"]
+[ext_resource type="Texture2D" uid="uid://d0bjexpaflu7w" path="res://Assets/ShopiconShield.png" id="20_qs4pp"]
+[ext_resource type="Texture2D" uid="uid://cjrsyh82jumk" path="res://Assets/ShopiconSpeed.png" id="21_iyprq"]
+[ext_resource type="Texture2D" uid="uid://cfrmrg7c3n3gw" path="res://Assets/ShopiconTNT.png" id="22_f4lon"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -85,7 +98,6 @@ zoom = Vector2(0.4, 0.4)
 [node name="Canvas" type="CanvasLayer" parent="."]
 
 [node name="ShopHud" type="Control" parent="Canvas"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,13 +112,99 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_btcbx")
 
-[node name="HudBackground" type="Sprite2D" parent="Canvas/ShopHud"]
+[node name="Layout" type="Control" parent="Canvas/ShopHud"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HudBackground" type="Sprite2D" parent="Canvas/ShopHud/Layout"]
 show_behind_parent = true
 scale = Vector2(0.666667, 0.666667)
 texture = ExtResource("9_x3vf3")
 centered = false
 
-[node name="Utilities" type="Control" parent="Canvas/ShopHud"]
+[node name="ItemIcons" type="Control" parent="Canvas/ShopHud/Layout"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShopiconAutominer" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(871, 156)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("10_sm0op")
+
+[node name="ShopiconCargo" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(865, 359)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("11_76lrf")
+
+[node name="ShopiconDrill" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(648, 358)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("12_efx54")
+
+[node name="ShopiconFlag" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(528, 564)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("13_755ss")
+
+[node name="ShopiconFuel" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(752, 364)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("14_bbimk")
+
+[node name="ShopiconHealth" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(425, 363)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("15_m0h3t")
+
+[node name="ShopiconRange" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(647, 564)
+rotation = 1.6386
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("16_i4o1l")
+
+[node name="ShopiconRefuel" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(534, 162)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("17_j2n6q")
+
+[node name="ShopiconRepair" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(423, 161)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("18_c6x0f")
+
+[node name="ShopiconScanner" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(426, 559)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("19_jp1hh")
+
+[node name="ShopiconShield" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(649, 166)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("20_qs4pp")
+
+[node name="ShopiconSpeed" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(539, 366)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("21_iyprq")
+
+[node name="ShopiconTnt" type="Sprite2D" parent="Canvas/ShopHud/Layout/ItemIcons"]
+position = Vector2(760, 164)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("22_f4lon")
+
+[node name="Control" type="Control" parent="Canvas/ShopHud/Layout"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShopSelector" type="Control" parent="Canvas/ShopHud"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Utilities" type="Control" parent="Canvas/ShopHud/ShopSelector"]
 anchors_preset = 0
 offset_left = 350.0
 offset_top = 95.0
@@ -114,37 +212,37 @@ offset_right = 1250.0
 offset_bottom = 295.0
 scale = Vector2(0.667, 0.667)
 
-[node name="Refule" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
+[node name="Refule" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Utilities"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Repair" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
+[node name="Repair" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Utilities"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Shield" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
+[node name="Shield" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Utilities"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Bomb" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
+[node name="Bomb" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Utilities"]
 position = Vector2(520, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Miner" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
+[node name="Miner" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Utilities"]
 position = Vector2(685, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Upgrades" type="Control" parent="Canvas/ShopHud"]
+[node name="Upgrades" type="Control" parent="Canvas/ShopHud/ShopSelector"]
 anchors_preset = 0
 offset_left = 350.0
 offset_top = 295.0
@@ -152,37 +250,37 @@ offset_right = 1250.0
 offset_bottom = 495.0
 scale = Vector2(0.667, 0.667)
 
-[node name="Health" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
+[node name="Health" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Upgrades"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Speed" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
+[node name="Speed" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Upgrades"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Drill" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
+[node name="Drill" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Upgrades"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Tank" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
+[node name="Tank" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Upgrades"]
 position = Vector2(520, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Cargo" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
+[node name="Cargo" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Upgrades"]
 position = Vector2(685, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Apilities" type="Control" parent="Canvas/ShopHud"]
+[node name="Apilities" type="Control" parent="Canvas/ShopHud/ShopSelector"]
 anchors_preset = 0
 offset_left = 350.0
 offset_top = 495.0
@@ -190,19 +288,19 @@ offset_right = 1250.0
 offset_bottom = 695.0
 scale = Vector2(0.667, 0.667)
 
-[node name="Scaner" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
+[node name="Scaner" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Apilities"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Flag" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
+[node name="Flag" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Apilities"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Range" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
+[node name="Range" type="Sprite2D" parent="Canvas/ShopHud/ShopSelector/Apilities"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")

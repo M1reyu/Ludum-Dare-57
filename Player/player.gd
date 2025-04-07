@@ -31,7 +31,7 @@ var mineRangeBought : bool = false
 
 const shopItem = preload("res://globalVars.gd").shopBuyables
 
-signal playerStats(funds : int, hp : int, fuel : int, cargo : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
+signal playerStats(funds : int, hp : int, hpMax : int, fuel : int, fuelMax : int, cargo : int, cargoMax : int, speedMax : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
 
 func _ready() -> void:
 	curHealth = maxHealth
@@ -97,7 +97,7 @@ func _physics_process(delta: float) -> void:
 		if (abs(dir.y) > speedLimit): dir.y = speedLimit * (dir.y / abs(dir.y))
 
 func sendStatSignal() -> void:
-	playerStats.emit(curMoney, curHealth, curTank, curCargo, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
+	playerStats.emit(curMoney, curHealth, maxHealth, curTank, maxTank, curCargo, maxCargo, speed, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
 
 func directionMod(dir : Vector2) -> Vector2:
 	if dir.x < 0: dir.x = -1

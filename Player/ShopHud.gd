@@ -14,13 +14,13 @@ const shopItem = preload("res://globalVars.gd").shopBuyables
 signal buyShopSelection(itemIndex : int)
 
 func _ready() -> void:
-	MenuSection1 = $Utilities
+	MenuSection1 = $ShopSelector/Utilities
 	MenuSection1Count = MenuSection1.get_child_count()
 	
-	MenuSection2 = $Upgrades
+	MenuSection2 = $ShopSelector/Upgrades
 	MenuSection2Count = MenuSection2.get_child_count()
 	
-	MenuSection3 = $Apilities
+	MenuSection3 = $ShopSelector/Apilities
 	MenuSection3Count = MenuSection3.get_child_count()
 	
 	hide()
@@ -86,5 +86,7 @@ func highlightMenu():
 		else: node.hide()
 	
 
-func _on_player_player_stats(funds: int, hp: int, fuel: int, cargo: int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
+
+
+func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
 	pass # Replace with function body.
