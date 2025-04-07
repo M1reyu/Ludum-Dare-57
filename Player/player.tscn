@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://rqiv0brcb6qx" path="res://Player/shop_hud.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://dso056m18q1im" path="res://Player/player_ui.tscn" id="9_x3vf3"]
+[ext_resource type="Theme" uid="uid://vclsrkov84c6" path="res://Assets/Themes/Credits_lable.tres" id="10_apopc"]
+[ext_resource type="Texture2D" uid="uid://yt2aokys5edl" path="res://Assets/Ore.png" id="11_5htga"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -53,6 +55,91 @@ height = 170.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_00tjw"]
 radius = 42.19
 
+[sub_resource type="Animation" id="Animation_5htga"]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("orePopUp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -100), Vector2(0, -130)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("orePopUp:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.49),
+"transitions": PackedFloat32Array(1, 2.73208, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("orePopUp:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.01, 1.49, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_apopc"]
+resource_name = "ore_gained"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("orePopUp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -115), Vector2(0, -145)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("orePopUp:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01, 0.25, 0.79),
+"transitions": PackedFloat32Array(1, 1.56917, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("orePopUp:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.79, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5o4e"]
+_data = {
+&"RESET": SubResource("Animation_5htga"),
+&"ore_gained": SubResource("Animation_apopc")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_onrkg")
@@ -82,6 +169,64 @@ zoom = Vector2(0.4, 0.4)
 [node name="ShopHud" parent="Canvas" instance=ExtResource("8_00tjw")]
 
 [node name="PlayerUI" parent="Canvas" instance=ExtResource("9_x3vf3")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p5o4e")
+}
+
+[node name="orePopUp" type="Control" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_top = -145.0
+offset_right = 40.0
+offset_bottom = -105.0
+
+[node name="Label" type="Label" parent="orePopUp"]
+layout_mode = 0
+offset_top = -28.0
+offset_right = 53.0
+offset_bottom = 50.0
+theme = ExtResource("10_apopc")
+text = "+1"
+horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="orePopUp"]
+position = Vector2(-40, 8.5)
+scale = Vector2(0.505814, 0.505814)
+texture = ExtResource("11_5htga")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p5o4e")
+}
+
+[node name="orePopUp" type="Control" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_top = -145.0
+offset_right = 40.0
+offset_bottom = -105.0
+
+[node name="Label" type="Label" parent="orePopUp"]
+layout_mode = 0
+offset_top = -28.0
+offset_right = 53.0
+offset_bottom = 50.0
+theme = ExtResource("10_apopc")
+text = "+1"
+horizontal_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="orePopUp"]
+position = Vector2(-40, 8.5)
+scale = Vector2(0.505814, 0.505814)
+texture = ExtResource("11_5htga")
 
 [connection signal="playerStats" from="." to="Canvas/ShopHud" method="_on_player_player_stats"]
 [connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]

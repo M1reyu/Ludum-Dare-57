@@ -30,6 +30,7 @@ var playerSpeed : int
 
 @onready var menuHud : Control = $Canvas/ShopHud
 @onready var playerSprite : AnimatedSprite2D = $PlayerSprite
+@onready var animations: AnimationPlayer = get_node("AnimationPlayer")
 
 const globals = preload("res://globalVars.gd") 
 const shopItem = globals.shopBuyables
@@ -195,4 +196,14 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 		return
 
 	curHealth -= damage
-	
+
+func _on_collect_valuable(value: int) -> void:
+	var oldCargo: int = curCargo
+	curCargo = min(curCargo + value, maxCargo)
+	var diffCargo = curCargo - oldCargo
+	var label: Label = get_node("orePopUp/Label")
+	if diffCargo == 0:
+		label.text = "full"
+	else:
+		label.text = "+" + str(diffCargo)
+	animations.play("ore_gained")
