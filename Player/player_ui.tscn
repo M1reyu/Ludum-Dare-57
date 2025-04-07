@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Player/player_ui.gd" id="1_m5vge"]
 [ext_resource type="Texture2D" uid="uid://dbb5wgyw42nat" path="res://Assets/Hub.png" id="2_4r83l"]
 [ext_resource type="Texture2D" uid="uid://dec3xlix87io4" path="res://Assets/Icon Cargo.png" id="3_7x5ta"]
-[ext_resource type="Theme" uid="uid://uopc6krwp0in" path="res://Assets/Themes/player_bars.tres" id="3_njtxh"]
+[ext_resource type="Theme" uid="uid://dpulc4qy1orno" path="res://Assets/Themes/Player_bars.tres" id="3_njtxh"]
 [ext_resource type="Texture2D" uid="uid://dhv4yaymkktnx" path="res://Assets/IconCoin.png" id="4_cutnq"]
 [ext_resource type="Texture2D" uid="uid://djtkwud5x348r" path="res://Assets/IconFuel.png" id="5_njtxh"]
 [ext_resource type="Texture2D" uid="uid://cvmgp1nbij7bl" path="res://Assets/ Icon Heath.png" id="6_s8btb"]
