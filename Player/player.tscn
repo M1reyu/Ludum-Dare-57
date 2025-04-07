@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
 [ext_resource type="Texture2D" uid="uid://befjlexrbepi2" path="res://Assets/Player/Player_SmallDrill02.png" id="3_00tjw"]
-[ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/ShopHud.gd" id="3_btcbx"]
+[ext_resource type="Script" path="res://Player/ShopHud.gd" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://f8to3g72oacr" path="res://Assets/Player/Player_BigDrill01.png" id="4_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
 [ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://dqqi5lxhhvmly" path="res://Assets/ShopUI01.png" id="9_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopSelector.png" id="10_x3vf3"]
-[ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Player/player_ui.gd" id="11_apopc"]
+[ext_resource type="Script" path="res://Player/player_ui.gd" id="11_apopc"]
 [ext_resource type="StyleBox" uid="uid://qsf04kvwe00c" path="res://Assets/Resources/FillBarBackground.tres" id="13_gu6f8"]
 [ext_resource type="StyleBox" uid="uid://btqodgj00flxw" path="res://Assets/Resources/FillBar.tres" id="13_p5o4e"]
 
