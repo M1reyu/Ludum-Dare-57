@@ -224,7 +224,7 @@ func setCellTile(position: Vector2i) -> void:
     
     var tileOffset: int = 0
     var atlasId: int = 0
-    
+
     if cell.isMined():
         setCellNumberTile(position)
         tileOffset = -1
@@ -232,28 +232,6 @@ func setCellTile(position: Vector2i) -> void:
         tileOffset = cell.getTileDamageOffset()
     
     ground.set_cell(position, atlasId, Vector2i(cell.tileVariant, tileOffset))
-
-func debugCellTiles(position: Vector2i) -> void:
-    var cell: Cell = worldState[position.y][position.x]
-    
-    if cell == null:
-        return
-    
-    var tile: Vector2i = TILE_GROUND
-    var alternative: int = 0
-    var atlasId: int = 1
-    
-    if cell.isMined():
-        setCellNumberTile(position)
-        tile = TILE_MINED
-    elif cell.isDamaged():
-        alternative = 1
-    elif cell is Ore:
-        alternative = 2
-    elif cell is Mine:
-        alternative = 3
-    
-    ground.set_cell(position, atlasId, tile, alternative)
 
 func setCellNumberTile(position: Vector2i) -> void:
     var tile: Vector2i = Vector2i(-1, -1)
