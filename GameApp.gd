@@ -18,6 +18,8 @@ func _ready() -> void:
     
     if player != null:
         player.collides.connect(_on_collision_detected)
+        player.scan.connect(world._on_scan)
+        
         world.explosion.connect(player._on_explosion)
         world.minedValuable.connect(player._on_collect_valuable)
     

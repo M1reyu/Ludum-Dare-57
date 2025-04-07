@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal collides(collision: KinematicCollision2D)
+signal scan(coordinates: Vector2)
 
 @export var speed : int = 800
 @export var speedLimit : int = 1500
@@ -76,7 +77,10 @@ func _process(delta: float) -> void:
 	elif (Input.is_action_just_pressed("UseMiner")):
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseScan")):
-		pass
+		if scannerBought && scanTimeout <= 0:
+			scanTimeout = 10
+			scan.emit(playerSprite.global_position)
+		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseFlag")):
 		sendStatSignal()
 

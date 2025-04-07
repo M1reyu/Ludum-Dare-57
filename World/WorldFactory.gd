@@ -11,6 +11,7 @@ var numbers: TileMapLayer
 var xCenter: int
 var yCenter: int
 var globalSection: int
+var scanTimer: Timer
 
 const SECTION_ROWS: int = 3
 const SECTION_COUNT = 4
@@ -35,6 +36,8 @@ func _init(groundLayer: TileMapLayer, numberLayer: TileMapLayer) -> void:
     
     buildWorld()
     printWorld()
+    
+    initTimer()
 
 func buildWorld() -> void:
     print('Loading ... building world')
@@ -277,3 +280,33 @@ func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
             if cell == null || cell.isMined() == false:
                 continue
             setCellTile(Vector2i(x, y))
+
+func initTimer() -> void:
+    scanTimer = Timer.new()
+    scanTimer.timeout.connect(_on_scan_complete)
+    numbers.add_child(scanTimer)
+
+func _on_scan(coordinates: Vector2) -> void:
+    print("scan triggered")
+    if not scanTimer.is_stopped():
+        return
+    
+    var localPosition: Vector2 = numbers.to_local(coordinates)
+    var cellPosition: Vector2i = numbers.local_to_map(localPosition)
+    var bounds: PositionBounds = PositionBounds.new(cellPosition, worldState, 10)
+    
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            setCellNumberTile(Vector2i(x, y))
+    
+    scanTimer.start(3.0)
+    
+func _on_scan_complete() -> void:
+    print("scan complete")
+    for row in range(worldState.size()):
+        for column in range(worldState[row].size()):
+            var cell: Cell = worldState[row][column]
+            if cell == null || cell.isMined():
+                continue
+            numbers.set_cell(Vector2i(column, row))
+    scanTimer.stop()
