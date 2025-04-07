@@ -31,19 +31,19 @@ const itemNames = {
 }
 
 const itemInfos = {
-	shopBuyables.Repair : "Repairs all the Damage you suffered to your hull.",
-	shopBuyables.Refuel : "Refill your gas tank to continue working.",	
-	shopBuyables.Shield : "Protects you from the next Mine you hit.",	
-	shopBuyables.Bomb : "Can be placed to blow up everything in the area.\nCAUTION: Vacate the are after use!",
+	shopBuyables.Repair : "Repairs all the damage you suffered to your hull.",
+	shopBuyables.Refuel : "Refill your gas tank to continue getting around quickly.",	
+	shopBuyables.Shield : "Protects you from the next mine you hit.",	
+	shopBuyables.Bomb : "Can be placed to blow up everything in the area.\nCAUTION: Vacate the area after use!",
 	shopBuyables.Miner : "Can be used to safely dig a space without the worry of a mine blowing up in your face.",
-	shopBuyables.HealthUp : "Increases the amount of damage you can take before dieing.",
-	shopBuyables.SpeedUp : "Increases the strength of your thrusters so you can move faster.",
+	shopBuyables.HealthUp : "Increases the amount of damage you can take before dying.",
+	shopBuyables.SpeedUp : "Increases the strength of your thrusters to move faster.",
 	shopBuyables.StrengthUp : "Increases the strength of your drill to mine faster.",
-	shopBuyables.TankUp : "Increases the size of your fuel tank so you can mine longer.",
+	shopBuyables.TankUp : "Increases the size of your fuel tank to mine longer.",
 	shopBuyables.CargoUp : "Increaes the amount of ore you can collect.",
-	shopBuyables.Scanner : "Can be used to scan the area to find loot or mines easier",
-	shopBuyables.Flag : "Can be used to mark spots that hold mines so you don't dig them up on accident",
-	shopBuyables.RangeMine : "Spreads some of you drill strength to adjacent tiles.\nCAUTION: Will trigger mines!"
+	shopBuyables.Scanner : "Can be used to scan the area to find loot and mines easier",
+	shopBuyables.Flag : "Can be used to mark spots that hold mines so you don't dig them up by accident",
+	shopBuyables.RangeMine : "Spreads some of your drill damage to adjacent tiles.\nCAUTION: Can trigger mines!"
 }
 
 class ShopCalc:
