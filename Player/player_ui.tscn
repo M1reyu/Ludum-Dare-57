@@ -30,7 +30,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_4r83l")
 centered = false
 
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+[node name="healthBar" type="ProgressBar" parent="HUD"]
 self_modulate = Color(0, 0.894118, 0, 1)
 layout_mode = 0
 offset_left = 60.0
@@ -44,7 +44,7 @@ step = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="ProgressBar2" type="ProgressBar" parent="HUD"]
+[node name="cargoBar" type="ProgressBar" parent="HUD"]
 self_modulate = Color(0, 0.894118, 0, 1)
 layout_mode = 0
 offset_left = 61.0
@@ -58,7 +58,7 @@ step = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="ProgressBar3" type="ProgressBar" parent="HUD"]
+[node name="fuleBar" type="ProgressBar" parent="HUD"]
 self_modulate = Color(0, 0.894118, 0, 1)
 layout_mode = 0
 offset_left = 61.0
@@ -92,7 +92,7 @@ position = Vector2(61, 167)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_cutnq")
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="moneyLabel" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 79.0
 offset_top = 155.0

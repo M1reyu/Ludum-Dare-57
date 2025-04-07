@@ -14,5 +14,6 @@ extends Control
 
 func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, strength : int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
 	SkillTnt.set_label_value(str(bombs))
-	SkillTnt.set_label_value(str(miners))
+	SkillMiner.set_label_value(str(miners))
 	money.text = str(funds)
+	

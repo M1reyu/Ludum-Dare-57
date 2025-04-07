@@ -181,9 +181,9 @@ modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
-offset_top = -145.0
+offset_top = -100.0
 offset_right = 40.0
-offset_bottom = -105.0
+offset_bottom = -60.0
 
 [node name="Label" type="Label" parent="orePopUp"]
 layout_mode = 0
@@ -203,3 +203,4 @@ texture = ExtResource("11_5htga")
 [connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]
 [connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]
 [connection signal="area_exited" from="PlayerTigArea" to="." method="_on_player_tig_area_area_exited"]
+[connection signal="buyShopSelection" from="Canvas/ShopHud" to="." method="_on_shop_hud_buy_shop_selection"]

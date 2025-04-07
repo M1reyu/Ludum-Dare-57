@@ -133,7 +133,7 @@ func directionMod(dir : Vector2) -> Vector2:
 	elif dir.y > 0: dir.y = 1
 	return dir
 
-func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
+func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 	var cost = 0
 	
 	match itemType:
