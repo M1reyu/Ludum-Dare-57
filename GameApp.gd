@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var ground: TileMapLayer = get_node("Ground")
-@onready var numbers: TileMapLayer = get_node("Numbers")
+@onready var ground: TileMapLayer = get_node("Ground/Ground")
+@onready var numbers: TileMapLayer = get_node("Ground/Numbers")
 @onready var player: CharacterBody2D = get_node("Player")
 @onready var mainCam: Camera2D = get_node("Player/MainCam")
 
