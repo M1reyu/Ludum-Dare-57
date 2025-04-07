@@ -75,6 +75,7 @@ func _process(delta: float) -> void:
 			node.explode.connect(_on_tn_t_explode)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseMiner")):
+		if strength != 0 && strength != -1: strength *= -1
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseScan")):
 		if scannerBought && scanTimeout <= 0:
@@ -82,6 +83,8 @@ func _process(delta: float) -> void:
 			scan.emit(playerSprite.global_position)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseFlag")):
+		if strength > 0: strength = -1
+		elif strength == -1: strength = playerStrength
 		sendStatSignal()
 
 func _physics_process(delta: float) -> void:

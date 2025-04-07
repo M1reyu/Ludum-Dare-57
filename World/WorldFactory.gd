@@ -90,8 +90,10 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
     
     if cell.isMined():
         return
-
-    cell.drill(damage)
+    
+    if damage >= 0: cell.drill(damage)
+    elif damage == -1: pass #Toggle cell unverwundbarkeit
+    else: pass #negativen Schaden als absoluten schaden an zelle anwenden bis zerstört
     setCellTile(cellPosition)
     
     if not cell.isDamaged() && not cell.isMined():
