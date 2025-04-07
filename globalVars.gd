@@ -32,7 +32,7 @@ const itemNames = {
 
 const itemInfos = {
 	shopBuyables.Repair : "Repairs all the damage you suffered to your hull.",
-	shopBuyables.Refuel : "Refill your gas tank to continue getting around quickly.",	
+	shopBuyables.Refuel : "Refill your gas tank to continue digging and getting around quickly.",	
 	shopBuyables.Shield : "Protects you from the next mine you hit.",	
 	shopBuyables.Bomb : "Can be placed to blow up everything in the area.\nCAUTION: Vacate the area after use!",
 	shopBuyables.Miner : "Can be used to safely dig a space without the worry of a mine blowing up in your face.",

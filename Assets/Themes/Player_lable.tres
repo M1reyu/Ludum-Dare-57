@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://f8r1yxwiwbks"]
+
+[ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="1_a60yy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v31lc"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.984314, 0.909804, 0.917647, 0.392157)
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[resource]
+Label/colors/font_color = Color(0.345098, 0.388235, 0.341176, 1)
+Label/font_sizes/font_size = 20
+Label/fonts/font = ExtResource("1_a60yy")
+RichTextLabel/colors/default_color = Color(0.301961, 0.0980392, 0.113725, 1)
+RichTextLabel/font_sizes/bold_font_size = 16
+RichTextLabel/font_sizes/normal_font_size = 20
+RichTextLabel/fonts/normal_font = ExtResource("1_a60yy")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_v31lc")
