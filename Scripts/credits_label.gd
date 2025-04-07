@@ -13,8 +13,8 @@ func buildText() -> void:
 	self.text = ''
 	addUser('Fin', 'Music', '', 'https://www.youtube.com/@FIN_Der-Otter')
 	addUser('Flocke', 'Mascot','', 'https://www.instagram.com/p/C_crsfbNoJH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==')
-	addUser('Martin', 'Programming, Level Design', 'prepe')
-	addUser('Nata', 'Programming, Level Design', 'krisss-gonko')
+	addUser('Martin', 'Programming, Game Design', 'prepe')
+	addUser('Nata', 'Sound, UI, Mini Art Support', 'krisss-gonko')
 	addUser('Stephie', 'Animation, Art', 'kyunru')
 	addUser('Tine', 'Programming, UI, Level Design', 'mireyu')
 	addLine()
