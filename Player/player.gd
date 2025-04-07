@@ -182,3 +182,10 @@ func _on_player_tig_area_area_exited(_area: Area2D) -> void:
 	canOpen = false
 	
 	sendStatSignal()
+
+func _on_explosion(coordinates: Vector2i, damage: int) -> void:
+	print("explosion...")
+	if position.distance_to(coordinates) < 300:
+		print("do damage")
+		curHealth -= damage
+    

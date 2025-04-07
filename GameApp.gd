@@ -21,6 +21,7 @@ func _ready() -> void:
         var center: int = WorldFactory.SECTION_ROWS * WorldFactory.SECTION_COUNT
         var centerPoint = ground.map_to_local(Vector2i(center, center))
         player.global_position = Vector2(centerPoint.x, player.global_position.y)
+        world.explosion.connect(player._on_explosion)
 
 func _on_collision_detected(collision: KinematicCollision2D) -> void:
     var cellPosition: Vector2i = ground.get_coords_for_body_rid(collision.get_collider_rid())
