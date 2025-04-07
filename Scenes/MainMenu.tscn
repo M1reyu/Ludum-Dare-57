@@ -64,6 +64,7 @@ textAlignment = 1
 hasInitialFocus = true
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_ce3w2")
 text = "Settings"

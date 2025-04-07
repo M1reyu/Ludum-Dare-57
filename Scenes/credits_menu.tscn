@@ -62,12 +62,6 @@ fit_content = true
 script = ExtResource("4_occkw")
 
 [node name="BackButton" parent="." instance=ExtResource("2_7cbwn")]
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 648.0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
 
 [connection signal="meta_clicked" from="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2/CreditsLabel" to="." method="_on_credits_label_meta_clicked"]

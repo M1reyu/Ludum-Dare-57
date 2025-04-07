@@ -10,6 +10,7 @@ var current_scene = SCENE_SET.MENU
 var powerUp = preload("res://Assets/Sounds/Effects/powerUp.wav")
 var pickupOre = preload("res://Assets/Sounds/Effects/pickupOre.wav")
 var explosion = preload("res://Assets/Sounds/Effects/explosion.wav")
+var explosion2 = preload("res://Assets/Sounds/Effects/explosion2.wav")
 var dig = preload("res://Assets/Sounds/Effects/dig.wav")
 
 var menu = preload("res://Assets/Sounds/Music/GameJam_Depth-Menu_Mix1.1_M1.0.wav")
@@ -24,6 +25,11 @@ func play_sfx(sfx_name: String):
 	elif sfx_name == "dig":
 		stream = dig
 	elif sfx_name == "explosion":
+		if randf()>0.05:
+			stream = explosion
+		else:
+			stream = explosion2
+	elif sfx_name == "nonBreak":
 		stream = explosion
 	else:
 		print("Invalid sfx name")
@@ -41,7 +47,6 @@ func play_sfx(sfx_name: String):
 	asp.queue_free()
 
 func change_music(scene: int):
-#TODO find correct position for volume set ->	bg_music.volume_db = volume
 	if current_scene != scene:
 		if scene == SCENE_SET.MENU:
 			bg_music.stream = menu
