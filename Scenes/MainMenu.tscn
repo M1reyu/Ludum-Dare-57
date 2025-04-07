@@ -59,7 +59,7 @@ size_flags_stretch_ratio = 0.0
 theme = ExtResource("3_ce3w2")
 text = "Start"
 script = ExtResource("4_elir1")
-targetScenePath = "uid://bmggpslv131f0"
+targetScenePath = "uid://b1d377qbu0m2h"
 textAlignment = 1
 hasInitialFocus = true
 
