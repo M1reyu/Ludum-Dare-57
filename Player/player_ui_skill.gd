@@ -17,3 +17,6 @@ func _ready():
 		multLable.visible = true
 		valueLable.visible = true
 		valueLable.text = "0"
+
+func set_label_value(value : String):
+	valueLable.text = value

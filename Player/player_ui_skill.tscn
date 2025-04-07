@@ -24,6 +24,7 @@ scale = Vector2(0.6, 0.6)
 
 [node name="x" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 111.0
 offset_top = 74.0
 offset_right = 163.0
@@ -34,6 +35,7 @@ text = "x"
 
 [node name="value" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 136.0
 offset_top = 76.0
 offset_right = 188.0
