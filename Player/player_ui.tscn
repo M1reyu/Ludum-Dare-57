@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dso056m18q1im"]
+
+[ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Player/player_ui.gd" id="1_m5vge"]
+[ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="2_bw1dt"]
+[ext_resource type="StyleBox" uid="uid://qsf04kvwe00c" path="res://Assets/Resources/FillBarBackground.tres" id="3_ced3y"]
+[ext_resource type="StyleBox" uid="uid://btqodgj00flxw" path="res://Assets/Resources/FillBar.tres" id="4_j43l2"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("1_m5vge")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_bw1dt")
+centered = false
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+self_modulate = Color(0, 0.894118, 0, 1)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 225.0
+offset_bottom = 45.0
+theme_override_styles/background = ExtResource("3_ced3y")
+theme_override_styles/fill = ExtResource("4_j43l2")
+max_value = 2.0
+step = 1.0
+value = 1.0
+show_percentage = false
