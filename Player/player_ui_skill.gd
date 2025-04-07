@@ -1,13 +1,15 @@
 extends Control
 
 @export var icon_image : CompressedTexture2D
+@export var btn_info : int
 @export var countable : bool
 @export var active : bool
-
 
 @onready var icon : Sprite2D = $Icon
 @onready var multLable : Label = $x
 @onready var valueLable : Label = $value
+@onready var bntInfo : Label = $bntInfo
+
 
 
 func _ready():
