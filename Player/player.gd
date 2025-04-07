@@ -43,6 +43,7 @@ func _ready() -> void:
 	curTank = maxTank
 	playerStrength = strength
 	playerSpeed = speed
+	sendStatSignal()
 
 var scanTimeout = 0
 func _process(delta: float) -> void:
