@@ -36,6 +36,8 @@ const globals = preload("res://globalVars.gd")
 const shopItem = globals.shopBuyables
 var shopCalc = globals.ShopCalc.new()
 
+var tntScene = preload("res://Scenes/TnT.tscn")
+
 signal playerStats(funds : int, hp : int, hpMax : int, fuel : int, fuelMax : int, cargo : int, cargoMax : int, speedMax : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
 
 func _ready() -> void:
@@ -46,8 +48,10 @@ func _ready() -> void:
 	sendStatSignal()
 
 var scanTimeout = 0
+var tntTimeout = 0
 func _process(delta: float) -> void:
 	if scanTimeout > 0: scanTimeout -= delta
+	if tntTimeout > 0: tntTimeout -= delta
 	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): 
 		sendStatSignal()
 		menuHud.show()
@@ -61,13 +65,20 @@ func _process(delta: float) -> void:
 		if (playerSprite.animation == "Idle"): playerSprite.play("Drill 1")
 	
 	if (Input.is_action_just_pressed("UseTnT")):
-		pass
+		if bombCount > 0 && tntTimeout <= 0:
+			tntTimeout = 1
+			bombCount -= 1
+			var node : TNTNode = tntScene.instantiate()
+			add_sibling(node)
+			node.global_position = global_position
+			node.explode.connect(_on_tn_t_explode)
+		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseMiner")):
-		pass
+		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseScan")):
 		pass
 	elif (Input.is_action_just_pressed("UseFlag")):
-		pass
+		sendStatSignal()
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
@@ -203,10 +214,11 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 
 	if shielded:
 		shielded = false
-		
-		return
+	else:
+		curHealth -= damage
+	
+	sendStatSignal()
 
-	curHealth -= damage
 
 func _on_collect_valuable(value: int) -> void:
 	var oldCargo: int = curCargo
@@ -218,3 +230,7 @@ func _on_collect_valuable(value: int) -> void:
 	else:
 		label.text = "+" + str(diffCargo)
 	animations.play("ore_gained")
+	sendStatSignal()
+
+func _on_tn_t_explode(coordinates: Vector2i, dmg: int) -> void:
+	_on_explosion(coordinates, dmg, 300)

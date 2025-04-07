@@ -15,3 +15,9 @@ position = Vector2(0, -750)
 
 [node name="Player" parent="." instance=ExtResource("1_e3m3f")]
 position = Vector2(0, -250)
+speed = 800
+speedLimit = 1500
+bounceForce = 1000
+maxHealth = 1
+maxTank = 100
+maxCargo = 5

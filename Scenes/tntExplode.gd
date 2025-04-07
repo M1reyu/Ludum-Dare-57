@@ -1,6 +1,8 @@
 extends Node2D
 
-signal explode(coordinates : Vector2i)
+class_name TNTNode
+
+signal explode(coordinates : Vector2i, dmg : int)
 
 func explodeTnt() -> void:
-	explode.emit(Vector2i(global_position))
+	explode.emit(Vector2i(global_position), 3)
