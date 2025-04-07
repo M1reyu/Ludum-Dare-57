@@ -63,24 +63,25 @@ func _process(_delta: float) -> void:
 func highlightMenu():
 	var iMod = menuIndex
 	var nodeCount = MenuSection1.get_child_count()
+	var node : Node
 	for i in range(nodeCount):
-		var node = MenuSection1.get_child(i)
-		node.set('self_modulate', Color.RED if (i+1 == iMod) else Color(1,1,1,1))
+		node = MenuSection1.get_child(i)
+		if (i+1 == iMod): node.show()
+		else: node.hide()
 	
-	MenuSection1.self_modulate = Color.GOLD if (0 < iMod && iMod <= nodeCount) else Color(1,1,1,1)
 	iMod -= nodeCount
 	
 	nodeCount = MenuSection2.get_child_count()
 	for i in range(nodeCount):
-		var node = MenuSection2.get_child(i)
-		node.set('self_modulate', Color.RED if (i+1 == iMod) else Color(1,1,1,1))
+		node = MenuSection2.get_child(i)
+		if (i+1 == iMod): node.show()
+		else: node.hide()
 	
-	MenuSection2.self_modulate = Color.GOLD if (0 < iMod && iMod <= nodeCount) else Color(1,1,1,1)
 	iMod -= nodeCount
 	
 	nodeCount = MenuSection3.get_child_count()
 	for i in range(nodeCount):
-		var node = MenuSection3.get_child(i)
-		node.set('self_modulate', Color.RED if (i+1 == iMod) else Color(1,1,1,1))
+		node = MenuSection3.get_child(i)
+		if (i+1 == iMod): node.show()
+		else: node.hide()
 	
-	MenuSection3.self_modulate = Color.GOLD if (0 < iMod && iMod <= nodeCount) else Color(1,1,1,1)

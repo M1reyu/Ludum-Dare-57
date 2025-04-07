@@ -119,10 +119,8 @@ func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
 		shopItem.RangeMine:
 			mineRangeBought = true
 
-
 func _on_player_tig_area_area_entered(area: Area2D) -> void:
 	canOpen = true
-
 
 func _on_player_tig_area_area_exited(area: Area2D) -> void:
 	canOpen = false

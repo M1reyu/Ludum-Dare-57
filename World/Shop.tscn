@@ -1,25 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://cv3uv4h4wib1w"]
+[gd_scene load_steps=6 format=3 uid="uid://cv3uv4h4wib1w"]
 
-[ext_resource type="Texture2D" uid="uid://dupu7ujxmxhm4" path="res://Assets/Circle.png" id="1_1csam"]
+[ext_resource type="Texture2D" uid="uid://cvlx5f2rw0g33" path="res://Assets/Shop01.png" id="1_mfehs"]
+[ext_resource type="Texture2D" uid="uid://b4iw3ygfu1aii" path="res://Assets/Shop02.png" id="2_h6tul"]
+[ext_resource type="Texture2D" uid="uid://vyo8mye7ofxb" path="res://Assets/Shop03.png" id="3_kq1uj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_53lfk"]
 animations = [{
 "frames": [{
+"duration": 1.5,
+"texture": ExtResource("1_mfehs")
+}, {
 "duration": 1.0,
-"texture": ExtResource("1_1csam")
+"texture": ExtResource("2_h6tul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kq1uj")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 2.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mfehs"]
-radius = 249.257
+radius = 536.093
 
 [node name="Shop" type="Node2D"]
 
 [node name="Visual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -50)
 sprite_frames = SubResource("SpriteFrames_53lfk")
+autoplay = "default"
+frame_progress = 0.105008
 
 [node name="ShopArea" type="Area2D" parent="."]
 collision_layer = 4
