@@ -91,6 +91,11 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
     cell.drill(damage)
     setCellTile(cellPosition)
     
+    if not cell.isDamaged() && not cell.isMined():
+        AudioPlayer.play_sfx("nonBreak")
+    else:
+        AudioPlayer.play_sfx("dig")
+    
     if not cell.isMined():
         return
         
