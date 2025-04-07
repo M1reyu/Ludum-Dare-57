@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_e3m3f"]
 [ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
-[ext_resource type="PackedScene" uid="uid://cv3uv4h4wib1w" path="res://World/Shop.tscn" id="2_ws5ob"]
+[ext_resource type="PackedScene" uid="uid://cv3uv4h4wib1w" path="res://Scenes/Shop.tscn" id="2_ws5ob"]
 
 [node name="MainGame" type="Node2D"]
 
@@ -14,3 +14,9 @@ position = Vector2(0, -750)
 
 [node name="Player" parent="." instance=ExtResource("1_e3m3f")]
 position = Vector2(0, -250)
+speed = null
+speedLimit = null
+bounceForce = null
+maxHealth = null
+maxTank = null
+maxCargo = null

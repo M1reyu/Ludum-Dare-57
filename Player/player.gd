@@ -66,6 +66,7 @@ func _physics_process(delta: float) -> void:
 	dirMod = directionMod(dir)
 	if (abs(dir.x) > speedLimit): dir.x = speedLimit * dirMod.x
 	if (abs(dir.y) > speedLimit): dir.y = speedLimit * dirMod.y
+	#if (dirMod = Vector2.ZERO && )
 	velocity = dir
 	var pos : Vector2 = position
 	if(move_and_slide()):
