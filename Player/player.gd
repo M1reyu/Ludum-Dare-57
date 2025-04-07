@@ -26,6 +26,7 @@ var flaggingBought : bool = false
 var mineRangeBought : bool = false
 
 @onready var menuHud : Control = $MainCam/MenuHud
+@onready var playerSprite : AnimatedSprite2D = $PlayerSprite
 
 const shopItem = preload("res://globalVars.gd").shopBuyables
 
@@ -36,6 +37,14 @@ func _ready() -> void:
 var posTimeout = 0
 func _process(_delta: float) -> void:
 	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
+	
+	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))
+	if (dirMod == Vector2.ZERO): 
+		playerSprite.rotation_degrees = 0
+		if (playerSprite.animation != "Idle"): playerSprite.play("Idle")
+	else:
+		playerSprite.rotation = dirMod.angle() - Vector2.DOWN.angle()
+		if (playerSprite.animation == "Idle"): playerSprite.play("Drill 1")
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
@@ -66,7 +75,6 @@ func _physics_process(delta: float) -> void:
 	dirMod = directionMod(dir)
 	if (abs(dir.x) > speedLimit): dir.x = speedLimit * dirMod.x
 	if (abs(dir.y) > speedLimit): dir.y = speedLimit * dirMod.y
-	#if (dirMod = Vector2.ZERO && )
 	velocity = dir
 	var pos : Vector2 = position
 	if(move_and_slide()):
