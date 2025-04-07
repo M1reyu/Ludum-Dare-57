@@ -188,4 +188,4 @@ func _on_explosion(coordinates: Vector2i, damage: int) -> void:
 	if position.distance_to(coordinates) < 300:
 		print("do damage")
 		curHealth -= damage
-    
+	
