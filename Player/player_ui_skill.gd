@@ -11,9 +11,10 @@ extends Control
 @onready var bntInfo : Label = $bntInfo
 
 
-
 func _ready():
 	icon.texture = icon_image
+	bntInfo.text = str(btn_info)
+
 	if countable:
 		icon.position.x-=30
 		multLable.visible = true
