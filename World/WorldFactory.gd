@@ -97,8 +97,10 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
     recalculateAdjacentCellSweeperCount(cellPosition)
     
     if cell is Mine:
+        AudioPlayer.play_sfx('explosion')
         explosion.emit(ground.map_to_local(cellPosition), 1)
     elif cell is Ore:
+        AudioPlayer.play_sfx('pickupOre')
         minedValuable.emit(cell.value)
 
 func printWorld() -> void:
