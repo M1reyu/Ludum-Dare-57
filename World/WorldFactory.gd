@@ -37,6 +37,13 @@ func buildWorld() -> void:
         buildPlanetLayer(SECTION_ROWS * (section + 1))
         globalSection -= 1
     
+    # to avoid displaying wrong numbers, because the cell are build in columns
+    # we need to update all mined cells again
+    for row in range(worldState.size()):
+        for column in range(worldState[row].size()):
+            var cell: Cell = worldState[row][column]
+            if cell is Cell && cell.isMined():
+                setCellTile(Vector2i(column, row))
 
 func buildCell(section: int, randModifier: float) -> Cell:
     var randF: float = random.randf() + randModifier
@@ -67,6 +74,9 @@ func drill(cellPosition: Vector2i) -> void:
 
     cell.drill(1)
     setCellTile(cellPosition)
+    
+    if cell.isMined():
+        recalculateAdjacentCellSweeperCount(cellPosition)
 
 func printWorld() -> void:
     print("World state:")
@@ -162,10 +172,46 @@ func setCellTile(position: Vector2i) -> void:
     
     var tile: Vector2i = TILE_GROUND
     var alternative: int = 0
+    var atlasId: int = 1
     
     if cell.isMined():
+        # calc adjacent tiles for number
+        var count: int = getAdjacentSweeperCellCount(position)
+        if count > 0:
+            tile = Vector2i(count - 1, 0)
+            atlasId = 0
+        else:
         tile = TILE_MINED
     elif cell.isDamaged():
         alternative = 1
+    elif cell is Ore:
+        alternative = 2
+    elif cell is Mine:
+        alternative = 3
      
-    ground.set_cell(position, 1, tile, alternative)
+    ground.set_cell(position, atlasId, tile, alternative)
+
+func getAdjacentSweeperCellCount(position: Vector2i) -> int:
+    var bounds: PositionBounds = PositionBounds.new(position, worldState)
+    var count: int = 0
+    
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            var cell: Cell = worldState[y][x]
+            if cell == null || cell.isMined():
+                continue
+            if cell is Mine || cell is Ore:
+                count += 1
+    
+    return count
+
+func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
+    var bounds: PositionBounds = PositionBounds.new(position, worldState)
+
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            var cell: Cell = worldState[y][x]
+            if cell == null || cell.isMined() == false:
+                continue
+            setCellTile(Vector2i(x, y))
+    

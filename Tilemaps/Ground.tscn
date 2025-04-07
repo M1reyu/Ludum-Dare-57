@@ -1,16 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnfmo3kebwssg"]
+[gd_scene load_steps=6 format=3 uid="uid://bnfmo3kebwssg"]
 
 [ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="1_e2tqa"]
+[ext_resource type="Texture2D" uid="uid://b0jgf5kv4n3ug" path="res://Assets/Numbers.png" id="1_t6ebd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t61jw"]
+texture = ExtResource("1_t6ebd")
+texture_region_size = Vector2i(256, 256)
+2:0/0 = 0
+1:0/0 = 0
+0:0/next_alternative_id = 2
+0:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2tqa"]
 texture = ExtResource("1_e2tqa")
 texture_region_size = Vector2i(250, 250)
-0:0/next_alternative_id = 2
+0:0/next_alternative_id = 4
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 0:0/1 = 1
 0:0/1/modulate = Color(0.513726, 1, 0, 1)
 0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+0:0/2 = 2
+0:0/2/modulate = Color(0.73531, 0.73531, 0, 1)
+0:0/2/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
+0:0/3 = 3
+0:0/3/modulate = Color(0.767025, 2.52686e-06, 9.62615e-07, 1)
+0:0/3/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 1:1/0 = 0
 1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, -128, 128, -128, 128, 128, -128, 128)
 1:0/0 = 0
@@ -22,6 +42,7 @@ texture_region_size = Vector2i(250, 250)
 tile_size = Vector2i(256, 256)
 physics_layer_0/collision_layer = 2
 sources/1 = SubResource("TileSetAtlasSource_e2tqa")
+sources/0 = SubResource("TileSetAtlasSource_t61jw")
 
 [node name="Ground" type="TileMapLayer"]
 tile_set = SubResource("TileSet_t61jw")
