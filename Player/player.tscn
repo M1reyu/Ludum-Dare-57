@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://cjrsyh82jumk" path="res://Assets/ShopiconSpeed.png" id="21_iyprq"]
 [ext_resource type="Texture2D" uid="uid://cfrmrg7c3n3gw" path="res://Assets/ShopiconTNT.png" id="22_f4lon"]
 [ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="23_76lrf"]
+[ext_resource type="PackedScene" uid="uid://bx16abjhtxddb" path="res://Player/shop_hud.tscn" id="8_00tjw"]
+[ext_resource type="PackedScene" uid="uid://dso056m18q1im" path="res://Player/player_ui.tscn" id="9_x3vf3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
