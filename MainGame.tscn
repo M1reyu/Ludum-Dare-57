@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://bmggpslv131f0"]
+[gd_scene load_steps=5 format=3 uid="uid://b1d377qbu0m2h"]
 
-[ext_resource type="PackedScene" path="res://Player/player.tscn" id="1_e3m3f"]
-[ext_resource type="PackedScene" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
+[ext_resource type="Script" uid="uid://dv67aw8xfdo14" path="res://GameApp.gd" id="1_bqqt8"]
 [ext_resource type="PackedScene" uid="uid://d35ogjkebk0x6" path="res://Scenes/Shop.tscn" id="2_ws5ob"]
 
 [node name="MainGame" type="Node2D"]
+script = ExtResource("1_bqqt8")
 
 [node name="Ground" parent="." instance=ExtResource("2_e3m3f")]
 tile_map_data = PackedByteArray("AAD9/wEAAQABAAAAAAD+/wEAAQABAAAAAAD//wEAAQABAAAAAAAAAAEAAQABAAAAAAABAAEAAQABAAAAAAACAAEAAQABAAAAAAD9/wIAAQABAAEAAAD+/wIAAQABAAEAAAD//wIAAQABAAEAAAAAAAIAAQABAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAAEAAQAAQABAAEAAAADAAQAAQABAAEAAAACAAQAAQABAAEAAAABAAQAAQABAAEAAAAAAAQAAQABAAEAAAD//wQAAQABAAEAAAD+/wQAAQABAAEAAAD9/wQAAQABAAEAAAD8/wQAAQABAAEAAAD7/wQAAQABAAEAAAD7/wUAAQABAAEAAAD8/wUAAQABAAEAAAD9/wUAAQABAAEAAAD+/wUAAQABAAEAAAD//wUAAQABAAEAAAAAAAUAAQABAAEAAAABAAUAAQABAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAD7/wEAAQABAAAAAAAEAAEAAQABAAAAAAAEAAIAAQABAAEAAAD7/wIAAQABAAEAAAA=")
