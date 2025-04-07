@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm6dp81ug0jj7"]
+
+[ext_resource type="Texture2D" uid="uid://bqe521c2yywuf" path="res://Assets/Numbers.png" id="1_exy8k"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t61jw"]
+texture = ExtResource("1_exy8k")
+texture_region_size = Vector2i(256, 256)
+2:0/0 = 0
+1:0/0 = 0
+0:0/next_alternative_id = 2
+0:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_30fbc"]
+texture = ExtResource("1_exy8k")
+texture_region_size = Vector2i(256, 256)
+7:0/0 = 0
+6:0/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+1:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exy8k"]
+texture = ExtResource("1_exy8k")
+texture_region_size = Vector2i(256, 256)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t61jw"]
+tile_size = Vector2i(256, 256)
+physics_layer_0/collision_layer = 2
+sources/3 = SubResource("TileSetAtlasSource_30fbc")
+sources/2 = SubResource("TileSetAtlasSource_t61jw")
+sources/4 = SubResource("TileSetAtlasSource_exy8k")
+
+[node name="Numbers" type="TileMapLayer"]
+tile_set = SubResource("TileSet_t61jw")
+collision_enabled = false

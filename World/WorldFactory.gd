@@ -4,6 +4,7 @@ class_name WorldFactory
 var worldState: Array = Array()
 var random: RandomNumberGenerator
 var ground: TileMapLayer
+var numbers: TileMapLayer
 var xCenter: int
 var yCenter: int
 var globalSection: int
@@ -44,6 +45,50 @@ func buildWorld() -> void:
 			var cell: Cell = worldState[row][column]
 			if cell is Cell && cell.isMined():
 				setCellTile(Vector2i(column, row))
+=======
+const ATLAS_ORE_ONLY = 2
+const ATLAS_MINES_ONLY = 3
+const ATLAS_MIXED = 4
+
+func _init(groundLayer: TileMapLayer, numberLayer: TileMapLayer) -> void:
+    if groundLayer == null || numberLayer == null:
+        printerr("Ground- or number-layer is missing")
+        
+        return
+        
+    ground = groundLayer
+    numbers = numberLayer
+    random = RandomNumberGenerator.new()
+    random.randomize()
+    
+    buildWorld()
+    printWorld()
+
+func buildWorld() -> void:
+    print('Loading ... building world')
+    
+    prepareNumberTiles()
+    
+    var radius = SECTION_ROWS * SECTION_COUNT
+    xCenter = radius
+    yCenter = radius
+    prepareWorldContainer(radius)
+    
+    globalSection = SECTION_COUNT
+    
+    # start from the inner to the outer
+    for section in range(SECTION_COUNT):
+        buildPlanetLayer(SECTION_ROWS * (section + 1))
+        globalSection -= 1
+    
+    # to avoid displaying wrong numbers, because the cell are build in columns
+    # we need to update all mined cells again
+    for row in range(worldState.size()):
+        for column in range(worldState[row].size()):
+            var cell: Cell = worldState[row][column]
+            if cell is Cell && cell.isMined():
+                setCellTile(Vector2i(column, row))
+>>>>>>> 015fa24 (add and use a colored number layer)
 
 func buildCell(section: int, randModifier: float) -> Cell:
 	var randF: float = random.randf() + randModifier
@@ -146,6 +191,28 @@ func prepareWorldContainer(radius: int) -> void:
 		worldState[i].resize(size)
 		worldState[i].fill(null)
 
+func prepareNumberTiles() -> void:
+    var _t = numbers.tile_set.get_source_count()
+    var tileSet: TileSet = numbers.tile_set;
+    var colors: Array = [
+        Color(0,1,0),
+        Color(1,0,0),
+        Color(1, 0.65, 0) # kinda orange
+    ]
+    
+    for atlasIndex in range(tileSet.get_source_count()):
+        var atlasId: int = tileSet.get_source_id(atlasIndex)
+        var source: TileSetAtlasSource = tileSet.get_source(atlasId)
+        if not source is TileSetAtlasSource:
+            continue
+        
+        var color: Color = colors[atlasIndex]
+        
+        for tileIndex in range(source.get_tiles_count()):
+            #var tileCoordinates = Vector2i(tileSetSource.get_tile_id(tileIndex)
+            var tileData = source.get_tile_data(Vector2i(tileIndex, 0), 0)
+            tileData.modulate = color
+
 func buildPlanetLayer(radius: int) -> void:
 	# create a filled circle by utilizing Bresenham's algorithm
 	var x: int = 0
@@ -207,6 +274,71 @@ func getAdjacentSweeperCellCount(position: Vector2i) -> int:
 
 func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
 	var bounds: PositionBounds = PositionBounds.new(position, worldState)
+=======
+    var cell: Cell = worldState[position.y][position.x]
+    
+    if cell == null:
+        return
+    
+    var tile: Vector2i = TILE_GROUND
+    var alternative: int = 0
+    var atlasId: int = 1
+    
+    if cell.isMined():
+        setCellNumberTile(position)
+        tile = TILE_MINED
+    elif cell.isDamaged():
+        alternative = 1
+    elif cell is Ore:
+        alternative = 2
+    elif cell is Mine:
+        alternative = 3
+     
+    ground.set_cell(position, atlasId, tile, alternative)
+
+func setCellNumberTile(position: Vector2i) -> void:
+    var tile: Vector2i = Vector2i(-1, -1)
+    var atlasId: int = ATLAS_MIXED
+    # calc adjacent tiles for number
+    var counts: Array = getAdjacentSweeperCellCount(position)
+    var count: int = counts[0]
+    if count > 0:
+        tile = Vector2i(count - 1, 0)
+        var countMines: int = counts[1]
+        if countMines == count:
+            atlasId = ATLAS_MINES_ONLY
+        elif countMines == 0:
+            atlasId = ATLAS_ORE_ONLY
+            
+    
+    numbers.set_cell(position, atlasId, tile)
+    
+    #print("New color for cell (%d, %d) - Tile: (%d, %d)" % [position.x, position.y, tile.x, tile.y])
+    #var tileData: TileData = numbers.get_cell_tile_data(position)
+    #if tileData != null:
+    #    tileData.modulate = Color(randi_range(0,1),randi_range(0,1),randi_range(0,1),1)
+
+func getAdjacentSweeperCellCount(position: Vector2i) -> Array:
+    var bounds: PositionBounds = PositionBounds.new(position, worldState)
+    var count: int = 0
+    var mineCount: int = 0
+    
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            var cell: Cell = worldState[y][x]
+            if cell == null || cell.isMined():
+                continue
+            if cell is Mine || cell is Ore:
+                count += 1
+                if cell is Mine:
+                    mineCount += 1
+    
+    return [count, mineCount]
+
+func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
+    var bounds: PositionBounds = PositionBounds.new(position, worldState)
+    print("Recalculation bounds: y(%d, %d), x(%d, %d)" % [bounds.yMin, bounds.yMax, bounds.xMin, bounds.xMax])
+>>>>>>> 015fa24 (add and use a colored number layer)
 
 	for y in range(bounds.yMin, bounds.yMax + 1):
 		for x in range(bounds.xMin, bounds.xMax + 1):
