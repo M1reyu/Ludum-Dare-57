@@ -75,7 +75,7 @@ class ShopCalc:
 				return getFlagCost(true if value1 == 0 else false)
 			shopBuyables.RangeMine:
 				return getRangeCost(true if value1 == 0 else false)
-		return 0
+		return -1
 
 	func getRepairCost(hp : int, maxHp : int) -> int:
 		return ((maxHp-hp) * 150) if (hp < maxHp) else -1

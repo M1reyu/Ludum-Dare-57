@@ -44,8 +44,9 @@ func _ready() -> void:
 	playerStrength = strength
 	playerSpeed = speed
 
-var posTimeout = 0
-func _process(_delta: float) -> void:
+var scanTimeout = 0
+func _process(delta: float) -> void:
+	if scanTimeout > 0: scanTimeout -= delta
 	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): 
 		sendStatSignal()
 		menuHud.show()
@@ -57,6 +58,15 @@ func _process(_delta: float) -> void:
 	else:
 		playerSprite.rotation = dirMod.angle() - Vector2.DOWN.angle()
 		if (playerSprite.animation == "Idle"): playerSprite.play("Drill 1")
+	
+	if (Input.is_action_just_pressed("UseTnT")):
+		pass
+	elif (Input.is_action_just_pressed("UseMiner")):
+		pass
+	elif (Input.is_action_just_pressed("UseScan")):
+		pass
+	elif (Input.is_action_just_pressed("UseFlag")):
+		pass
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
