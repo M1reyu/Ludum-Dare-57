@@ -25,17 +25,23 @@ var minerCount : int = 0
 var scannerBought : bool = false
 var flaggingBought : bool = false
 var mineRangeBought : bool = false
+var playerStrength : int
+var playerSpeed : int
 
 @onready var menuHud : Control = $Canvas/ShopHud
 @onready var playerSprite : AnimatedSprite2D = $PlayerSprite
 
-const shopItem = preload("res://globalVars.gd").shopBuyables
+const globals = preload("res://globalVars.gd") 
+const shopItem = globals.shopBuyables
+var shopCalc = globals.ShopCalc.new()
 
 signal playerStats(funds : int, hp : int, hpMax : int, fuel : int, fuelMax : int, cargo : int, cargoMax : int, speedMax : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
 
 func _ready() -> void:
 	curHealth = maxHealth
 	curTank = maxTank
+	playerStrength = strength
+	playerSpeed = speed
 
 var posTimeout = 0
 func _process(_delta: float) -> void:
@@ -57,8 +63,16 @@ func _physics_process(delta: float) -> void:
 	
 	if (!menuHud.visible): 
 		dir = Input.get_vector("Left", "Right", "Up", "Down")
-		if dir != Vector2.ZERO: curTank -= delta
-		
+		if (dir != Vector2.ZERO && curTank > 0): 
+			curTank -= delta
+			if curTank <= 0:
+				curTank = 0
+				strength = 0
+				speed = playerSpeed / 4
+			else:
+				strength = playerStrength
+				speed = playerSpeed
+			
 		if (dir.x != 0):
 			dir.x *= speed * delta * 2
 			if((dir.x < 0 && velocity.x > 0) || (dir.x > 0 && velocity.x < 0)): dir.x += (velocity.x * 0.65)
@@ -97,7 +111,7 @@ func _physics_process(delta: float) -> void:
 		if (abs(dir.y) > speedLimit): dir.y = speedLimit * (dir.y / abs(dir.y))
 
 func sendStatSignal() -> void:
-	playerStats.emit(curMoney, curHealth, maxHealth, curTank, maxTank, curCargo, maxCargo, speed, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
+	playerStats.emit(curMoney, curHealth, maxHealth, curTank, maxTank, curCargo, maxCargo, playerSpeed, playerStrength, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
 
 func directionMod(dir : Vector2) -> Vector2:
 	if dir.x < 0: dir.x = -1
@@ -108,49 +122,53 @@ func directionMod(dir : Vector2) -> Vector2:
 	return dir
 
 func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
+	var cost = 0
+	
 	match itemType:
 		shopItem.Repair:
+			cost = shopCalc.getCost(itemType, curHealth, maxHealth)
 			curMoney -= (maxHealth - curHealth) * 150
 			curHealth = maxHealth
 		shopItem.Refuel:
-			curMoney -= (maxTank - curTank)
+			cost = shopCalc.getCost(itemType, curTank, maxTank)
 			curTank = maxTank
 		shopItem.Shield:
-			curMoney -= 100
+			cost = shopCalc.getCost(itemType)
 			shielded = true
 		shopItem.Bomb:
-			curMoney -= 300
+			cost = shopCalc.getCost(itemType)
 			bombCount += 1
 		shopItem.Miner:
-			curMoney -= 1000
+			cost = shopCalc.getCost(itemType)
 			minerCount += 1
 		shopItem.HealthUp:
-			curMoney -= maxHealth * 500
+			cost = shopCalc.getCost(itemType, maxHealth)
 			maxHealth += 1
 			curHealth = maxHealth
 		shopItem.SpeedUp:
-			curMoney -= speed * 2
-			speed += 200
+			cost = shopCalc.getCost(itemType, playerSpeed)
+			playerSpeed += 200
 		shopItem.StrengthUp:
-			curMoney -= strength * 750
-			strength *= 2
+			cost = shopCalc.getCost(itemType, playerStrength)
+			playerStrength *= 2
 		shopItem.TankUp:
-			curMoney -= maxTank * 5
+			cost = shopCalc.getCost(itemType, maxTank)
 			maxTank *= 2
 			curTank = maxTank
 		shopItem.CargoUp:
-			curMoney -= 200 + maxCargo * 50
+			cost = shopCalc.getCost(itemType, maxCargo)
 			maxCargo += 5
 		shopItem.Scanner:
-			curMoney -= 2500
+			cost = shopCalc.getCost(itemType)
 			scannerBought = true
 		shopItem.Flag:
-			curMoney -= 5000
+			cost = shopCalc.getCost(itemType)
 			flaggingBought = true
 		shopItem.RangeMine:
-			curMoney -= 5000
+			cost = shopCalc.getCost(itemType)
 			mineRangeBought = true
 	
+	curMoney -= cost
 	sendStatSignal()
 
 func _on_player_tig_area_area_entered(_area: Area2D) -> void:

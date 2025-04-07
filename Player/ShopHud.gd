@@ -10,8 +10,30 @@ var MenuSection1Count : int = 0
 var MenuSection2Count : int = 0
 var MenuSection3Count : int = 0
 
-const shopItem = preload("res://globalVars.gd").shopBuyables
+var ItemName : Label
+var ItemInfo : Label
+var ItemCost : Label
+
+const globals = preload("res://globalVars.gd")
+const shopItem = globals.shopBuyables
+var shopCalc = globals.ShopCalc.new()
 signal buyShopSelection(itemIndex : int)
+
+var funds: int
+var hp: int
+var hpMax: int
+var fuel: int
+var fuelMax: int
+var cargo: int
+var cargoMax: int
+var speedMax: int
+var strength : int
+var bombs: int
+var miners: int
+var shielded: bool
+var scanner: bool
+var flagging: bool
+var rangeMine: bool
 
 func _ready() -> void:
 	MenuSection1 = $ShopSelector/Utilities
@@ -22,6 +44,10 @@ func _ready() -> void:
 	
 	MenuSection3 = $ShopSelector/Apilities
 	MenuSection3Count = MenuSection3.get_child_count()
+	
+	ItemName = $Layout/InfoPanel/ItemName
+	ItemInfo = $Layout/InfoPanel/ItemInfo
+	ItemCost = $Layout/InfoPanel/ItemCost
 	
 	hide()
 
@@ -55,7 +81,8 @@ func _process(_delta: float) -> void:
 		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex = MenuSection1Count + MenuSection2Count + 1
 		else: menuIndex = 1
 	elif (Input.is_action_just_pressed('Use')):
-		buyShopSelection.emit(menuIndex)
+		if (funds >= getCostForItem()):
+			buyShopSelection.emit(menuIndex)
 	else: return
 	
 	highlightMenu()
@@ -85,8 +112,45 @@ func highlightMenu():
 		if (i+1 == iMod): node.show()
 		else: node.hide()
 	
+	ItemName.text = globals.itemNames.get(menuIndex)
+	ItemInfo.text = globals.itemInfos.get(menuIndex)
+	var cost = getCostForItem()
+	ItemCost.text = str(cost)
+	#if funds < cost: ItemCost.theme.font_color = Color.RED
+	#else: ItemCost.theme.font_color = Color.BLACK
 
+func getCostForItem() -> int:
+	match menuIndex:
+		shopItem.Repair:
+			return shopCalc.getCost(menuIndex, hp, hpMax)
+		shopItem.Refuel:
+			return shopCalc.getCost(menuIndex, fuel, fuelMax)
+		shopItem.HealthUp:
+			return shopCalc.getCost(menuIndex, hpMax)
+		shopItem.SpeedUp:
+			return shopCalc.getCost(menuIndex, speedMax)
+		shopItem.StrengthUp:
+			return shopCalc.getCost(menuIndex, strength)
+		shopItem.TankUp:
+			return shopCalc.getCost(menuIndex, fuelMax)
+		shopItem.CargoUp:
+			return shopCalc.getCost(menuIndex, cargoMax)
+	
+	return shopCalc.getCost(menuIndex)
 
-
-func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
-	pass # Replace with function body.
+func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, strength : int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
+	self.funds = funds
+	self.hp = hp
+	self.hpMax = hpMax
+	self.fuel = fuel
+	self.fuelMax = fuelMax
+	self.cargo = cargo
+	self.cargoMax = cargoMax
+	self.speedMax = speedMax
+	self.strength = strength
+	self.bombs = bombs
+	self.miners = miners
+	self.shielded = shielded
+	self.scanner = scanner
+	self.flagging = flagging
+	self.rangeMine = rangeMine

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=33 format=3 uid="uid://vq3ebi483wyn"]
 
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://d0bjexpaflu7w" path="res://Assets/ShopiconShield.png" id="20_qs4pp"]
 [ext_resource type="Texture2D" uid="uid://cjrsyh82jumk" path="res://Assets/ShopiconSpeed.png" id="21_iyprq"]
 [ext_resource type="Texture2D" uid="uid://cfrmrg7c3n3gw" path="res://Assets/ShopiconTNT.png" id="22_f4lon"]
+[ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="23_76lrf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -70,6 +71,8 @@ height = 170.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_00tjw"]
 radius = 42.19
+
+[sub_resource type="Theme" id="Theme_76lrf"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 2
@@ -194,10 +197,45 @@ position = Vector2(760, 164)
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("22_f4lon")
 
-[node name="Control" type="Control" parent="Canvas/ShopHud/Layout"]
+[node name="InfoPanel" type="Control" parent="Canvas/ShopHud/Layout"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 986.0
+offset_top = 219.0
+offset_right = 1236.0
+offset_bottom = 569.0
+
+[node name="ItemInfo" type="Label" parent="Canvas/ShopHud/Layout/InfoPanel"]
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 230.0
+offset_bottom = 285.0
+theme = SubResource("Theme_76lrf")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("23_76lrf")
+theme_override_font_sizes/font_size = 23
+text = "Info"
+autowrap_mode = 2
+
+[node name="ItemName" type="Label" parent="Canvas/ShopHud/Layout/InfoPanel"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 96.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("23_76lrf")
+theme_override_font_sizes/font_size = 30
+text = "Name"
+
+[node name="ItemCost" type="Label" parent="Canvas/ShopHud/Layout/InfoPanel"]
+offset_left = 30.0
+offset_top = 300.0
+offset_right = 230.0
+offset_bottom = 339.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("23_76lrf")
+theme_override_font_sizes/font_size = 26
+text = "0$"
+horizontal_alignment = 2
 
 [node name="ShopSelector" type="Control" parent="Canvas/ShopHud"]
 anchors_preset = 0
