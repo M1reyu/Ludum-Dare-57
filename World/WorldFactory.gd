@@ -88,7 +88,6 @@ func buildWorld() -> void:
             var cell: Cell = worldState[row][column]
             if cell is Cell && cell.isMined():
                 setCellTile(Vector2i(column, row))
->>>>>>> 015fa24 (add and use a colored number layer)
 
 func buildCell(section: int, randModifier: float) -> Cell:
 	var randF: float = random.randf() + randModifier
@@ -338,7 +337,6 @@ func getAdjacentSweeperCellCount(position: Vector2i) -> Array:
 func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
     var bounds: PositionBounds = PositionBounds.new(position, worldState)
     print("Recalculation bounds: y(%d, %d), x(%d, %d)" % [bounds.yMin, bounds.yMax, bounds.xMin, bounds.xMax])
->>>>>>> 015fa24 (add and use a colored number layer)
 
 	for y in range(bounds.yMin, bounds.yMax + 1):
 		for x in range(bounds.xMin, bounds.xMax + 1):
