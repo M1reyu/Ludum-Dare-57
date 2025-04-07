@@ -22,7 +22,8 @@ var shielded : bool = false
 var bombCount : int = 0
 var minerCount : int = 0
 var scannerBought : bool = false
-var mineRangeBought : bool = true
+var flaggingBought : bool = false
+var mineRangeBought : bool = false
 
 @onready var menuHud : Control = $MainCam/MenuHud
 
@@ -116,11 +117,13 @@ func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
 			maxCargo *= 2
 		shopItem.Scanner:
 			scannerBought = true
+		shopItem.Flag:
+			flaggingBought = true
 		shopItem.RangeMine:
 			mineRangeBought = true
 
-func _on_player_tig_area_area_entered(area: Area2D) -> void:
+func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	canOpen = true
 
-func _on_player_tig_area_area_exited(area: Area2D) -> void:
+func _on_player_tig_area_area_exited(_area: Area2D) -> void:
 	canOpen = false

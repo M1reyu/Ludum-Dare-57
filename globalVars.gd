@@ -10,5 +10,6 @@ enum shopBuyables {
 	TankUp = 9,
 	CargoUp = 10,
 	Scanner = 11,
-	RangeMine = 12
+	Flag = 12,
+	RangeMine = 13
 }

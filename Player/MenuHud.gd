@@ -2,9 +2,9 @@ extends Control
 
 var canClose : bool = false
 var menuIndex : int = 0
-var MenuSection1 : Panel
-var MenuSection2 : Panel
-var MenuSection3 : Panel
+var MenuSection1 : Node
+var MenuSection2 : Node
+var MenuSection3 : Node
 
 var MenuSection1Count : int = 0
 var MenuSection2Count : int = 0

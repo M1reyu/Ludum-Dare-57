@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
 [ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
-[ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://dqqi5lxhhvmly" path="res://Assets/ShopUI01.png" id="9_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopSelector.png" id="10_x3vf3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -21,8 +21,8 @@ animations = [{
 "texture": ExtResource("3_00tjw")
 }],
 "loop": true,
-"name": &"Drill 1 Down",
-"speed": 5.0
+"name": &"Drill 1",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -32,8 +32,8 @@ animations = [{
 "texture": ExtResource("5_apopc")
 }],
 "loop": true,
-"name": &"Drill 2 Down",
-"speed": 5.0
+"name": &"Drill 2",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -44,7 +44,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 4.0
+"speed": 3.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_od3ui"]
@@ -62,8 +62,9 @@ script = ExtResource("1_onrkg")
 position = Vector2(2, 0)
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_i3pqv")
-animation = &"Idle"
+animation = &"Drill 2"
 autoplay = "Idle"
+frame_progress = 0.201101
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_od3ui")
@@ -78,6 +79,7 @@ shape = SubResource("CircleShape2D_00tjw")
 zoom = Vector2(0.4, 0.4)
 
 [node name="MenuHud" type="Control" parent="MainCam"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -106,33 +108,33 @@ offset_right = 925.0
 offset_bottom = 340.0
 
 [node name="Refule" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
-position = Vector2(25, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(25, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Repair" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
-position = Vector2(200, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(190, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Shield" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
-position = Vector2(375, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(355, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Bomb" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
-position = Vector2(550, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(520, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Miner" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
-position = Vector2(725, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(685, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Upgrades" type="Control" parent="MainCam/MenuHud"]
@@ -143,33 +145,33 @@ offset_right = 925.0
 offset_bottom = 640.0
 
 [node name="Health" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
-position = Vector2(25, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(25, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Speed" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
-position = Vector2(200, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(190, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Drill" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
-position = Vector2(375, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(355, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Tank" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
-position = Vector2(550, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(520, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Cargo" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
-position = Vector2(725, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(685, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Apilities" type="Control" parent="MainCam/MenuHud"]
@@ -180,15 +182,21 @@ offset_right = 925.0
 offset_bottom = 940.0
 
 [node name="Scaner" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
-position = Vector2(25, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(25, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
+centered = false
+
+[node name="Flag" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
+position = Vector2(190, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [node name="Range" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
-position = Vector2(200, 25)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_00tjw")
+position = Vector2(355, 10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("10_x3vf3")
 centered = false
 
 [connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]
