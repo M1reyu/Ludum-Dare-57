@@ -54,7 +54,7 @@ class ShopCalc:
 			shopBuyables.Refuel:
 				return getRefuelCost(value1, value2)
 			shopBuyables.Shield:
-				return getShieldCost()
+				return getShieldCost(true if value1 == 0 else false)
 			shopBuyables.Bomb:
 				return getBombCost()
 			shopBuyables.Miner:
@@ -70,19 +70,19 @@ class ShopCalc:
 			shopBuyables.CargoUp:
 				return getCargoUpCost(value1)
 			shopBuyables.Scanner:
-				return getScannerCost()
+				return getScannerCost(true if value1 == 0 else false)
 			shopBuyables.Flag:
-				return getFlagCost()
+				return getFlagCost(true if value1 == 0 else false)
 			shopBuyables.RangeMine:
-				return getRangeCost()
+				return getRangeCost(true if value1 == 0 else false)
 		return 0
 
 	func getRepairCost(hp : int, maxHp : int) -> int:
-		return (maxHp-hp) * 150
+		return ((maxHp-hp) * 150) if (hp < maxHp) else -1
 	func getRefuelCost(fuel : int, maxFuel : int) -> int:
-		return maxFuel - fuel
-	func getShieldCost() -> int:
-		return 100
+		return (maxFuel - fuel) if (fuel < maxFuel) else -1
+	func getShieldCost(canBuy : bool) -> int:
+		return 100 if canBuy else -1
 	func getBombCost() -> int:
 		return 300
 	func getMinerConst() -> int:
@@ -90,16 +90,16 @@ class ShopCalc:
 	func getHealUpCost(maxHp : int) -> int:
 		return maxHp * 500
 	func getSpeedUpCost(speed : int) -> int:
-		return speed * 2
+		return speed * 2 if speed < 1400 else -1
 	func getStrengthUpCost(strength : int) -> int:
 		return strength * 750
 	func getTankUpCost(tank : int) -> int:
 		return tank * 5
 	func getCargoUpCost(cargo : int) -> int:
 		return 200 + cargo * 50
-	func getScannerCost() -> int:
-		return 2500
-	func getFlagCost() -> int:
-		return 5000
-	func getRangeCost() -> int:
-		return 5000
+	func getScannerCost(canBuy : bool) -> int:
+		return 2500 if canBuy else -1
+	func getFlagCost(canBuy : bool) -> int:
+		return 5000 if canBuy else -1
+	func getRangeCost(canBuy : bool) -> int:
+		return 5000 if canBuy else -1

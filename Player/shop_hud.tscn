@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bx16abjhtxddb"]
+[gd_scene load_steps=20 format=3 uid="uid://rqiv0brcb6qx"]
 
 [ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/ShopHud.gd" id="1_fix0b"]
 [ext_resource type="Texture2D" uid="uid://dqqi5lxhhvmly" path="res://Assets/ShopUI01.png" id="2_rlgbk"]
@@ -17,11 +17,11 @@
 [ext_resource type="Texture2D" uid="uid://cfrmrg7c3n3gw" path="res://Assets/ShopiconTNT.png" id="15_lct2t"]
 [ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="16_cqr7r"]
 [ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopSelector.png" id="17_av2kc"]
+[ext_resource type="Texture2D" uid="uid://dhv4yaymkktnx" path="res://Assets/IconCoin.png" id="17_rlgbk"]
 
 [sub_resource type="Theme" id="Theme_76lrf"]
 
 [node name="ShopHud" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,7 +128,7 @@ offset_bottom = 569.0
 [node name="ItemInfo" type="Label" parent="Layout/InfoPanel"]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 35.0
+offset_top = 85.0
 offset_right = 230.0
 offset_bottom = 285.0
 theme = SubResource("Theme_76lrf")
@@ -141,24 +141,30 @@ autowrap_mode = 2
 [node name="ItemName" type="Label" parent="Layout/InfoPanel"]
 layout_mode = 0
 offset_left = 5.0
-offset_right = 96.0
-offset_bottom = 39.0
+offset_right = 205.0
+offset_bottom = 80.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("16_cqr7r")
 theme_override_font_sizes/font_size = 30
 text = "Name"
+autowrap_mode = 2
 
 [node name="ItemCost" type="Label" parent="Layout/InfoPanel"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 300.0
-offset_right = 230.0
-offset_bottom = 339.0
+offset_left = 25.0
+offset_top = 310.0
+offset_right = 185.0
+offset_bottom = 349.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("16_cqr7r")
 theme_override_font_sizes/font_size = 26
-text = "0$"
+text = "0"
 horizontal_alignment = 2
+
+[node name="IconCoin" type="Sprite2D" parent="Layout/InfoPanel"]
+position = Vector2(203, 326)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("17_rlgbk")
 
 [node name="ShopSelector" type="Control" parent="."]
 anchors_preset = 0

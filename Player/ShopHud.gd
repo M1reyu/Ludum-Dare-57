@@ -81,7 +81,8 @@ func _process(_delta: float) -> void:
 		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex = MenuSection1Count + MenuSection2Count + 1
 		else: menuIndex = 1
 	elif (Input.is_action_just_pressed('Use')):
-		if (funds >= getCostForItem()):
+		var cost = getCostForItem()
+		if (0 < cost && cost <= funds):
 			buyShopSelection.emit(menuIndex)
 	else: return
 	
@@ -115,9 +116,9 @@ func highlightMenu():
 	ItemName.text = globals.itemNames.get(menuIndex)
 	ItemInfo.text = globals.itemInfos.get(menuIndex)
 	var cost = getCostForItem()
-	ItemCost.text = str(cost)
-	#if funds < cost: ItemCost.theme.font_color = Color.RED
-	#else: ItemCost.theme.font_color = Color.BLACK
+	ItemCost.text = "-" if cost < 0 else str(cost)
+	if funds < cost: ItemCost.set("theme_override_colors/font_color", Color.RED)
+	else: ItemCost.set("theme_override_colors/font_color", Color.BLACK)
 
 func getCostForItem() -> int:
 	match menuIndex:
@@ -125,6 +126,10 @@ func getCostForItem() -> int:
 			return shopCalc.getCost(menuIndex, hp, hpMax)
 		shopItem.Refuel:
 			return shopCalc.getCost(menuIndex, fuel, fuelMax)
+		shopItem.Bomb:
+			return -1 if (bombs == 10) else shopCalc.getCost(menuIndex)
+		shopItem.Miner:
+			return -1 if (miners == 10) else shopCalc.getCost(menuIndex)
 		shopItem.HealthUp:
 			return shopCalc.getCost(menuIndex, hpMax)
 		shopItem.SpeedUp:
@@ -135,6 +140,12 @@ func getCostForItem() -> int:
 			return shopCalc.getCost(menuIndex, fuelMax)
 		shopItem.CargoUp:
 			return shopCalc.getCost(menuIndex, cargoMax)
+		shopItem.Scanner:
+			return shopCalc.getCost(menuIndex, 1 if scanner else 0)
+		shopItem.Flag:
+			return shopCalc.getCost(menuIndex, 1 if flagging else 0)
+		shopItem.RangeMine:
+			return shopCalc.getCost(menuIndex, 1 if rangeMine else 0)
 	
 	return shopCalc.getCost(menuIndex)
 

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
 [ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
-[ext_resource type="PackedScene" uid="uid://bx16abjhtxddb" path="res://Player/shop_hud.tscn" id="8_00tjw"]
+[ext_resource type="PackedScene" uid="uid://rqiv0brcb6qx" path="res://Player/shop_hud.tscn" id="8_00tjw"]
 [ext_resource type="PackedScene" uid="uid://dso056m18q1im" path="res://Player/player_ui.tscn" id="9_x3vf3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
@@ -83,5 +83,7 @@ zoom = Vector2(0.4, 0.4)
 
 [node name="PlayerUI" parent="Canvas" instance=ExtResource("9_x3vf3")]
 
+[connection signal="playerStats" from="." to="Canvas/ShopHud" method="_on_player_player_stats"]
+[connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]
 [connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]
 [connection signal="area_exited" from="PlayerTigArea" to="." method="_on_player_tig_area_area_exited"]

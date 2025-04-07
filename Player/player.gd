@@ -64,11 +64,12 @@ func _physics_process(delta: float) -> void:
 	if (!menuHud.visible): 
 		dir = Input.get_vector("Left", "Right", "Up", "Down")
 		if (dir != Vector2.ZERO && curTank > 0): 
+			if (int(curTank - delta) < int(curTank)): sendStatSignal()
 			curTank -= delta
 			if curTank <= 0:
 				curTank = 0
 				strength = 0
-				speed = playerSpeed / 4
+				speed = playerSpeed / 2
 			else:
 				strength = playerStrength
 				speed = playerSpeed
