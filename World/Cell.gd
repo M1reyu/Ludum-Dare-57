@@ -17,7 +17,7 @@ func _init(section: int = 0) -> void:
         _baseHealth <<= section - 1
     
     healthPoints = _baseHealth
-    tileVariant = randi_range(0, 3)
+    tileVariant = calculateTileVariant()
     
 func isMined() -> bool:
     return healthPoints <= 0
@@ -41,6 +41,20 @@ func getTileDamageOffset() -> int:
         return 1
     
     if healthInPercent > 0.34:
+        return 2
+    
+    return 3
+
+func calculateTileVariant() -> int:
+    var randF: float = randf()
+    
+    if randF > 0.9:
+        return 0
+    
+    if randF > 0.7:
+        return 1
+        
+    if randF > 0.35:
         return 2
     
     return 3
