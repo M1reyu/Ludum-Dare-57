@@ -13,6 +13,7 @@ signal collides(collision: KinematicCollision2D)
 
 var strength : int = 2
 var inMenu : bool = false
+var canOpen : bool = false
 
 var curHealth : int = 1
 var curTank : float = 100.0
@@ -33,7 +34,7 @@ func _ready() -> void:
 
 var posTimeout = 0
 func _process(_delta: float) -> void:
-	if (!menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
+	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
 
 func _physics_process(delta: float) -> void:
 	var dir : Vector2 = Vector2.ZERO
@@ -117,3 +118,11 @@ func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
 			scannerBought = true
 		shopItem.RangeMine:
 			mineRangeBought = true
+
+
+func _on_player_tig_area_area_entered(area: Area2D) -> void:
+	canOpen = true
+
+
+func _on_player_tig_area_area_exited(area: Area2D) -> void:
+	canOpen = false

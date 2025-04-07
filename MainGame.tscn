@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=4 uid="uid://b1d377qbu0m2h"]
+[gd_scene load_steps=4 format=4 uid="uid://b1d377qbu0m2h"]
 
 [ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_e3m3f"]
 [ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
+[ext_resource type="PackedScene" uid="uid://cv3uv4h4wib1w" path="res://World/Shop.tscn" id="2_ws5ob"]
 
 [node name="MainGame" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_e3m3f")]
-
 [node name="Ground" parent="." instance=ExtResource("2_e3m3f")]
 tile_map_data = PackedByteArray("AAD9/wEAAQABAAAAAAD+/wEAAQABAAAAAAD//wEAAQABAAAAAAAAAAEAAQABAAAAAAABAAEAAQABAAAAAAACAAEAAQABAAAAAAD9/wIAAQABAAEAAAD+/wIAAQABAAEAAAD//wIAAQABAAEAAAAAAAIAAQABAAEAAAABAAIAAQABAAEAAAACAAIAAQABAAEAAAAEAAQAAQABAAEAAAADAAQAAQABAAEAAAACAAQAAQABAAEAAAABAAQAAQABAAEAAAAAAAQAAQABAAEAAAD//wQAAQABAAEAAAD+/wQAAQABAAEAAAD9/wQAAQABAAEAAAD8/wQAAQABAAEAAAD7/wQAAQABAAEAAAD7/wUAAQABAAEAAAD8/wUAAQABAAEAAAD9/wUAAQABAAEAAAD+/wUAAQABAAEAAAD//wUAAQABAAEAAAAAAAUAAQABAAEAAAABAAUAAQABAAEAAAACAAUAAQABAAEAAAADAAUAAQABAAEAAAAEAAUAAQABAAEAAAD7/wEAAQABAAAAAAAEAAEAAQABAAAAAAAEAAIAAQABAAEAAAD7/wIAAQABAAEAAAA=")
+
+[node name="Shop" parent="." instance=ExtResource("2_ws5ob")]
+position = Vector2(0, -500)
+
+[node name="Player" parent="." instance=ExtResource("1_e3m3f")]
+position = Vector2(0, -250)

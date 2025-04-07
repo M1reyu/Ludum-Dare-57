@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv3uv4h4wib1w"]
+
+[ext_resource type="Texture2D" uid="uid://dupu7ujxmxhm4" path="res://Assets/Circle.png" id="1_1csam"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_53lfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1csam")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mfehs"]
+radius = 249.257
+
+[node name="Shop" type="Node2D"]
+
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_53lfk")
+
+[node name="ShopArea" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="ShopAreaShape" type="CollisionShape2D" parent="ShopArea"]
+shape = SubResource("CircleShape2D_mfehs")
