@@ -63,7 +63,7 @@ func buildWorld() -> void:
 
 func buildCell(section: int, randModifier: float) -> Cell:
     var randF: float = random.randf() + randModifier
-    
+
     # the first section contains no mines
     if section > 1 && randF > (0.96 - (section * 0.01)):
         return Mine.new(section)
@@ -98,7 +98,7 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
     
     if cell is Mine:
         AudioPlayer.play_sfx('explosion')
-        explosion.emit(ground.map_to_local(cellPosition), 1)
+        explosion.emit(ground.map_to_local(cellPosition), cell.damage, Mine.DAMAGE_RADIUS)
     elif cell is Ore:
         AudioPlayer.play_sfx('pickupOre')
         minedValuable.emit(cell.value)
