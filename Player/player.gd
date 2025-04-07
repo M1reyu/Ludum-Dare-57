@@ -200,6 +200,7 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 			mineRangeBought = true
 	
 	curMoney -= cost
+	AudioPlayer.play_sfx("powerUp")
 	sendStatSignal()
 
 func _on_player_tig_area_area_entered(_area: Area2D) -> void:
