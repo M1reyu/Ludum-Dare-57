@@ -105,10 +105,14 @@ func addCellsOnLineFromTo(x: int, yStart: int, yEnd: int, steps: int = 1) -> voi
         addCell(x, yStart, -1.0)
         yStart += steps
     
+    var randModifier: float = 0.0
+    if x == 0 or x == worldState.size() - 1:
+        randModifier = -1.0
+    
     for y in range(yStart, yEnd, steps):
         if doesCellExist(x, y):
             return
-        addCell(x, y)
+        addCell(x, y, randModifier)
 
 func doesCellExist(x: int, y: int) -> bool:
     return worldState[y][x] != null
