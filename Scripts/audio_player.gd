@@ -12,6 +12,7 @@ var pickupOre = preload("res://Assets/Sounds/Effects/pickupOre.wav")
 var explosion = preload("res://Assets/Sounds/Effects/explosion.wav")
 var explosion2 = preload("res://Assets/Sounds/Effects/explosion2.wav")
 var dig = preload("res://Assets/Sounds/Effects/dig.wav")
+var nonBreak = preload("res://Assets/Sounds/Effects/nonBreak.wav")
 
 var menu = preload("res://Assets/Sounds/Music/GameJam_Depth-Menu_Mix1.1_M1.0.wav")
 var level = preload("res://Assets/Sounds/Music/GameJam_Depth_Mix1.0_M1.0.wav")
@@ -30,7 +31,7 @@ func play_sfx(sfx_name: String):
 		else:
 			stream = explosion2
 	elif sfx_name == "nonBreak":
-		stream = explosion
+		stream = nonBreak
 	else:
 		print("Invalid sfx name")
 		return
