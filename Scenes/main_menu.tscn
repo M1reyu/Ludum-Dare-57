@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://xv75whi5jajw"]
+
+[ext_resource type="Script" uid="uid://brfbiks4y05p3" path="res://Scripts/main_menu.gd" id="2_03h3j"]
+[ext_resource type="PackedScene" path="res://Scenes/background.tscn" id="3_wqsap"]
+[ext_resource type="Script" uid="uid://dpyf25n3iu6ni" path="res://Scripts/simple_button.gd" id="4_elir1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_03h3j")
+
+[node name="Background" parent="." instance=ExtResource("3_wqsap")]
+layout_mode = 1
+texture = null
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 156
+text = "Tinies Reaper"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+script = ExtResource("4_elir1")
+targetScenePath = "res://scenes/levels/level_01.tscn"
+hasInitialFocus = true
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+script = ExtResource("4_elir1")
+targetScenePath = "res://scenes/ui/settings_menu.tscn"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+script = ExtResource("4_elir1")
+targetScenePath = "res://scenes/ui/credits_menu.tscn"

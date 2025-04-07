@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciq4m7ci7otje"]
+
+[ext_resource type="Theme" uid="uid://sskftnklcksg" path="res://assets/themes/default_theme.tres" id="1_fxoss"]
+[ext_resource type="PackedScene" uid="uid://bp0kh61x22hov" path="res://scenes/ui/background.tscn" id="2_btxxp"]
+[ext_resource type="Script" uid="uid://cy050i6wslnvx" path="res://scripts/ui/volume_slider.gd" id="3_wf1lt"]
+[ext_resource type="PackedScene" uid="uid://bhy6v7h1w250f" path="res://scenes/ui/back_button.tscn" id="4_ev2s6"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fxoss")
+
+[node name="Background" parent="." instance=ExtResource("2_btxxp")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "Settings"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "Volume"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -15.0
+max_value = 10.0
+step = 0.2
+script = ExtResource("3_wf1lt")
+
+[node name="Timer" type="Timer" parent="VBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer/VolumeSlider"]
+autostart = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer2/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "100%"
+
+[node name="BackButton" parent="." instance=ExtResource("4_ev2s6")]
+layout_mode = 1
