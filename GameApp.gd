@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 	# adapt the player zoom level
 	if mainCam != null:
-		mainCam.zoom = Vector2(0.25, 0.25)
+		mainCam.zoom = Vector2(0.4, 0.4)
 	
 	# adapt the player position
 	if player != null:
