@@ -16,9 +16,8 @@ var scanTimer: Timer
 const SECTION_ROWS: int = 3
 const SECTION_COUNT = 4
 
-const TILE_GROUND: Vector2i = Vector2i(0, 0)
-const TILE_MINED: Vector2i = Vector2i(-1, -1)
-
+const ATLAS_GROUND = 0
+const ATLAS_MINED = 2
 const ATLAS_ORE_ONLY = 2
 const ATLAS_MINES_ONLY = 3
 const ATLAS_MIXED = 4
@@ -228,15 +227,17 @@ func setCellTile(position: Vector2i) -> void:
         return
     
     var tileOffset: int = 0
-    var atlasId: int = 0
+    var tileVariant: int = cell.tileVariant
+    var atlasId: int = ATLAS_GROUND
 
     if cell.isMined():
         setCellNumberTile(position)
-        tileOffset = -1
+        atlasId = ATLAS_MINED
+        tileVariant = 0
     elif cell.isDamaged():
         tileOffset = cell.getTileDamageOffset()
     
-    ground.set_cell(position, atlasId, Vector2i(cell.tileVariant, tileOffset))
+    ground.set_cell(position, atlasId, Vector2i(tileVariant, tileOffset))
 
 func setCellNumberTile(position: Vector2i) -> void:
     var tile: Vector2i = Vector2i(-1, -1)
