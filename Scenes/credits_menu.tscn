@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm3gpslv131w0"]
+
+[ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/background.tscn" id="1_y7p5x"]
+[ext_resource type="PackedScene" uid="uid://pumfk61vaauj" path="res://Scenes/back_button.tscn" id="2_7cbwn"]
+[ext_resource type="Script" uid="uid://trjwrl1xiso0" path="res://Scripts/credits_label.gd" id="4_occkw"]
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" parent="." instance=ExtResource("1_y7p5x")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 32
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+text = "Credits"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 122
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="CreditsLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("4_occkw")
+
+[node name="BackButton" parent="." instance=ExtResource("2_7cbwn")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 648.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[connection signal="meta_clicked" from="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2/CreditsLabel" to="." method="_on_credits_label_meta_clicked"]

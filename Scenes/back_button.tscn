@@ -25,7 +25,7 @@ size_flags_vertical = 10
 layout_mode = 2
 text = "Back"
 script = ExtResource("1_4c7ye")
-targetScenePath = "res://scenes/ui/main_menu.tscn"
+targetScenePath = "uid://xv75whi5jajw"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
