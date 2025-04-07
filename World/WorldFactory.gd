@@ -205,6 +205,23 @@ func setCellTile(position: Vector2i) -> void:
     if cell == null:
         return
     
+    var tileOffset: int = 0
+    var atlasId: int = 0
+    
+    if cell.isMined():
+        setCellNumberTile(position)
+        tileOffset = -1
+    elif cell.isDamaged():
+        tileOffset = cell.getTileDamageOffset()
+    
+    ground.set_cell(position, atlasId, Vector2i(cell.tileVariant, tileOffset))
+
+func debugCellTiles(position: Vector2i) -> void:
+    var cell: Cell = worldState[position.y][position.x]
+    
+    if cell == null:
+        return
+    
     var tile: Vector2i = TILE_GROUND
     var alternative: int = 0
     var atlasId: int = 1
@@ -218,7 +235,7 @@ func setCellTile(position: Vector2i) -> void:
         alternative = 2
     elif cell is Mine:
         alternative = 3
-     
+    
     ground.set_cell(position, atlasId, tile, alternative)
 
 func setCellNumberTile(position: Vector2i) -> void:
@@ -227,6 +244,7 @@ func setCellNumberTile(position: Vector2i) -> void:
     # calc adjacent tiles for number
     var counts: Array = getAdjacentSweeperCellCount(position)
     var count: int = counts[0]
+
     if count > 0:
         tile = Vector2i(count - 1, 0)
         var countMines: int = counts[1]
@@ -236,11 +254,6 @@ func setCellNumberTile(position: Vector2i) -> void:
             atlasId = ATLAS_ORE_ONLY
     
     numbers.set_cell(position, atlasId, tile)
-    
-    #print("New color for cell (%d, %d) - Tile: (%d, %d)" % [position.x, position.y, tile.x, tile.y])
-    #var tileData: TileData = numbers.get_cell_tile_data(position)
-    #if tileData != null:
-    #    tileData.modulate = Color(randi_range(0,1),randi_range(0,1),randi_range(0,1),1)
 
 func getAdjacentSweeperCellCount(position: Vector2i) -> Array:
     var bounds: PositionBounds = PositionBounds.new(position, worldState)
