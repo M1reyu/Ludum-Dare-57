@@ -24,5 +24,5 @@ func _ready() -> void:
 
 func _on_collision_detected(collision: KinematicCollision2D) -> void:
     var cellPosition: Vector2i = ground.get_coords_for_body_rid(collision.get_collider_rid())
-    world.drill(cellPosition)
+    world.drill(cellPosition, player.strength)
     AudioPlayer.play_sfx("dig")

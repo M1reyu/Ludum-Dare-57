@@ -2,7 +2,7 @@ extends Object
 class_name Cell
 
 var _baseHealth: int = 2
-var _resistance: int = 0
+var _resistance: int = 1
 
 var healthPoints: int = 0
 var value: int = 0
@@ -15,6 +15,9 @@ func _init(section: int = 0) -> void:
     
     if section > 1:
         _baseHealth <<= section - 1
+        
+        if section > 2:
+            _resistance += section * 1.5
     
     healthPoints = _baseHealth
     tileVariant = calculateTileVariant()

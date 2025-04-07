@@ -1,6 +1,9 @@
 extends Node
 class_name WorldFactory
 
+signal explosion(coordinates: Vector2i, damage: int)
+signal minedValuable(value: int)
+
 var worldState: Array = Array()
 var random: RandomNumberGenerator
 var ground: TileMapLayer
@@ -24,7 +27,7 @@ func _init(groundLayer: TileMapLayer, numberLayer: TileMapLayer) -> void:
         printerr("Ground- or number-layer is missing")
         
         return
-        
+
     ground = groundLayer
     numbers = numberLayer
     random = RandomNumberGenerator.new()
@@ -76,7 +79,7 @@ func addCell(x: int, y: int, randModifier: float = 0.0) -> void:
     worldState[y][x] = buildCell(globalSection, randModifier)
     setCellTile(Vector2i(x, y))
 
-func drill(cellPosition: Vector2i) -> void:
+func drill(cellPosition: Vector2i, damage: int) -> void:
     var x: int = cellPosition.x
     var y: int = cellPosition.y
     var cell: Cell = worldState[y][x]
@@ -85,11 +88,18 @@ func drill(cellPosition: Vector2i) -> void:
     if cell.isMined():
         return
 
-    cell.drill(1)
+    cell.drill(damage)
     setCellTile(cellPosition)
     
-    if cell.isMined():
-        recalculateAdjacentCellSweeperCount(cellPosition)
+    if not cell.isMined():
+        return
+        
+    recalculateAdjacentCellSweeperCount(cellPosition)
+    
+    if cell is Mine:
+        explosion.emit(ground.map_to_local(cellPosition), 1)
+    elif cell is Ore:
+        minedValuable.emit(cell.value)
 
 func printWorld() -> void:
     print("World state:")
