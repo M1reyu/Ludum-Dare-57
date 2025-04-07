@@ -13,7 +13,7 @@ config_version=5
 config/name="MineDigger"
 run/main_scene="uid://xv75whi5jajw"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-boot_splash/bg_color=Color(0.984314, 0.909804, 0.917647, 1)
+boot_splash/bg_color=Color(0.301961, 0.0980392, 0.113725, 1)
 config/icon="uid://dwurb7gsrfo2s"
 
 [autoload]
