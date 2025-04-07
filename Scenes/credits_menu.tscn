@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm3gpslv131w0"]
+[gd_scene load_steps=5 format=3 uid="uid://bm3gpslv131w0"]
 
 [ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/background.tscn" id="1_y7p5x"]
 [ext_resource type="PackedScene" uid="uid://pumfk61vaauj" path="res://Scenes/back_button.tscn" id="2_7cbwn"]
+[ext_resource type="Theme" uid="uid://letb3gcgu35b" path="res://Assets/Themes/Credits_lable.tres" id="2_oouge"]
 [ext_resource type="Script" uid="uid://trjwrl1xiso0" path="res://Scripts/credits_label.gd" id="4_occkw"]
 
 [node name="CreditsMenu" type="Control"]
@@ -26,14 +27,15 @@ grow_vertical = 2
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 64
-theme_override_constants/margin_top = 64
+theme_override_constants/margin_top = 47
 theme_override_constants/margin_right = 64
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_bottom = 64
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme = ExtResource("2_oouge")
+theme_override_font_sizes/font_size = 110
 text = "Credits"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
@@ -54,6 +56,7 @@ size_flags_vertical = 0
 
 [node name="CreditsLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2"]
 layout_mode = 2
+theme = ExtResource("2_oouge")
 bbcode_enabled = true
 fit_content = true
 script = ExtResource("4_occkw")

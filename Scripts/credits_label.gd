@@ -20,10 +20,10 @@ func buildText() -> void:
 	addLine()
 	addUrl('https://github.com/M1reyu/Ludum-Dare-57', 'Github')
 	self.text += ', '
-	addUrl('https://ldjam.com/events/ludum-dare/57/$413145', 'Ludum Dare 56')
+	addUrl('https://ldjam.com/events/ludum-dare/57/$413145', 'Ludum Dare 57')
 	addLine()
 	addLine()
-	addLine('Thank you for digging :)')
+	addLine('Thank you for digging :D')
 
 func addUrl(url: String, label: String = '') -> void:
 	self.text += '[url=' + url + ']' + label + '[/url]'
