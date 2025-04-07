@@ -21,4 +21,4 @@ func _on_volume_value_changed(value: float) -> void:
 		AudioPlayer.bg_music.set_volume_db(value - 10.0)
 	if self.can_play_sound == true:
 		self.can_play_sound = false
-		AudioPlayer.play_sfx("jump")
+		AudioPlayer.play_sfx("pickupOre")
