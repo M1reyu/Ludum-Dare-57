@@ -1,15 +1,19 @@
-[gd_scene load_steps=14 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=18 format=3 uid="uid://vq3ebi483wyn"]
 
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
 [ext_resource type="Texture2D" uid="uid://befjlexrbepi2" path="res://Assets/Player/Player_SmallDrill02.png" id="3_00tjw"]
-[ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/MenuHud.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://cswelp48kvxed" path="res://Player/ShopHud.gd" id="3_btcbx"]
 [ext_resource type="Texture2D" uid="uid://f8to3g72oacr" path="res://Assets/Player/Player_BigDrill01.png" id="4_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
 [ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://dhtt666kpbd5m" path="res://Assets/Square.png" id="9_00tjw"]
 [ext_resource type="Texture2D" uid="uid://dqqi5lxhhvmly" path="res://Assets/ShopUI01.png" id="9_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopSelector.png" id="10_x3vf3"]
+[ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Player/player_ui.gd" id="11_apopc"]
+[ext_resource type="StyleBox" uid="uid://qsf04kvwe00c" path="res://Assets/Resources/FillBarBackground.tres" id="13_gu6f8"]
+[ext_resource type="StyleBox" uid="uid://btqodgj00flxw" path="res://Assets/Resources/FillBar.tres" id="13_p5o4e"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
 animations = [{
@@ -78,7 +82,9 @@ shape = SubResource("CircleShape2D_00tjw")
 [node name="MainCam" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
 
-[node name="MenuHud" type="Control" parent="MainCam"]
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="ShopHud" type="Control" parent="Canvas"]
 visible = false
 layout_mode = 3
 anchors_preset = 8
@@ -86,119 +92,150 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -600.0
-offset_top = -600.0
-offset_right = 600.0
-offset_bottom = 600.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_btcbx")
 
-[node name="HudBackground" type="Sprite2D" parent="MainCam/MenuHud"]
+[node name="HudBackground" type="Sprite2D" parent="Canvas/ShopHud"]
 show_behind_parent = true
+scale = Vector2(0.666667, 0.666667)
 texture = ExtResource("9_x3vf3")
 centered = false
-offset = Vector2(-500, 0)
 
-[node name="Utilities" type="Control" parent="MainCam/MenuHud"]
+[node name="Utilities" type="Control" parent="Canvas/ShopHud"]
 anchors_preset = 0
-offset_left = 25.0
-offset_top = 140.0
-offset_right = 925.0
-offset_bottom = 340.0
+offset_left = 350.0
+offset_top = 95.0
+offset_right = 1250.0
+offset_bottom = 295.0
+scale = Vector2(0.667, 0.667)
 
-[node name="Refule" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
+[node name="Refule" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Repair" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
+[node name="Repair" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Shield" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
+[node name="Shield" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Bomb" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
+[node name="Bomb" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
 position = Vector2(520, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Miner" type="Sprite2D" parent="MainCam/MenuHud/Utilities"]
+[node name="Miner" type="Sprite2D" parent="Canvas/ShopHud/Utilities"]
 position = Vector2(685, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Upgrades" type="Control" parent="MainCam/MenuHud"]
+[node name="Upgrades" type="Control" parent="Canvas/ShopHud"]
 anchors_preset = 0
-offset_left = 25.0
-offset_top = 440.0
-offset_right = 925.0
-offset_bottom = 640.0
+offset_left = 350.0
+offset_top = 295.0
+offset_right = 1250.0
+offset_bottom = 495.0
+scale = Vector2(0.667, 0.667)
 
-[node name="Health" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Health" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Speed" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Speed" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Drill" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Drill" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Tank" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Tank" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
 position = Vector2(520, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Cargo" type="Sprite2D" parent="MainCam/MenuHud/Upgrades"]
+[node name="Cargo" type="Sprite2D" parent="Canvas/ShopHud/Upgrades"]
 position = Vector2(685, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Apilities" type="Control" parent="MainCam/MenuHud"]
+[node name="Apilities" type="Control" parent="Canvas/ShopHud"]
 anchors_preset = 0
-offset_left = 25.0
-offset_top = 740.0
-offset_right = 925.0
-offset_bottom = 940.0
+offset_left = 350.0
+offset_top = 495.0
+offset_right = 1250.0
+offset_bottom = 695.0
+scale = Vector2(0.667, 0.667)
 
-[node name="Scaner" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
+[node name="Scaner" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
 position = Vector2(25, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Flag" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
+[node name="Flag" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
 position = Vector2(190, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
-[node name="Range" type="Sprite2D" parent="MainCam/MenuHud/Apilities"]
+[node name="Range" type="Sprite2D" parent="Canvas/ShopHud/Apilities"]
 position = Vector2(355, 10)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("10_x3vf3")
 centered = false
 
+[node name="PlayerUI" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("11_apopc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Canvas/PlayerUI"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_00tjw")
+centered = false
+
+[node name="ProgressBar" type="ProgressBar" parent="Canvas/PlayerUI"]
+self_modulate = Color(0, 0.894118, 0, 1)
+layout_mode = 0
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 225.0
+offset_bottom = 45.0
+theme_override_styles/background = ExtResource("13_gu6f8")
+theme_override_styles/fill = ExtResource("13_p5o4e")
+max_value = 2.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[connection signal="playerStats" from="." to="Canvas/ShopHud" method="_on_player_player_stats"]
+[connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]
 [connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]
 [connection signal="area_exited" from="PlayerTigArea" to="." method="_on_player_tig_area_area_exited"]
-[connection signal="buyShopSelection" from="MainCam/MenuHud" to="." method="_on_menu_hud_buy_shop_selection"]
+[connection signal="buyShopSelection" from="Canvas/ShopHud" to="." method="_on_menu_hud_buy_shop_selection"]

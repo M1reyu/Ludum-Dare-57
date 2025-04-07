@@ -15,6 +15,7 @@ var strength : int = 2
 var inMenu : bool = false
 var canOpen : bool = false
 
+var curMoney : int = 0
 var curHealth : int = 1
 var curTank : float = 100.0
 var curCargo : int = 0
@@ -25,10 +26,12 @@ var scannerBought : bool = false
 var flaggingBought : bool = false
 var mineRangeBought : bool = false
 
-@onready var menuHud : Control = $MainCam/MenuHud
+@onready var menuHud : Control = $Canvas/ShopHud
 @onready var playerSprite : AnimatedSprite2D = $PlayerSprite
 
 const shopItem = preload("res://globalVars.gd").shopBuyables
+
+signal playerStats(funds : int, hp : int, fuel : int, cargo : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
 
 func _ready() -> void:
 	curHealth = maxHealth
@@ -36,10 +39,12 @@ func _ready() -> void:
 
 var posTimeout = 0
 func _process(_delta: float) -> void:
-	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): menuHud.show()
+	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): 
+		sendStatSignal()
+		menuHud.show()
 	
 	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))
-	if (dirMod == Vector2.ZERO): 
+	if (dirMod == Vector2.ZERO || menuHud.visible): 
 		playerSprite.rotation_degrees = 0
 		if (playerSprite.animation != "Idle"): playerSprite.play("Idle")
 	else:
@@ -91,6 +96,9 @@ func _physics_process(delta: float) -> void:
 		if (abs(dir.x) > speedLimit): dir.x = speedLimit * (dir.x / abs(dir.x))
 		if (abs(dir.y) > speedLimit): dir.y = speedLimit * (dir.y / abs(dir.y))
 
+func sendStatSignal() -> void:
+	playerStats.emit(curMoney, curHealth, curTank, curCargo, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
+
 func directionMod(dir : Vector2) -> Vector2:
 	if dir.x < 0: dir.x = -1
 	elif dir.x > 0: dir.x = 1
@@ -102,37 +110,57 @@ func directionMod(dir : Vector2) -> Vector2:
 func _on_menu_hud_buy_shop_selection(itemType: int) -> void:
 	match itemType:
 		shopItem.Repair:
+			curMoney -= (maxHealth - curHealth) * 150
 			curHealth = maxHealth
 		shopItem.Refuel:
+			curMoney -= (maxTank - curTank)
 			curTank = maxTank
 		shopItem.Shield:
+			curMoney -= 100
 			shielded = true
 		shopItem.Bomb:
+			curMoney -= 300
 			bombCount += 1
 		shopItem.Miner:
+			curMoney -= 1000
 			minerCount += 1
 		shopItem.HealthUp:
+			curMoney -= maxHealth * 500
 			maxHealth += 1
 			curHealth = maxHealth
 		shopItem.SpeedUp:
+			curMoney -= speed * 2
 			speed += 200
 		shopItem.StrengthUp:
+			curMoney -= strength * 750
 			strength *= 2
-			print("StrengthUp: " + str(strength))
 		shopItem.TankUp:
+			curMoney -= maxTank * 5
 			maxTank *= 2
 			curTank = maxTank
 		shopItem.CargoUp:
-			maxCargo *= 2
+			curMoney -= 200 + maxCargo * 50
+			maxCargo += 5
 		shopItem.Scanner:
+			curMoney -= 2500
 			scannerBought = true
 		shopItem.Flag:
+			curMoney -= 5000
 			flaggingBought = true
 		shopItem.RangeMine:
+			curMoney -= 5000
 			mineRangeBought = true
+	
+	sendStatSignal()
 
 func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	canOpen = true
+	curMoney += curCargo * 100
+	curCargo = 0
+	
+	sendStatSignal()
 
 func _on_player_tig_area_area_exited(_area: Area2D) -> void:
 	canOpen = false
+	
+	sendStatSignal()
