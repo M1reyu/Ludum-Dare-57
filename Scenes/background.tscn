@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp0kh61x22hov"]
+[gd_scene load_steps=2 format=3 uid="uid://uim80f67kp5r"]
 
-[ext_resource type="Texture2D" uid="uid://w6d4xpi8jrvf" path="res://DevArt/BgColors.jpg" id="1_4jjo1"]
+[ext_resource type="Texture2D" uid="uid://dk16di4rvctcg" path="res://Assets/BackgroundTemp.jpg" id="1_sn1xx"]
 
 [node name="Background" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = -76.0
+offset_right = 806.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_4jjo1")
+texture = ExtResource("1_sn1xx")
 expand_mode = 3
 stretch_mode = 6
