@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bn6yxmildf0j7"]
+[gd_scene load_steps=5 format=3 uid="uid://d083eclaube7r"]
 
-[ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_cguwc"]
+[ext_resource type="PackedScene" path="res://Player/player.tscn" id="1_cguwc"]
 [ext_resource type="Script" uid="uid://dv67aw8xfdo14" path="res://GameApp.gd" id="1_wicfy"]
-[ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_wicfy"]
-[ext_resource type="PackedScene" uid="uid://dm6dp81ug0jj7" path="res://Tilemaps/Numbers.tscn" id="3_go42g"]
+[ext_resource type="PackedScene" path="res://Tilemaps/Ground.tscn" id="2_wicfy"]
+[ext_resource type="PackedScene" path="res://Tilemaps/Numbers.tscn" id="3_go42g"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_wicfy")

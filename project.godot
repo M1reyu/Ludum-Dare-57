@@ -73,6 +73,10 @@ NextItem={
 2d_physics/layer_2="Ground"
 2d_physics/layer_3="Shop"
 
+[memory]
+
+limits/message_queue/max_size_mb=819200
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

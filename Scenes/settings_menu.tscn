@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciq4m7ci7otje"]
+[gd_scene load_steps=4 format=3 uid="uid://dty22uu0yvdqy"]
 
-[ext_resource type="Theme" uid="uid://sskftnklcksg" path="res://assets/themes/default_theme.tres" id="1_fxoss"]
-[ext_resource type="PackedScene" uid="uid://bp0kh61x22hov" path="res://scenes/ui/background.tscn" id="2_btxxp"]
-[ext_resource type="Script" uid="uid://cy050i6wslnvx" path="res://scripts/ui/volume_slider.gd" id="3_wf1lt"]
-[ext_resource type="PackedScene" uid="uid://bhy6v7h1w250f" path="res://scenes/ui/back_button.tscn" id="4_ev2s6"]
+[ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/background.tscn" id="2_btxxp"]
+[ext_resource type="Script" uid="uid://d1i5cts7sgxo1" path="res://Scripts/volume_slider.gd" id="3_wf1lt"]
+[ext_resource type="PackedScene" uid="uid://pumfk61vaauj" path="res://Scenes/back_button.tscn" id="4_ev2s6"]
 
 [node name="SettingsMenu" type="Control"]
 layout_mode = 3
@@ -12,7 +11,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_fxoss")
 
 [node name="Background" parent="." instance=ExtResource("2_btxxp")]
 layout_mode = 1

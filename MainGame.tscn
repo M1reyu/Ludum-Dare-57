@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://b1d377qbu0m2h"]
+[gd_scene load_steps=4 format=4 uid="uid://bmggpslv131f0"]
 
-[ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Player/player.tscn" id="1_e3m3f"]
-[ext_resource type="PackedScene" uid="uid://bnfmo3kebwssg" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
-[ext_resource type="PackedScene" uid="uid://cv3uv4h4wib1w" path="res://Scenes/Shop.tscn" id="2_ws5ob"]
+[ext_resource type="PackedScene" path="res://Player/player.tscn" id="1_e3m3f"]
+[ext_resource type="PackedScene" path="res://Tilemaps/Ground.tscn" id="2_e3m3f"]
+[ext_resource type="PackedScene" uid="uid://d35ogjkebk0x6" path="res://Scenes/Shop.tscn" id="2_ws5ob"]
 
 [node name="MainGame" type="Node2D"]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://brfbiks4y05p3" path="res://Scripts/main_menu.gd" id="2_03h3j"]
 [ext_resource type="Theme" uid="uid://cfr83i8fuq5tj" path="res://Assets/Themes/Start_theme.tres" id="3_ce3w2"]
 [ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="3_n45e2"]
-[ext_resource type="PackedScene" uid="uid://uim80f67kp5r" path="res://Scenes/background.tscn" id="3_wqsap"]
+[ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/background.tscn" id="3_wqsap"]
 [ext_resource type="Script" uid="uid://dpyf25n3iu6ni" path="res://Scripts/simple_button.gd" id="4_elir1"]
 
 [sub_resource type="Theme" id="Theme_opfnp"]
@@ -59,7 +59,7 @@ size_flags_stretch_ratio = 0.0
 theme = ExtResource("3_ce3w2")
 text = "       Start       "
 script = ExtResource("4_elir1")
-targetScenePath = "res://scenes/levels/level_01.tscn"
+targetScenePath = "uid://bmggpslv131f0"
 textAlignment = 1
 hasInitialFocus = true
 
@@ -68,7 +68,6 @@ layout_mode = 2
 theme = ExtResource("3_ce3w2")
 text = "Settings"
 script = ExtResource("4_elir1")
-targetScenePath = "res://scenes/ui/settings_menu.tscn"
 textAlignment = 1
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
@@ -76,5 +75,4 @@ layout_mode = 2
 theme = ExtResource("3_ce3w2")
 text = "Credits"
 script = ExtResource("4_elir1")
-targetScenePath = "res://scenes/ui/credits_menu.tscn"
 textAlignment = 1

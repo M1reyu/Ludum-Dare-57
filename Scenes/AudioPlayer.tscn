@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds4xh4cve6c7s"]
+[gd_scene load_steps=3 format=3 uid="uid://cvwon6onbii8v"]
 
-[ext_resource type="Script" uid="uid://cr4rf8keak72q" path="res://scripts/audio_player.gd" id="1_5cco8"]
+[ext_resource type="Script" uid="uid://cr4rf8keak72q" path="res://Scripts/audio_player.gd" id="1_5cco8"]
 [ext_resource type="AudioStream" uid="uid://dmcr1e6vuh0cp" path="res://Assets/Sounds/Music/GameJam_Depth-Menu_Mix1.1_M1.0.wav" id="2_dteqw"]
 
 [node name="AudioPlayer" type="Node"]
