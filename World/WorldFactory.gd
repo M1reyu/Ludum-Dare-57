@@ -15,37 +15,6 @@ const SECTION_COUNT = 4
 const TILE_GROUND: Vector2i = Vector2i(0, 0)
 const TILE_MINED: Vector2i = Vector2i(-1, -1)
 
-func _init(tml: TileMapLayer) -> void:
-	ground = tml
-	random = RandomNumberGenerator.new()
-	random.randomize()
-	
-	buildWorld()
-	printWorld()
-
-func buildWorld() -> void:
-	print('Loading ... building world')
-	
-	var radius = SECTION_ROWS * SECTION_COUNT
-	xCenter = radius
-	yCenter = radius
-	prepareWorldContainer(radius)
-	
-	globalSection = SECTION_COUNT
-	
-	# start from the inner to the outer
-	for section in range(SECTION_COUNT):
-		buildPlanetLayer(SECTION_ROWS * (section + 1))
-		globalSection -= 1
-	
-	# to avoid displaying wrong numbers, because the cell are build in columns
-	# we need to update all mined cells again
-	for row in range(worldState.size()):
-		for column in range(worldState[row].size()):
-			var cell: Cell = worldState[row][column]
-			if cell is Cell && cell.isMined():
-				setCellTile(Vector2i(column, row))
-=======
 const ATLAS_ORE_ONLY = 2
 const ATLAS_MINES_ONLY = 3
 const ATLAS_MIXED = 4
@@ -90,105 +59,105 @@ func buildWorld() -> void:
                 setCellTile(Vector2i(column, row))
 
 func buildCell(section: int, randModifier: float) -> Cell:
-	var randF: float = random.randf() + randModifier
-	
-	# the first section contains no mines
-	if section > 1 && randF > (0.96 - (section * 0.01)):
-		return Mine.new(section)
-	elif randF > (0.75 - (section * 0.05)):
-		return Ore.new(section)
-	elif randF < -0.95:
-		# the first row could have already mined cells
-		section = 0
-	
-	return Cell.new(section)
+    var randF: float = random.randf() + randModifier
+    
+    # the first section contains no mines
+    if section > 1 && randF > (0.96 - (section * 0.01)):
+        return Mine.new(section)
+    elif randF > (0.75 - (section * 0.05)):
+        return Ore.new(section)
+    elif randF < -0.95:
+        # the first row could have already mined cells
+        section = 0
+    
+    return Cell.new(section)
 
 func addCell(x: int, y: int, randModifier: float = 0.0) -> void:
-	worldState[y][x] = buildCell(globalSection, randModifier)
-	setCellTile(Vector2i(x, y))
+    worldState[y][x] = buildCell(globalSection, randModifier)
+    setCellTile(Vector2i(x, y))
 
 func drill(cellPosition: Vector2i) -> void:
-	var x: int = cellPosition.x
-	var y: int = cellPosition.y
-	var cell: Cell = worldState[y][x]
-	print("Drill: (%d, %d), health: %d" % [x, y, cell.healthPoints])
-	
-	if cell.isMined():
-		return
+    var x: int = cellPosition.x
+    var y: int = cellPosition.y
+    var cell: Cell = worldState[y][x]
+    print("Drill: (%d, %d), health: %d" % [x, y, cell.healthPoints])
+    
+    if cell.isMined():
+        return
 
-	cell.drill(1)
-	setCellTile(cellPosition)
-	
-	if cell.isMined():
-		recalculateAdjacentCellSweeperCount(cellPosition)
+    cell.drill(1)
+    setCellTile(cellPosition)
+    
+    if cell.isMined():
+        recalculateAdjacentCellSweeperCount(cellPosition)
 
 func printWorld() -> void:
-	print("World state:")
-	
-	for row in worldState:
-		var out: String = ""
-		for cell in row:
-			if is_instance_of(cell, Ore):
-				out += "O"
-			elif is_instance_of(cell, Mine):
-				out += "M"
-			elif is_instance_of(cell, Cell):
-				if cell.isMined() == true:
-					out += "~"
-				else:
-					out += "X"
-			else:
-				out += "-"
-		print(out)
+    print("World state:")
+    
+    for row in worldState:
+        var out: String = ""
+        for cell in row:
+            if is_instance_of(cell, Ore):
+                out += "O"
+            elif is_instance_of(cell, Mine):
+                out += "M"
+            elif is_instance_of(cell, Cell):
+                if cell.isMined() == true:
+                    out += "~"
+                else:
+                    out += "X"
+            else:
+                out += "-"
+        print(out)
 
 func addCellsOnVerticalLineToCenter(x: int, y: int) -> void:
-	# draw a column-line from y to y = 0
-	if y > yCenter:
-		addCellsOnLineFromTo(x, y, yCenter - 1, -1)
-	elif y < yCenter:
-		addCellsOnLineFromTo(x, y, yCenter)
-	elif doesCellExist(x, y) == false:
-		addCell(x, y)
+    # draw a column-line from y to y = 0
+    if y > yCenter:
+        addCellsOnLineFromTo(x, y, yCenter - 1, -1)
+    elif y < yCenter:
+        addCellsOnLineFromTo(x, y, yCenter)
+    elif doesCellExist(x, y) == false:
+        addCell(x, y)
 
 func addCellsOnLineFromTo(x: int, yStart: int, yEnd: int, steps: int = 1) -> void:
-	if doesCellExist(x, yStart):
-		return
-	
-	if globalSection == 1:
-		# the most outer row layer contains base dirt cells only
-		addCell(x, yStart, -1.0)
-		yStart += steps
-	
-	var randModifier: float = 0.0
-	if x == 0 or x == worldState.size() - 1:
-		randModifier = -1.0
-	
-	for y in range(yStart, yEnd, steps):
-		if doesCellExist(x, y):
-			return
-		addCell(x, y, randModifier)
+    if doesCellExist(x, yStart):
+        return
+    
+    if globalSection == 1:
+        # the most outer row layer contains base dirt cells only
+        addCell(x, yStart, -1.0)
+        yStart += steps
+    
+    var randModifier: float = 0.0
+    if x == 0 or x == worldState.size() - 1:
+        randModifier = -1.0
+    
+    for y in range(yStart, yEnd, steps):
+        if doesCellExist(x, y):
+            return
+        addCell(x, y, randModifier)
 
 func doesCellExist(x: int, y: int) -> bool:
-	return worldState[y][x] != null
+    return worldState[y][x] != null
 
 # draw 8 points going away from each corner
 func buildSymmetric8PointsAndLines(x: int, y: int) -> void:
-	addCellsOnVerticalLineToCenter(xCenter + x, yCenter + y)
-	addCellsOnVerticalLineToCenter(xCenter - x, yCenter + y)
-	addCellsOnVerticalLineToCenter(xCenter + x, yCenter - y)
-	addCellsOnVerticalLineToCenter(xCenter - x, yCenter - y)
-	addCellsOnVerticalLineToCenter(xCenter + y, yCenter + x)
-	addCellsOnVerticalLineToCenter(xCenter - y, yCenter + x)
-	addCellsOnVerticalLineToCenter(xCenter + y, yCenter - x)
-	addCellsOnVerticalLineToCenter(xCenter - y, yCenter - x)
+    addCellsOnVerticalLineToCenter(xCenter + x, yCenter + y)
+    addCellsOnVerticalLineToCenter(xCenter - x, yCenter + y)
+    addCellsOnVerticalLineToCenter(xCenter + x, yCenter - y)
+    addCellsOnVerticalLineToCenter(xCenter - x, yCenter - y)
+    addCellsOnVerticalLineToCenter(xCenter + y, yCenter + x)
+    addCellsOnVerticalLineToCenter(xCenter - y, yCenter + x)
+    addCellsOnVerticalLineToCenter(xCenter + y, yCenter - x)
+    addCellsOnVerticalLineToCenter(xCenter - y, yCenter - x)
 
 func prepareWorldContainer(radius: int) -> void:
-	var size: int = radius * 2 + 1
-	worldState.resize(size)
-	for i in range(size):
-		worldState[i] = Array()
-		worldState[i].resize(size)
-		worldState[i].fill(null)
+    var size: int = radius * 2 + 1
+    worldState.resize(size)
+    for i in range(size):
+        worldState[i] = Array()
+        worldState[i].resize(size)
+        worldState[i].fill(null)
 
 func prepareNumberTiles() -> void:
     var _t = numbers.tile_set.get_source_count()
@@ -213,67 +182,24 @@ func prepareNumberTiles() -> void:
             tileData.modulate = color
 
 func buildPlanetLayer(radius: int) -> void:
-	# create a filled circle by utilizing Bresenham's algorithm
-	var x: int = 0
-	var y: int = radius
-	var d: int = 3 - 2 * radius # decision parameter
-	
-	buildSymmetric8PointsAndLines(x, y)
-	
-	while x <= y:
-		if d > 0:
-			y -= 1
-			d = d + 4 * (x - y) + 10
-		else:
-			d = d + 4 * x + 6
-		
-		x += 1
-		buildSymmetric8PointsAndLines(x, y)
+    # create a filled circle by utilizing Bresenham's algorithm
+    var x: int = 0
+    var y: int = radius
+    var d: int = 3 - 2 * radius # decision parameter
+    
+    buildSymmetric8PointsAndLines(x, y)
+    
+    while x <= y:
+        if d > 0:
+            y -= 1
+            d = d + 4 * (x - y) + 10
+        else:
+            d = d + 4 * x + 6
+        
+        x += 1
+        buildSymmetric8PointsAndLines(x, y)
 
 func setCellTile(position: Vector2i) -> void:
-	var cell: Cell = worldState[position.y][position.x]
-	
-	if cell == null:
-		return
-	
-	var tile: Vector2i = TILE_GROUND
-	var alternative: int = 0
-	var atlasId: int = 1
-	
-	if cell.isMined():
-		# calc adjacent tiles for number
-		var count: int = getAdjacentSweeperCellCount(position)
-		if count > 0:
-			tile = Vector2i(count - 1, 0)
-			atlasId = 0
-		else:
-			tile = TILE_MINED
-	elif cell.isDamaged():
-		alternative = 1
-	elif cell is Ore:
-		alternative = 2
-	elif cell is Mine:
-		alternative = 3
-	 
-	ground.set_cell(position, atlasId, tile, alternative)
-
-func getAdjacentSweeperCellCount(position: Vector2i) -> int:
-	var bounds: PositionBounds = PositionBounds.new(position, worldState)
-	var count: int = 0
-	
-	for y in range(bounds.yMin, bounds.yMax + 1):
-		for x in range(bounds.xMin, bounds.xMax + 1):
-			var cell: Cell = worldState[y][x]
-			if cell == null || cell.isMined():
-				continue
-			if cell is Mine || cell is Ore:
-				count += 1
-	
-	return count
-
-func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
-	var bounds: PositionBounds = PositionBounds.new(position, worldState)
-=======
     var cell: Cell = worldState[position.y][position.x]
     
     if cell == null:
@@ -308,7 +234,6 @@ func setCellNumberTile(position: Vector2i) -> void:
             atlasId = ATLAS_MINES_ONLY
         elif countMines == 0:
             atlasId = ATLAS_ORE_ONLY
-            
     
     numbers.set_cell(position, atlasId, tile)
     
@@ -338,10 +263,9 @@ func recalculateAdjacentCellSweeperCount(position: Vector2i) -> void:
     var bounds: PositionBounds = PositionBounds.new(position, worldState)
     print("Recalculation bounds: y(%d, %d), x(%d, %d)" % [bounds.yMin, bounds.yMax, bounds.xMin, bounds.xMax])
 
-	for y in range(bounds.yMin, bounds.yMax + 1):
-		for x in range(bounds.xMin, bounds.xMax + 1):
-			var cell: Cell = worldState[y][x]
-			if cell == null || cell.isMined() == false:
-				continue
-			setCellTile(Vector2i(x, y))
-	
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            var cell: Cell = worldState[y][x]
+            if cell == null || cell.isMined() == false:
+                continue
+            setCellTile(Vector2i(x, y))
