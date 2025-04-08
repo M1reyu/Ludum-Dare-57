@@ -13,8 +13,8 @@ var yCenter: int
 var globalSection: int
 var scanTimer: Timer
 
-const SECTION_ROWS: int = 3
-const SECTION_COUNT = 4
+const SECTION_ROWS: int = 5
+const SECTION_COUNT = 5
 
 const ATLAS_GROUND = 0
 const ATLAS_MINED = 2
