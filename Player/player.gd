@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal collides(collision: KinematicCollision2D)
 signal scan(coordinates: Vector2)
+signal tnt(coordinates: Vector2)
 
 @export var speed : int = 800
 @export var speedLimit : int = 1500
@@ -248,4 +249,5 @@ func _on_collect_valuable(value: int) -> void:
 	sendStatSignal()
 
 func _on_tn_t_explode(coordinates: Vector2i, dmg: int) -> void:
-	_on_explosion(coordinates, dmg, 300)
+	_on_explosion(coordinates, dmg, 550)
+	tnt.emit(coordinates)

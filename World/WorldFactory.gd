@@ -313,3 +313,16 @@ func _on_scan_complete() -> void:
                 continue
             numbers.set_cell(Vector2i(column, row))
     scanTimer.stop()
+
+func _on_tnt(coordinates: Vector2) -> void:
+    var localPosition: Vector2 = numbers.to_local(coordinates)
+    var cellPosition: Vector2i = numbers.local_to_map(localPosition)
+    var bounds: PositionBounds = PositionBounds.new(cellPosition, worldState, 10)
+    
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            var currentCellPosition = Vector2i(x,y)
+            var local = ground.map_to_local(currentCellPosition)
+            if local.distance_to(localPosition) < 600:
+                worldState[y][x].healthPoints = 0
+                setCellTile(currentCellPosition)
