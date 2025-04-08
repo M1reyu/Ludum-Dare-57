@@ -9,26 +9,27 @@ extends Node2D
 var world: WorldFactory
 
 func _ready() -> void:
-    # build the world
-    world = WorldFactory.new(ground, numbers)
-    
-    # adapt the player zoom level
-    if mainCam != null:
-        mainCam.zoom = Vector2(0.4, 0.4)
-    
-    if player != null:
-        player.collides.connect(_on_collision_detected)
-        player.scan.connect(world._on_scan)
-        player.tnt.connect(world._on_tnt)
-        
-        world.explosion.connect(player._on_explosion)
-        world.minedValuable.connect(player._on_collect_valuable)
-    
-    # adapt the matrix position of the generated world to be centered below the player
-    var center: int = WorldFactory.SECTION_ROWS * WorldFactory.SECTION_COUNT
-    var centerPoint = ground.map_to_local(Vector2i(center, center))
-    tileLayer.position = Vector2(-centerPoint.x, 0)    
+	AudioPlayer.change_music(AudioPlayer.SCENE_SET.LEVEL)
+	# build the world
+	world = WorldFactory.new(ground, numbers)
+	
+	# adapt the player zoom level
+	if mainCam != null:
+		mainCam.zoom = Vector2(0.4, 0.4)
+	
+	if player != null:
+		player.collides.connect(_on_collision_detected)
+		player.scan.connect(world._on_scan)
+		player.tnt.connect(world._on_tnt)
+		
+		world.explosion.connect(player._on_explosion)
+		world.minedValuable.connect(player._on_collect_valuable)
+	
+	# adapt the matrix position of the generated world to be centered below the player
+	var center: int = WorldFactory.SECTION_ROWS * WorldFactory.SECTION_COUNT
+	var centerPoint = ground.map_to_local(Vector2i(center, center))
+	tileLayer.position = Vector2(-centerPoint.x, 0)    
 
 func _on_collision_detected(collision: KinematicCollision2D) -> void:
-    var cellPosition: Vector2i = ground.get_coords_for_body_rid(collision.get_collider_rid())
-    world.drill(cellPosition, player.strength)
+	var cellPosition: Vector2i = ground.get_coords_for_body_rid(collision.get_collider_rid())
+	world.drill(cellPosition, player.strength)
