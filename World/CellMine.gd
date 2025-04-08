@@ -1,7 +1,7 @@
 extends Cell
 class_name Mine
 
-const DAMAGE_RADIUS = 500
+const DAMAGE_RADIUS = 300
 
 var damage: int = 1
 
