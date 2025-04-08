@@ -33,7 +33,7 @@ func play_sfx(sfx_name: String):
 	elif sfx_name == "nonBreak":
 		stream = nonBreak
 	else:
-		print("Invalid sfx name")
+		#print("Invalid sfx name")
 		return
 	
 	var asp = AudioStreamPlayer.new()
