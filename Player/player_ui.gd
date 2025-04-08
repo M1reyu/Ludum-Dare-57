@@ -21,6 +21,11 @@ func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax
 	healthBar.value = hp
 	fuleBar.value = fuel
 	cargoBar.value = cargo
+	if shielded:
+		healthBar.set_modulate("00ffff5f")
+	else:
+		healthBar.set_modulate(Color(1,1,1,1))
+
 #NOTE: not displaid
 	#speedMax: int,
 	#strength : int,
