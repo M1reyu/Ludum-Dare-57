@@ -8,9 +8,11 @@ signal scan(coordinates: Vector2)
 @export var bounceForce : int = 1000
 #@export var gravity : int = 300
 
-@export var maxHealth : int = 1
+@export var maxHealth : int = 2
 @export var maxTank : int = 100
 @export var maxCargo : int = 5
+
+@export_file('*.tscn') var deathScenePath: String = ''
 
 var strength : int = 2
 var inMenu : bool = false
@@ -75,7 +77,8 @@ func _process(delta: float) -> void:
 			node.explode.connect(_on_tn_t_explode)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseMiner")):
-		if strength != 0 && strength != -1: strength *= -1
+		if minerCount > 0:
+			if strength != 0 && strength != -1: strength *= -1
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseScan")):
 		if scannerBought && scanTimeout <= 0:
@@ -83,8 +86,9 @@ func _process(delta: float) -> void:
 			scan.emit(playerSprite.global_position)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseFlag")):
-		if strength > 0: strength = -1
-		elif strength == -1: strength = playerStrength
+		if flaggingBought:
+			if strength > 0: strength = -1
+			elif strength == -1: strength = playerStrength
 		sendStatSignal()
 
 func _physics_process(delta: float) -> void:
@@ -225,6 +229,9 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 	else:
 		curHealth -= damage
 	
+	if curHealth <= 0: 
+		GlobalVars.playerFunds = curMoney
+		get_tree().change_scene_to_file(deathScenePath)
 	sendStatSignal()
 
 

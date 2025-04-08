@@ -1,3 +1,5 @@
+extends Node
+
 enum shopBuyables {
 	Repair = 1,
 	Refuel = 2,
@@ -13,6 +15,8 @@ enum shopBuyables {
 	Flag = 12,
 	RangeMine = 13
 }
+
+var playerFunds : int = 0
 
 const itemNames = {
 	shopBuyables.Repair : "Repair",

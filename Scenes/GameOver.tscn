@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6jb345ssluks"]
+
+[ext_resource type="Texture2D" uid="uid://bhv54y0pc2mnv" path="res://Assets/GameOver.jpg" id="1_m5628"]
+[ext_resource type="Script" uid="uid://whty4j2f51k7" path="res://Scenes/game_over.gd" id="1_uib17"]
+[ext_resource type="PackedScene" uid="uid://pumfk61vaauj" path="res://Scenes/back_button.tscn" id="2_k52d1"]
+[ext_resource type="Theme" uid="uid://letb3gcgu35b" path="res://Assets/Themes/Credits_lable.tres" id="3_ktc4i"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_uib17")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOver" type="Sprite2D" parent="CanvasLayer"]
+scale = Vector2(0.666667, 0.666667)
+texture = ExtResource("1_m5628")
+centered = false
+
+[node name="BackButton" parent="CanvasLayer" instance=ExtResource("2_k52d1")]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 432.0
+offset_top = 436.0
+offset_right = 821.0
+offset_bottom = 488.0
+theme = ExtResource("3_ktc4i")
+theme_override_font_sizes/font_size = 40
+text = "SCORE: "
