@@ -45,6 +45,7 @@ theme_override_font_sizes/font_size = 35
 text = "99"
 
 [node name="bntInfo" type="Label" parent="."]
+layout_mode = 0
 offset_left = 99.0
 offset_top = 137.0
 offset_right = 151.0
