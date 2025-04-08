@@ -14,8 +14,8 @@ var explosion2 = preload("res://Assets/Sounds/Effects/explosion2.wav")
 var dig = preload("res://Assets/Sounds/Effects/dig.wav")
 var nonBreak = preload("res://Assets/Sounds/Effects/nonBreak.wav")
 
-var menu = preload("res://Assets/Sounds/Music/GameJam_Depth-Menu_Mix1.1_M1.0.wav")
-var level = preload("res://Assets/Sounds/Music/GameJam_Depth_Mix1.0_M1.0.wav")
+var menu = preload("res://Assets/Sounds/Music/GameJam_Depth-Menu_Mix1.1_M1.0.mp3")
+var level = preload("res://Assets/Sounds/Music/GameJam_Depth_Mix1.0_M1.0.mp3")
 
 func play_sfx(sfx_name: String):
 	var stream = null
