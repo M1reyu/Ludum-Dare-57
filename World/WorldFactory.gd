@@ -91,11 +91,11 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
         return
     
     if damage >= 0: cell.drill(damage)
-    elif damage == -1: pass #Toggle cell unverwundbarkeit
-    else: pass #negativen Schaden als absoluten schaden an zelle anwenden bis zerstört
+    elif damage == -1: cell.isFlagged = not cell.isFlagged #Toggle cell unverwundbarkeit
+    
     setCellTile(cellPosition)
     
-    if not cell.isDamaged() && not cell.isMined():
+    if (cell.isFlagged || not cell.isDamaged()) && not cell.isMined():
         AudioPlayer.play_sfx("nonBreak")
     else:
         AudioPlayer.play_sfx("dig")
@@ -184,6 +184,7 @@ func prepareNumberTiles() -> void:
     var _t = numbers.tile_set.get_source_count()
     var tileSet: TileSet = numbers.tile_set;
     var colors: Array = [
+        Color(1,1,1),
         Color(0,1,0),
         Color(1,0,0),
         Color(1, 0.65, 0) # kinda orange
@@ -236,6 +237,11 @@ func setCellTile(position: Vector2i) -> void:
         tileVariant = 0
     elif cell.isDamaged():
         tileOffset = cell.getTileDamageOffset()
+    
+    if cell.isFlagged:
+        numbers.set_cell(position, 0, Vector2i(0,0))
+    elif not cell.isMined():
+        numbers.set_cell(position)
     
     ground.set_cell(position, atlasId, Vector2i(tileVariant, tileOffset))
 

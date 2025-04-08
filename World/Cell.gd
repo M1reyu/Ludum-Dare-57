@@ -7,6 +7,7 @@ var _resistance: int = 1
 var healthPoints: int = 0
 var value: int = 0
 var tileVariant: int = 0
+var isFlagged: bool = false
 
 func _init(section: int = 0) -> void:
     if section == 0:
@@ -29,6 +30,9 @@ func isDamaged() -> bool:
     return healthPoints < _baseHealth && isMined() == false
     
 func drill(damage: int = 1) -> void:
+    if isFlagged == true:
+        return
+
     damage -= _resistance
     if damage > 0:
         healthPoints -= damage

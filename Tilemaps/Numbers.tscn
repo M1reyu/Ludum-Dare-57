@@ -1,6 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf4t1yn5t71y1"]
+[gd_scene load_steps=8 format=3 uid="uid://cf4t1yn5t71y1"]
 
 [ext_resource type="Texture2D" uid="uid://bqe521c2yywuf" path="res://Assets/Numbers.png" id="1_exy8k"]
+[ext_resource type="Texture2D" uid="uid://cffxa2ndsavdb" path="res://Assets/Flag.png" id="1_jby3s"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ga4fa"]
+texture = ExtResource("1_jby3s")
+texture_region_size = Vector2i(167, 167)
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t61jw"]
 texture = ExtResource("1_exy8k")
@@ -45,6 +51,7 @@ physics_layer_0/collision_layer = 2
 sources/3 = SubResource("TileSetAtlasSource_30fbc")
 sources/2 = SubResource("TileSetAtlasSource_t61jw")
 sources/4 = SubResource("TileSetAtlasSource_exy8k")
+sources/0 = SubResource("TileSetAtlasSource_ga4fa")
 
 [node name="Numbers" type="TileMapLayer"]
 tile_set = SubResource("TileSet_t61jw")

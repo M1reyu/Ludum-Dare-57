@@ -106,7 +106,7 @@ func _physics_process(delta: float) -> void:
 				strength = 0
 				speed = playerSpeed / 2
 			else:
-				strength = playerStrength
+				if strength == 0: strength = playerStrength
 				speed = playerSpeed
 			
 		if (dir.x != 0):
