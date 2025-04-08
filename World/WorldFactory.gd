@@ -107,7 +107,7 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
     
     if cell is Mine:
         AudioPlayer.play_sfx('explosion')
-        explosion.emit(ground.map_to_local(cellPosition), cell.damage, Mine.DAMAGE_RADIUS)
+        explosion.emit(ground.to_global(ground.map_to_local(cellPosition)), cell.damage, Mine.DAMAGE_RADIUS)
     elif cell is Ore:
         AudioPlayer.play_sfx('pickupOre')
         minedValuable.emit(cell.value)
