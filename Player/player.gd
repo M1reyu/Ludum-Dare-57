@@ -19,7 +19,7 @@ var strength : int = 2
 var inMenu : bool = false
 var canOpen : bool = false
 
-var curMoney : int = 0
+var curMoney : int = 5
 var curHealth : int = 1
 var curTank : float = 100.0
 var curCargo : int = 0
@@ -34,7 +34,8 @@ var playerSpeed : int
 
 @onready var menuHud : Control = $Canvas/ShopHud
 @onready var playerSprite : AnimatedSprite2D = $PlayerSprite
-@onready var animations: AnimationPlayer = get_node("AnimationPlayer")
+@onready var animations : AnimationPlayer = get_node("AnimationPlayer")
+@onready var flagmodeFlag : Sprite2D = $FlagMode
 
 const globals = preload("res://globalVars.gd") 
 const shopItem = globals.shopBuyables
@@ -60,11 +61,13 @@ func _process(delta: float) -> void:
 		sendStatSignal()
 		menuHud.show()
 	
-	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))
+	flagmodeFlag.visible = true if (strength == -1) else false
+	
+	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))	
 	if (dirMod == Vector2.ZERO || menuHud.visible): 
 		playerSprite.rotation_degrees = 0
 		if (playerSprite.animation != "Idle"): playerSprite.play("Idle")
-	else:
+	elif (strength >= 0):
 		playerSprite.rotation = dirMod.angle() - Vector2.DOWN.angle()
 		if (playerSprite.animation == "Idle"): playerSprite.play("Drill 1")
 	
@@ -162,12 +165,13 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 	
 	match itemType:
 		shopItem.Repair:
-			cost = shopCalc.getCost(itemType, curHealth, maxHealth)
-			curMoney -= (maxHealth - curHealth) * 150
-			curHealth = maxHealth
+			cost = shopCalc.getCost(itemType, curHealth, maxHealth, curMoney)
+			curHealth += (cost / 150)
+			if curHealth > maxHealth: curHealth = maxHealth
 		shopItem.Refuel:
-			cost = shopCalc.getCost(itemType, curTank, maxTank)
-			curTank = maxTank
+			cost = shopCalc.getCost(itemType, curTank, maxTank, curMoney)
+			curTank += cost
+			if curTank > maxTank: curTank = maxTank
 		shopItem.Shield:
 			cost = shopCalc.getCost(itemType)
 			shielded = true
@@ -187,6 +191,7 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 		shopItem.StrengthUp:
 			cost = shopCalc.getCost(itemType, playerStrength)
 			playerStrength *= 2
+			strength = playerStrength
 		shopItem.TankUp:
 			cost = shopCalc.getCost(itemType, maxTank)
 			maxTank *= 2

@@ -123,9 +123,11 @@ func highlightMenu():
 func getCostForItem() -> int:
 	match menuIndex:
 		shopItem.Repair:
-			return shopCalc.getCost(menuIndex, hp, hpMax)
+			return shopCalc.getCost(menuIndex, hp, hpMax, funds)
 		shopItem.Refuel:
-			return shopCalc.getCost(menuIndex, fuel, fuelMax)
+			return shopCalc.getCost(menuIndex, fuel, fuelMax, funds)
+		shopItem.Shield:
+			return shopCalc.getCost(menuIndex, 1 if shielded else 0)
 		shopItem.Bomb:
 			return -1 if (bombs == 10) else shopCalc.getCost(menuIndex)
 		shopItem.Miner:

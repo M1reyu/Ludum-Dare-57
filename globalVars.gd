@@ -51,12 +51,12 @@ const itemInfos = {
 }
 
 class ShopCalc:
-	func getCost(key : int, value1 : int = 0, value2 : int = 0) -> int:
+	func getCost(key : int, value1 : int = 0, value2 : int = 0, funds : int = 0) -> int:
 		match key:
 			shopBuyables.Repair:
-				return getRepairCost(value1, value2)
+				return getRepairCost(value1, value2, funds)
 			shopBuyables.Refuel:
-				return getRefuelCost(value1, value2)
+				return getRefuelCost(value1, value2, funds)
 			shopBuyables.Shield:
 				return getShieldCost(true if value1 == 0 else false)
 			shopBuyables.Bomb:
@@ -81,10 +81,14 @@ class ShopCalc:
 				return getRangeCost(true if value1 == 0 else false)
 		return -1
 
-	func getRepairCost(hp : int, maxHp : int) -> int:
-		return ((maxHp-hp) * 150) if (hp < maxHp) else -1
-	func getRefuelCost(fuel : int, maxFuel : int) -> int:
-		return (maxFuel - fuel) if (fuel < maxFuel) else -1
+	func getRepairCost(hp : int, maxHp : int, funds : int) -> int:
+		if hp == maxHp: return -1
+		var cost : int = (maxHp-hp) * 150
+		return int(funds / 150) * 150 if funds < cost else cost
+	func getRefuelCost(fuel : int, maxFuel : int, funds : int) -> int:
+		if fuel >= maxFuel: return -1
+		var cost : int = maxFuel - fuel
+		return funds if (funds < cost) else cost
 	func getShieldCost(canBuy : bool) -> int:
 		return 100 if canBuy else -1
 	func getBombCost() -> int:

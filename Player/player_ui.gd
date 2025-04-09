@@ -11,6 +11,8 @@ extends Control
 @onready var SkillScanner : Control = $Skills/SkillScanner
 @onready var SkillFlag : Control = $Skills/SkillFlag
 
+func _ready() -> void:
+	show()
 
 func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, strength : int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
 	money.text = str(funds)
