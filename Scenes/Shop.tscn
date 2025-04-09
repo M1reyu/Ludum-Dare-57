@@ -31,16 +31,16 @@ radius = 536.093
 [sub_resource type="SpriteFrames" id="SpriteFrames_1mgah"]
 animations = [{
 "frames": [{
-"duration": 3.0,
+"duration": 6.0,
 "texture": ExtResource("4_ckylj")
 }, {
-"duration": 3.0,
+"duration": 9.0,
 "texture": ExtResource("5_2aaoe")
 }, {
-"duration": 3.0,
+"duration": 9.0,
 "texture": ExtResource("6_ct2yw")
 }, {
-"duration": 3.0,
+"duration": 6.0,
 "texture": ExtResource("7_ccd4q")
 }],
 "loop": true,
