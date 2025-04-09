@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://vq3ebi483wyn"]
+[gd_scene load_steps=20 format=3 uid="uid://vq3ebi483wyn"]
 
 [ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Player/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://rqiv0brcb6qx" path="res://Player/shop_hud.tscn" id="8_00tjw"]
 [ext_resource type="Texture2D" uid="uid://cffxa2ndsavdb" path="res://Assets/Flag.png" id="8_5htga"]
+[ext_resource type="Texture2D" uid="uid://baxcqg3q1ap02" path="res://Assets/Autominer01.png" id="9_p5o4e"]
 [ext_resource type="PackedScene" uid="uid://dso056m18q1im" path="res://Player/player_ui.tscn" id="9_x3vf3"]
 [ext_resource type="Theme" uid="uid://letb3gcgu35b" path="res://Assets/Themes/Credits_lable.tres" id="10_apopc"]
 [ext_resource type="Texture2D" uid="uid://cf6yvh66guukt" path="res://Assets/Ore.png" id="11_5htga"]
@@ -158,6 +159,13 @@ visible = false
 position = Vector2(7, 27)
 rotation = 0.740771
 texture = ExtResource("8_5htga")
+
+[node name="AutoMinerMode" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 29)
+rotation = -0.131549
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_p5o4e")
 
 [node name="PlayerHitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_od3ui")

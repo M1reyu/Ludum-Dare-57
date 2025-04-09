@@ -36,6 +36,7 @@ var playerSpeed : int
 @onready var playerSprite : AnimatedSprite2D = $PlayerSprite
 @onready var animations : AnimationPlayer = get_node("AnimationPlayer")
 @onready var flagmodeFlag : Sprite2D = $FlagMode
+@onready var autominerMode : Sprite2D = $AutoMinerMode
 
 const globals = preload("res://globalVars.gd") 
 const shopItem = globals.shopBuyables
@@ -62,6 +63,7 @@ func _process(delta: float) -> void:
 		menuHud.show()
 	
 	flagmodeFlag.visible = true if (strength == -1) else false
+	autominerMode.visible = true if (strength < -1) else false
 	
 	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))	
 	if (dirMod == Vector2.ZERO || menuHud.visible): 
