@@ -10,19 +10,19 @@ var tileVariant: int = 0
 var isFlagged: bool = false
 
 func _init(section: int = 0) -> void:
-	if section == 0:
-		# if no section is give, that means the cell should be mined
-		return
+	# if no section is give, that means the cell should be mined
+	if section == 0: return
+	section -= 1
 	
-	if section > 1:
-		_baseHealth <<= section - 1
-		
-		if section > 2:
-			_resistance += section * 1.5
+	#Scaling Health of Tile by Section Factor
+	_baseHealth <<= section
+	
+	#Scaling Resistance of Tile by Section Factor
+	_resistance <<= int(section * 0.5)
 	
 	healthPoints = _baseHealth
 	tileVariant = calculateTileVariant()
-	
+
 func isMined() -> bool:
 	return healthPoints <= 0
 	
