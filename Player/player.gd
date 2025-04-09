@@ -19,7 +19,7 @@ var strength : int = 2
 var inMenu : bool = false
 var canOpen : bool = false
 
-var curMoney : int = 5
+var curMoney : int = 0
 var curHealth : int = 1
 var curTank : float = 100.0
 var curCargo : int = 0
