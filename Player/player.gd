@@ -20,6 +20,7 @@ var inMenu : bool = false
 var canOpen : bool = false
 
 var curMoney : int = 0
+var totalMoney: int = 0
 var curHealth : int = 1
 var curTank : float = 100.0
 var curCargo : int = 0
@@ -217,7 +218,9 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 
 func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	canOpen = true
-	curMoney += curCargo * 100
+	var moneyEarned: int = curCargo * 100
+	curMoney += moneyEarned
+	totalMoney += moneyEarned
 	curCargo = 0
 	
 	sendStatSignal()
@@ -238,7 +241,7 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 		curHealth -= damage
 	
 	if curHealth <= 0: 
-		GlobalVars.playerFunds = curMoney
+		GlobalVars.playerFunds = totalMoney
 		get_tree().change_scene_to_file(deathScenePath)
 	sendStatSignal()
 
