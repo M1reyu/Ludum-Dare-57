@@ -323,8 +323,7 @@ func _on_scan_complete() -> void:
 func _on_tnt(coordinates: Vector2) -> void:
     var localPosition: Vector2 = numbers.to_local(coordinates)
     var cellPosition: Vector2i = numbers.local_to_map(localPosition)
-    var bounds: PositionBounds = PositionBounds.new(cellPosition, worldState, 10)
-    var hitPositions: Array = Array()
+    var bounds: PositionBounds = PositionBounds.new(cellPosition, worldState, 6)
     
     for y in range(bounds.yMin, bounds.yMax + 1):
         for x in range(bounds.xMin, bounds.xMax + 1):
@@ -332,9 +331,9 @@ func _on_tnt(coordinates: Vector2) -> void:
             var local = ground.map_to_local(currentCellPosition)
             if local.distance_to(localPosition) < 600:
                 worldState[y][x].healthPoints = 0
-                hitPositions.push_back(currentCellPosition)
     
     # only after removing all cells, the new numbers can be calculated
-    for hitPosition in hitPositions:
-        setCellTile(hitPosition)
+    for y in range(bounds.yMin, bounds.yMax + 1):
+        for x in range(bounds.xMin, bounds.xMax + 1):
+            setCellTile(Vector2i(x, y))
         
