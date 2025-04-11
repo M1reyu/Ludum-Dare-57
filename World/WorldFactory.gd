@@ -329,8 +329,12 @@ func _on_tnt(coordinates: Vector2) -> void:
         for x in range(bounds.xMin, bounds.xMax + 1):
             var currentCellPosition = Vector2i(x,y)
             var local = ground.map_to_local(currentCellPosition)
-            if local.distance_to(localPosition) < 600:
-                worldState[y][x].healthPoints = 0
+            if local.distance_to(localPosition) > 600:
+                continue
+            
+            var cell: Cell = worldState[y][x]
+            if is_instance_of(cell, Cell):
+                cell.healthPoints = 0
     
     # only after removing all cells, the new numbers can be calculated
     for y in range(bounds.yMin, bounds.yMax + 1):
