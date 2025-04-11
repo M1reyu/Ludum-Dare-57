@@ -216,6 +216,7 @@ position = Vector2(-40, 8.5)
 scale = Vector2(0.505814, 0.505814)
 texture = ExtResource("11_5htga")
 
+[connection signal="activateSkill" from="." to="Canvas/PlayerUI" method="_on_activate_skill"]
 [connection signal="playerStats" from="." to="Canvas/ShopHud" method="_on_player_player_stats"]
 [connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]
 [connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]

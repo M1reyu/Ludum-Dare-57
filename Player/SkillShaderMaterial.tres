@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvhdyo0v0go75"]
+
+[ext_resource type="Shader" uid="uid://vqeaj56uoubt" path="res://Player/SkillShader.gdshader" id="1_i45g8"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_i45g8")
+shader_parameter/percent = 0.0

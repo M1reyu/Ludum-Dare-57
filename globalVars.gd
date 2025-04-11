@@ -50,6 +50,11 @@ const itemInfos = {
 	shopBuyables.RangeMine : "Spreads some of your drill damage to adjacent tiles.\nCAUTION: Can trigger mines!"
 }
 
+const cooldowns = {
+	shopBuyables.Bomb : 3,
+	shopBuyables.Scanner : 10
+}
+
 class ShopCalc:
 	func getCost(key : int, value1 : int = 0, value2 : int = 0, funds : int = 0) -> int:
 		match key:

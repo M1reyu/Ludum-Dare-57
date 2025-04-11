@@ -56,3 +56,25 @@ func showSkill(isActive: bool, controlElement: Control, positionOffset: int = 0)
 	controlElement.position.x = positionOffset
 	
 	return positionOffset + 244
+
+func _on_activate_skill(skillType: int) -> void:
+	if not GlobalVars.cooldowns.has(skillType):
+		return
+	
+	var control: Control = null
+	
+	match skillType:
+		GlobalVars.shopBuyables.Bomb:
+			control = SkillTnt
+		GlobalVars.shopBuyables.Scanner:
+			control = SkillScanner
+	
+	if control == null:
+		return
+	
+	var cooldown: int = GlobalVars.cooldowns.get(skillType)
+	var animation: AnimationPlayer = control.get_node("AnimationPlayer")
+	
+	# the animation length is one second - a lower scale is a longer duration
+	animation.speed_scale = 1.0 / cooldown
+	animation.play("skill_cooldown")

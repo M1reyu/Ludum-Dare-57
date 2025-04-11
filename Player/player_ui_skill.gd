@@ -23,3 +23,7 @@ func _ready():
 
 func set_label_value(value : String):
 	valueLable.text = value
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "skill_cooldown":
+		get_node("AnimationPlayer").play("RESET")

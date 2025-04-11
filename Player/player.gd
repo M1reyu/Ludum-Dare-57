@@ -3,6 +3,7 @@ extends CharacterBody2D
 signal collides(collision: KinematicCollision2D)
 signal scan(coordinates: Vector2)
 signal tnt(coordinates: Vector2)
+signal activateSkill(skillType: int)
 
 @export var speed : int = 800
 @export var speedLimit : int = 1500
@@ -76,12 +77,13 @@ func _process(delta: float) -> void:
 	
 	if (Input.is_action_just_pressed("UseTnT")):
 		if bombCount > 0 && tntTimeout <= 0:
-			tntTimeout = 1
+			tntTimeout = globals.cooldowns.get(shopItem.Bomb)
 			bombCount -= 1
 			var node : TNTNode = tntScene.instantiate()
 			add_sibling(node)
 			node.global_position = global_position
 			node.explode.connect(_on_tn_t_explode)
+			activateSkill.emit(shopItem.Bomb)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseMiner")):
 		if minerCount > 0:
@@ -89,8 +91,9 @@ func _process(delta: float) -> void:
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseScan")):
 		if scannerBought && scanTimeout <= 0:
-			scanTimeout = 10
+			scanTimeout = globals.cooldowns.get(shopItem.Scanner)
 			scan.emit(playerSprite.global_position)
+			activateSkill.emit(shopItem.Scanner)
 		sendStatSignal()
 	elif (Input.is_action_just_pressed("UseFlag")):
 		if flaggingBought:

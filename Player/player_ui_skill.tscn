@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://of6mo3qryxfv"]
+[gd_scene load_steps=8 format=3 uid="uid://of6mo3qryxfv"]
 
 [ext_resource type="Texture2D" uid="uid://dbb5wgyw42nat" path="res://Assets/Hub.png" id="1_saodp"]
 [ext_resource type="Script" uid="uid://dn1o7aa7pky5r" path="res://Player/player_ui_skill.gd" id="1_vqc3j"]
+[ext_resource type="Material" uid="uid://dvhdyo0v0go75" path="res://Player/SkillShaderMaterial.tres" id="2_bjni0"]
 [ext_resource type="Theme" uid="uid://f8r1yxwiwbks" path="res://Assets/Themes/Player_lable.tres" id="3_vqc3j"]
+
+[sub_resource type="Animation" id="Animation_h3n0b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bjni0"]
+resource_name = "test"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/percent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5a82o"]
+_data = {
+&"RESET": SubResource("Animation_h3n0b"),
+&"skill_cooldown": SubResource("Animation_bjni0")
+}
 
 [node name="skill" type="Control"]
 layout_mode = 3
@@ -14,6 +51,7 @@ offset_bottom = 34.0
 script = ExtResource("1_vqc3j")
 
 [node name="BG" type="Sprite2D" parent="."]
+material = ExtResource("2_bjni0")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_saodp")
 centered = false
@@ -53,3 +91,11 @@ offset_bottom = 182.0
 theme = ExtResource("3_vqc3j")
 theme_override_font_sizes/font_size = 35
 text = "1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BG")
+libraries = {
+&"": SubResource("AnimationLibrary_5a82o")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
