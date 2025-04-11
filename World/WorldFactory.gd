@@ -34,7 +34,7 @@ func _init(groundLayer: TileMapLayer, numberLayer: TileMapLayer) -> void:
     random.randomize()
     
     buildWorld()
-    printWorld()
+    #printWorld()
     
     initTimer()
 
