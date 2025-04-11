@@ -333,8 +333,13 @@ func _on_tnt(coordinates: Vector2) -> void:
                 continue
             
             var cell: Cell = worldState[y][x]
-            if is_instance_of(cell, Cell):
-                cell.healthPoints = 0
+            if not is_instance_of(cell, Cell):
+                continue
+            
+            cell.healthPoints = 0
+            
+            if cell is Ore:
+                minedValuable.emit(cell.value)
     
     # only after removing all cells, the new numbers can be calculated
     for y in range(bounds.yMin, bounds.yMax + 1):
