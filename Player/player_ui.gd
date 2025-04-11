@@ -12,6 +12,10 @@ extends Control
 @onready var SkillFlag : Control = $Skills/SkillFlag
 
 func _ready() -> void:
+	SkillTnt.visible = false
+	SkillMiner.visible = false
+	SkillScanner.visible = false
+	SkillFlag.visible = false
 	show()
 
 func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax: int, cargo: int, cargoMax: int, speedMax: int, strength : int, bombs: int, miners: int, shielded: bool, scanner: bool, flagging: bool, rangeMine: bool) -> void:
@@ -27,6 +31,11 @@ func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax
 		healthBar.set_modulate("00ffff5f")
 	else:
 		healthBar.set_modulate(Color(1,1,1,1))
+	
+	var skillPosition: int = showSkill(bombs > 0, SkillTnt)
+	skillPosition = showSkill(miners > 0, SkillMiner, skillPosition)
+	skillPosition = showSkill(scanner, SkillScanner, skillPosition)
+	showSkill(flagging, SkillFlag, skillPosition)
 
 #NOTE: not displaid
 	#speedMax: int,
@@ -38,3 +47,12 @@ func _on_player_player_stats(funds: int, hp: int, hpMax: int, fuel: int, fuelMax
 	#scanner: bool,
 	#flagging: bool,
 	#rangeMine: bool
+
+func showSkill(isActive: bool, controlElement: Control, positionOffset: int = 0) -> int:
+	if isActive == false && controlElement.visible == false:
+		return positionOffset
+	
+	controlElement.visible = true
+	controlElement.position.x = positionOffset
+	
+	return positionOffset + 244

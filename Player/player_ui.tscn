@@ -87,42 +87,42 @@ text = "99999"
 
 [node name="Skills" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 72.0
+offset_left = 222.0
 offset_top = 7.0
-offset_right = 112.0
+offset_right = 262.0
 offset_bottom = 47.0
 scale = Vector2(0.5, 0.5)
 
 [node name="SkillTnt" parent="Skills" instance=ExtResource("9_njtxh")]
-offset_left = 300.0
+offset_left = 0.0
 offset_top = 1.0
-offset_right = 340.0
+offset_right = 40.0
 offset_bottom = 41.0
 icon_image = ExtResource("7_0ck7p")
 btn_info = 1
 countable = true
 
 [node name="SkillMiner" parent="Skills" instance=ExtResource("9_njtxh")]
-offset_left = 544.0
+offset_left = 244.0
 offset_top = 4.0
-offset_right = 584.0
+offset_right = 284.0
 offset_bottom = 44.0
 icon_image = ExtResource("8_c1xew")
 btn_info = 2
 countable = true
 
 [node name="SkillScanner" parent="Skills" instance=ExtResource("9_njtxh")]
-offset_left = 786.0
+offset_left = 488.0
 offset_top = 2.0
-offset_right = 826.0
+offset_right = 528.0
 offset_bottom = 42.0
 icon_image = ExtResource("12_njtxh")
 btn_info = 3
 
 [node name="SkillFlag" parent="Skills" instance=ExtResource("9_njtxh")]
-offset_left = 1027.0
+offset_left = 732.0
 offset_top = 1.0
-offset_right = 1067.0
+offset_right = 772.0
 offset_bottom = 41.0
 icon_image = ExtResource("11_cutnq")
 btn_info = 4
