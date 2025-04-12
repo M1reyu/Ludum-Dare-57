@@ -73,13 +73,17 @@ func _process(_delta: float) -> void:
 		elif menuIndex == MenuSection1Count + MenuSection2Count + MenuSection3Count: menuIndex -= MenuSection3Count
 		menuIndex += 1 
 	elif (Input.is_action_just_pressed('Up')):
-		if menuIndex <= MenuSection1Count: menuIndex = MenuSection1Count + MenuSection2Count + 1
-		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex = 1
-		else: menuIndex = MenuSection1Count + 1
+		if menuIndex <= MenuSection1Count: menuIndex += MenuSection1Count + MenuSection2Count
+		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex -= MenuSection1Count
+		else: menuIndex -= MenuSection2Count
+		
+		menuIndex = min(menuIndex, MenuSection1Count + MenuSection2Count + MenuSection3Count) 
 	elif (Input.is_action_just_pressed('Down')):
-		if menuIndex <= MenuSection1Count: menuIndex = MenuSection1Count + 1
-		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex = MenuSection1Count + MenuSection2Count + 1
-		else: menuIndex = 1
+		if menuIndex <= MenuSection1Count: menuIndex += MenuSection1Count
+		elif menuIndex <= MenuSection1Count + MenuSection2Count: menuIndex += MenuSection2Count
+		else: menuIndex -= (MenuSection1Count + MenuSection2Count)
+		
+		menuIndex = min(menuIndex, MenuSection1Count + MenuSection2Count + MenuSection3Count) 
 	elif (Input.is_action_just_pressed('Use')):
 		var cost = getCostForItem()
 		if (0 < cost && cost <= funds):
