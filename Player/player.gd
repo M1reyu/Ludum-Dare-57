@@ -39,13 +39,15 @@ var playerSpeed : int
 @onready var animations : AnimationPlayer = get_node("AnimationPlayer")
 @onready var flagmodeFlag : Sprite2D = $PlayerAssets/FlagMode
 @onready var autominerMode : Sprite2D = $PlayerAssets/AutoMinerMode
-@onready var shopPrompt : Control = $ShopPrompt
+@onready var shopPrompt : Control = $PlayerPopups/ShopPrompt
+@onready var oreGainNode : Control = $PlayerPopups/OreGains
 
 const globals = preload("res://globalVars.gd") 
 const shopItem = globals.shopBuyables
 var shopCalc = globals.ShopCalc.new()
 
 var tntScene = preload("res://Scenes/TnT.tscn")
+var oreScene = preload("res://Scenes/ore_pop_up.tscn")
 
 signal playerStats(funds : int, hp : int, hpMax : int, fuel : int, fuelMax : int, cargo : int, cargoMax : int, speedMax : int, bombs : int, miners : int, shielded : bool, scanner : bool, flagging : bool, rangeMine : bool)
 
@@ -258,12 +260,12 @@ func _on_collect_valuable(value: int) -> void:
 	var oldCargo: int = curCargo
 	curCargo = min(curCargo + value, maxCargo)
 	var diffCargo = curCargo - oldCargo
-	var label: Label = get_node("orePopUp/Label")
-	if diffCargo == 0:
-		label.text = "full"
-	else:
-		label.text = "+" + str(diffCargo)
-	animations.play("ore_gained")
+	var oreGain : Control = oreScene.instantiate()
+	oreGainNode.add_child(oreGain)
+	var label: Label = oreGain.get_child(0)
+	if diffCargo == 0: label.text = "full"
+	else: label.text = "+" + str(diffCargo)
+	
 	sendStatSignal()
 
 func _on_tn_t_explode(coordinates: Vector2i, dmg: int) -> void:
