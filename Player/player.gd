@@ -39,6 +39,7 @@ var playerSpeed : int
 @onready var animations : AnimationPlayer = get_node("AnimationPlayer")
 @onready var flagmodeFlag : Sprite2D = $FlagMode
 @onready var autominerMode : Sprite2D = $AutoMinerMode
+@onready var shopPrompt : Control = $ShopPrompt
 
 const globals = preload("res://globalVars.gd") 
 const shopItem = globals.shopBuyables
@@ -225,11 +226,13 @@ func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	curMoney += moneyEarned
 	totalMoney += moneyEarned
 	curCargo = 0
+	shopPrompt.visible = true
 	
 	sendStatSignal()
 
 func _on_player_tig_area_area_exited(_area: Area2D) -> void:
 	canOpen = false
+	shopPrompt.visible = false
 	
 	sendStatSignal()
 
