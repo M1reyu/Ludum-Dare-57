@@ -35,10 +35,10 @@ var playerStrength : int
 var playerSpeed : int
 
 @onready var menuHud : Control = $Canvas/ShopHud
-@onready var playerSprite : AnimatedSprite2D = $PlayerSprite
+@onready var playerSprite : AnimatedSprite2D = $PlayerAssets/PlayerSprite
 @onready var animations : AnimationPlayer = get_node("AnimationPlayer")
-@onready var flagmodeFlag : Sprite2D = $FlagMode
-@onready var autominerMode : Sprite2D = $AutoMinerMode
+@onready var flagmodeFlag : Sprite2D = $PlayerAssets/FlagMode
+@onready var autominerMode : Sprite2D = $PlayerAssets/AutoMinerMode
 @onready var shopPrompt : Control = $ShopPrompt
 
 const globals = preload("res://globalVars.gd") 
@@ -249,6 +249,8 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 	if curHealth <= 0: 
 		GlobalVars.playerFunds = totalMoney
 		get_tree().change_scene_to_file(deathScenePath)
+	
+	animations.play("playerDmg")
 	sendStatSignal()
 
 
