@@ -52,7 +52,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/path = NodePath("Body:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -64,19 +64,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Body:scale")
+tracks/2/path = NodePath("Body:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Body:visible")
+tracks/3/path = NodePath("DustClouds:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -88,7 +88,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimatedSprite2D2:scale")
+tracks/4/path = NodePath("DustClouds:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -116,46 +116,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/path = NodePath("Body:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.86667, 3.56667),
-"transitions": PackedFloat32Array(1, 0.466517, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(0, 0), Vector2(2, 2)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Body:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 5, 5.16667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0.0333333, 5.26667, 6.03333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(3.56667, 6.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -166,17 +154,29 @@ tracks/4/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DustClouds:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2.75, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.001, 0.001), Vector2(1, 1)]
+}
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimatedSprite2D2:scale")
+tracks/5/path = NodePath("DustClouds:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 2.83333, 3.5),
-"transitions": PackedFloat32Array(1, 0.535887, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(2, 2)]
+"times": PackedFloat32Array(0, 2.75, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ya0am"]
@@ -191,16 +191,66 @@ script = ExtResource("1_inl5v")
 [node name="Body" type="Sprite2D" parent="."]
 texture = ExtResource("2_bl0su")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="DustClouds" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DustClouds"]
 sprite_frames = SubResource("SpriteFrames_xw41i")
 autoplay = "default"
-frame_progress = 0.760343
+frame_progress = 0.846382
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="DustClouds"]
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_xw41i")
 autoplay = "default"
-frame_progress = 0.720447
+frame_progress = 0.00914887
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(275, 0)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-275, 0)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(0, 275)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(0, -275)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(200, -200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(200, 200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-200, 200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-200, -200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
