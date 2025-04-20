@@ -12,7 +12,7 @@ signal activateSkill(skillType: int)
 
 @export var maxHealth : int = 2
 @export var maxTank : int = 100
-@export var maxCargo : int = 5
+@export var maxCargo : int = 10
 
 @export_file('*.tscn') var deathScenePath: String = ''
 
@@ -214,7 +214,7 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 			curTank = maxTank
 		shopItem.CargoUp:
 			cost = shopCalc.getCost(itemType, maxCargo)
-			maxCargo += 5
+			maxCargo += 10
 		shopItem.Scanner:
 			cost = shopCalc.getCost(itemType)
 			scannerBought = true

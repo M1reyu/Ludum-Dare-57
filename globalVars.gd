@@ -113,7 +113,7 @@ class ShopCalc:
 	func getTankUpCost(tank : int) -> int:
 		return tank * 5
 	func getCargoUpCost(cargo : int) -> int:
-		return 200 + cargo * 50
+		return cargo * 50
 	func getScannerCost(canBuy : bool) -> int:
 		return 2500 if canBuy else -1
 	func getFlagCost(canBuy : bool) -> int:
