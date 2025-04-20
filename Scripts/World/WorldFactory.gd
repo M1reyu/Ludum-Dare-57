@@ -96,7 +96,7 @@ func drill(cellPosition: Vector2i, damage: int, spread : bool = false) -> void:
     
     if damage >= 0: 
         cell.drill(damage)
-        if GlobalVars.drillSpreading && not spread && cell._resistance >= 0:
+        if GlobalVars.drillSpreading && not spread && cell._resistance >= 0 && not cell.isFlagged:
             damage -= cell._resistance
             drill(Vector2i(x+1, y), damage, true)
             drill(Vector2i(x-1, y), damage, true)
@@ -357,6 +357,7 @@ func _on_tnt(coordinates: Vector2) -> void:
                 continue
             
             cell.healthPoints = 0
+            cell.isFlagged = false
             
             if cell is Ore:
                 minedValuable.emit(cell.value)
