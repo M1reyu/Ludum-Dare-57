@@ -29,7 +29,6 @@ var bombCount : int = 0
 var minerCount : int = 0
 var scannerBought : bool = false
 var flaggingBought : bool = false
-var mineRangeBought : bool = false
 var playerStrength : int
 var playerSpeed : int
 
@@ -60,6 +59,7 @@ func _ready() -> void:
 	GlobalVars.tilesMined = 0
 	GlobalVars.minesHit = 0
 	GlobalVars.oreMined = 0
+	GlobalVars.drillSpreading = false
 	
 	sendStatSignal()
 
@@ -166,7 +166,7 @@ func _physics_process(delta: float) -> void:
 		if (abs(dir.y) > speedLimit): dir.y = speedLimit * (dir.y / abs(dir.y))
 
 func sendStatSignal() -> void:
-	playerStats.emit(curMoney, curHealth, maxHealth, curTank, maxTank, curCargo, maxCargo, playerSpeed, playerStrength, bombCount, minerCount, shielded, scannerBought, flaggingBought, mineRangeBought)
+	playerStats.emit(curMoney, curHealth, maxHealth, curTank, maxTank, curCargo, maxCargo, playerSpeed, playerStrength, bombCount, minerCount, shielded, scannerBought, flaggingBought, GlobalVars.drillSpreading)
 
 func directionMod(dir : Vector2) -> Vector2:
 	if dir.x < 0: dir.x = -1
@@ -223,7 +223,7 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 			flaggingBought = true
 		shopItem.RangeMine:
 			cost = shopCalc.getCost(itemType)
-			mineRangeBought = true
+			GlobalVars.drillSpreading = true
 	
 	curMoney -= cost
 	AudioPlayer.play_sfx("powerUp")

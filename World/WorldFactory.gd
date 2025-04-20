@@ -83,24 +83,34 @@ func addCell(x: int, y: int, randModifier: float = 0.0) -> void:
     worldState[y][x] = buildCell(globalSection, randModifier)
     setCellTile(Vector2i(x, y))
 
-func drill(cellPosition: Vector2i, damage: int) -> void:
+func drill(cellPosition: Vector2i, damage: int, spread : bool = false) -> void:
     var x: int = cellPosition.x
     var y: int = cellPosition.y
+    if x < 0 || y < 0 || y >= worldState.size() || x >= worldState[y].size(): return
+
     var cell: Cell = worldState[y][x]
     #print("Drill: (%d, %d), health: %d" % [x, y, cell.healthPoints])
     
-    if cell.isMined():
+    if cell == null || cell.isMined():
         return
     
-    if damage >= 0: cell.drill(damage)
+    if damage >= 0: 
+        cell.drill(damage)
+        if GlobalVars.drillSpreading && not spread && cell._resistance >= 0:
+            damage -= cell._resistance
+            drill(Vector2i(x+1, y), damage, true)
+            drill(Vector2i(x-1, y), damage, true)
+            drill(Vector2i(x, y+1), damage, true)
+            drill(Vector2i(x, y-1), damage, true)
     elif damage == -1: cell.isFlagged = not cell.isFlagged #Toggle cell unverwundbarkeit
     
     setCellTile(cellPosition)
     
-    if (cell.isFlagged || not cell.isDamaged()) && not cell.isMined():
-        AudioPlayer.play_sfx("nonBreak")
-    else:
-        AudioPlayer.play_sfx("dig")
+    if not spread:
+        if (cell.isFlagged || not cell.isDamaged()) && not cell.isMined():
+            AudioPlayer.play_sfx("nonBreak")
+        else:
+            AudioPlayer.play_sfx("dig")
     
     if not cell.isMined():
         return

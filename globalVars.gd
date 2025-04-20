@@ -6,6 +6,8 @@ var oreMined : int = 0
 var tilesMined : int = 0
 var timePlayed : float = 0
 
+var drillSpreading : bool = false
+
 enum shopBuyables {
 	Repair = 1,
 	Refuel = 2,
