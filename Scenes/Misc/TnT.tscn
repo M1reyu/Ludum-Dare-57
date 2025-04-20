@@ -1,0 +1,259 @@
+[gd_scene load_steps=13 format=3 uid="uid://caj8u6a80us7s"]
+
+[ext_resource type="Script" uid="uid://d2cb8f0t070f2" path="res://Scripts/Misc/tntExplode.gd" id="1_inl5v"]
+[ext_resource type="Texture2D" uid="uid://fwy8i6xmie5i" path="res://Assets/Ui/IconTNT.png" id="2_bl0su"]
+[ext_resource type="Texture2D" uid="uid://bolx7nlc7snd8" path="res://Assets/Dustclouds/Smoke01.png" id="3_mm8w5"]
+[ext_resource type="Texture2D" uid="uid://u2p34m7pwpw" path="res://Assets/Dustclouds/Smoke02.png" id="4_6o5j2"]
+[ext_resource type="Texture2D" uid="uid://cuk5oi8ppq2o4" path="res://Assets/Dustclouds/Smoke03.png" id="5_45v3g"]
+[ext_resource type="Texture2D" uid="uid://cuxm2bfdma40t" path="res://Assets/Dustclouds/Smoke04.png" id="6_bq1ax"]
+[ext_resource type="Texture2D" uid="uid://bek1kenfsvidd" path="res://Assets/Dustclouds/Smoke05.png" id="7_ag1om"]
+[ext_resource type="Texture2D" uid="uid://bl62mhepegfsr" path="res://Assets/Dustclouds/Smoke06.png" id="8_ggcru"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xw41i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mm8w5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6o5j2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_45v3g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bq1ax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ag1om")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ggcru")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_bl0su"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Body:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DustClouds:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DustClouds:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xw41i"]
+resource_name = "explode"
+length = 6.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.53333, 1.96667, 2.26667, 2.66667, 3, 3.36667, 3.43333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(0.9, 0.9), Vector2(1.2, 1.2), Vector2(0.8, 0.8), Vector2(1.3, 1.3), Vector2(1.1, 1.1), Vector2(1.5, 1.5), Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Body:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 5.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 5.26667, 6.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.56667, 6.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"explodeTnt"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DustClouds:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2.75, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(0.001, 0.001), Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DustClouds:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.75, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ya0am"]
+_data = {
+&"RESET": SubResource("Animation_bl0su"),
+&"explode": SubResource("Animation_xw41i")
+}
+
+[node name="TnT" type="Node2D"]
+script = ExtResource("1_inl5v")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("2_bl0su")
+
+[node name="DustClouds" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DustClouds"]
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.846382
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="DustClouds"]
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.00914887
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(275, 0)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-275, 0)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(0, 275)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(0, -275)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(200, -200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(200, 200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-200, 200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="DustClouds"]
+position = Vector2(-200, -200)
+sprite_frames = SubResource("SpriteFrames_xw41i")
+autoplay = "default"
+frame_progress = 0.265737
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ya0am")
+}
+autoplay = "explode"

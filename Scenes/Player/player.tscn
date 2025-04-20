@@ -1,0 +1,193 @@
+[gd_scene load_steps=21 format=3 uid="uid://vq3ebi483wyn"]
+
+[ext_resource type="Script" uid="uid://ceou74g8np8m2" path="res://Scripts/Player/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dwurb7gsrfo2s" path="res://Assets/Player/Player_SmallDrill01.png" id="2_od3ui"]
+[ext_resource type="Texture2D" uid="uid://befjlexrbepi2" path="res://Assets/Player/Player_SmallDrill02.png" id="3_00tjw"]
+[ext_resource type="Texture2D" uid="uid://f8to3g72oacr" path="res://Assets/Player/Player_BigDrill01.png" id="4_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://bsnxfjulcjyyl" path="res://Assets/Player/Player_BigDrill02.png" id="5_apopc"]
+[ext_resource type="Texture2D" uid="uid://ctt8p8t8m8fm8" path="res://Assets/Player/Player_Idle01.png" id="6_5htga"]
+[ext_resource type="Texture2D" uid="uid://dagkdj771c8ie" path="res://Assets/Player/Player_Idle02.png" id="7_p5o4e"]
+[ext_resource type="PackedScene" uid="uid://rqiv0brcb6qx" path="res://Scenes/Player/shop_hud.tscn" id="8_00tjw"]
+[ext_resource type="Texture2D" uid="uid://cffxa2ndsavdb" path="res://Assets/Ui/Flag.png" id="8_5htga"]
+[ext_resource type="Texture2D" uid="uid://baxcqg3q1ap02" path="res://Assets/Autominer/Autominer01.png" id="9_p5o4e"]
+[ext_resource type="PackedScene" uid="uid://dso056m18q1im" path="res://Scenes/Player/player_ui.tscn" id="9_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://bfxem8wudknhg" path="res://Assets/ShopIcons/ShopSelector.png" id="14_dkpta"]
+[ext_resource type="Theme" uid="uid://f8r1yxwiwbks" path="res://Assets/Themes/Player_lable.tres" id="15_lfmf2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3pqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_od3ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_00tjw")
+}],
+"loop": true,
+"name": &"Drill 1",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_x3vf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_apopc")
+}],
+"loop": true,
+"name": &"Drill 2",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5htga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p5o4e")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_od3ui"]
+radius = 45.0
+height = 170.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_00tjw"]
+radius = 42.19
+
+[sub_resource type="Animation" id="Animation_5htga"]
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAssets:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_apopc"]
+resource_name = "ore_gained"
+length = 0.8
+
+[sub_resource type="Animation" id="Animation_dkpta"]
+resource_name = "playerDmg"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerAssets:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.878431, 0, 0, 1), Color(1, 1, 1, 1), Color(0.878431, 0, 0, 1), Color(1, 1, 1, 1), Color(0.878431, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5o4e"]
+_data = {
+&"RESET": SubResource("Animation_5htga"),
+&"ore_gained": SubResource("Animation_apopc"),
+&"playerDmg": SubResource("Animation_dkpta")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_onrkg")
+deathScenePath = "uid://c6jb345ssluks"
+
+[node name="PlayerAssets" type="Node2D" parent="."]
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="PlayerAssets"]
+position = Vector2(2, 0)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_i3pqv")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="FlagMode" type="Sprite2D" parent="PlayerAssets"]
+position = Vector2(7, 27)
+rotation = 0.740771
+texture = ExtResource("8_5htga")
+
+[node name="AutoMinerMode" type="Sprite2D" parent="PlayerAssets"]
+position = Vector2(-1, 29)
+rotation = -0.131549
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_p5o4e")
+
+[node name="PlayerHitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_od3ui")
+
+[node name="PlayerTigArea" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTigArea"]
+shape = SubResource("CircleShape2D_00tjw")
+
+[node name="MainCam" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="ShopHud" parent="Canvas" instance=ExtResource("8_00tjw")]
+visible = false
+
+[node name="PlayerUI" parent="Canvas" instance=ExtResource("9_x3vf3")]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p5o4e")
+}
+
+[node name="PlayerPopups" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShopPrompt" type="Control" parent="PlayerPopups"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -23.0
+offset_top = -145.0
+offset_right = 27.0
+offset_bottom = -95.0
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerPopups/ShopPrompt"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("14_dkpta")
+centered = false
+
+[node name="Label" type="Label" parent="PlayerPopups/ShopPrompt"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = 50.0
+offset_bottom = 46.0
+theme = ExtResource("15_lfmf2")
+theme_override_font_sizes/font_size = 34
+text = "R"
+
+[node name="OreGains" type="Control" parent="PlayerPopups"]
+anchors_preset = 0
+offset_top = -115.0
+offset_right = 40.0
+offset_bottom = -75.0
+
+[connection signal="activateSkill" from="." to="Canvas/PlayerUI" method="_on_activate_skill"]
+[connection signal="playerStats" from="." to="Canvas/ShopHud" method="_on_player_player_stats"]
+[connection signal="playerStats" from="." to="Canvas/PlayerUI" method="_on_player_player_stats"]
+[connection signal="area_entered" from="PlayerTigArea" to="." method="_on_player_tig_area_area_entered"]
+[connection signal="area_exited" from="PlayerTigArea" to="." method="_on_player_tig_area_area_exited"]
+[connection signal="buyShopSelection" from="Canvas/ShopHud" to="." method="_on_shop_hud_buy_shop_selection"]

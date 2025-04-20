@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm3gpslv131w0"]
+
+[ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/Enviroment/background.tscn" id="1_y7p5x"]
+[ext_resource type="PackedScene" uid="uid://pumfk61vaauj" path="res://Scenes/Menu/back_button.tscn" id="2_7cbwn"]
+[ext_resource type="Theme" uid="uid://letb3gcgu35b" path="res://Assets/Themes/Credits_lable.tres" id="2_oouge"]
+[ext_resource type="Script" uid="uid://trjwrl1xiso0" path="res://Scripts/Menu/credits_label.gd" id="4_occkw"]
+
+[node name="CreditsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" parent="." instance=ExtResource("1_y7p5x")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 47
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme = ExtResource("2_oouge")
+theme_override_font_sizes/font_size = 110
+text = "Credits"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 122
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="CreditsLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_oouge")
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("4_occkw")
+
+[node name="BackButton" parent="." instance=ExtResource("2_7cbwn")]
+layout_mode = 1
+
+[connection signal="meta_clicked" from="VBoxContainer/MarginContainer2/ScrollContainer/VBoxContainer2/CreditsLabel" to="." method="_on_credits_label_meta_clicked"]

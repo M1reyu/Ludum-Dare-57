@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://cyoentlb5k0bt"]
+
+[ext_resource type="Texture2D" uid="uid://bolx7nlc7snd8" path="res://Assets/Dustclouds/Smoke01.png" id="1_o24uy"]
+[ext_resource type="Texture2D" uid="uid://cuk5oi8ppq2o4" path="res://Assets/Dustclouds/Smoke03.png" id="2_njsnu"]
+[ext_resource type="Texture2D" uid="uid://bl62mhepegfsr" path="res://Assets/Dustclouds/Smoke06.png" id="3_y3wjn"]
+[ext_resource type="Texture2D" uid="uid://u2p34m7pwpw" path="res://Assets/Dustclouds/Smoke02.png" id="4_woc1i"]
+[ext_resource type="Texture2D" uid="uid://bek1kenfsvidd" path="res://Assets/Dustclouds/Smoke05.png" id="5_8jvnv"]
+[ext_resource type="Texture2D" uid="uid://cuxm2bfdma40t" path="res://Assets/Dustclouds/Smoke04.png" id="6_ajj0o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_warhw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_o24uy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_njsnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y3wjn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_woc1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8jvnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ajj0o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_o24uy"]
+resource_name = "free"
+length = 0.75
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_njsnu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3wjn"]
+_data = {
+&"RESET": SubResource("Animation_njsnu"),
+&"free": SubResource("Animation_o24uy")
+}
+
+[node name="DustCloud" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_warhw")
+autoplay = "default"
+frame_progress = 0.10615
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y3wjn")
+}
+autoplay = "free"

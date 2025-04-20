@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://xv75whi5jajw"]
+
+[ext_resource type="Script" uid="uid://brfbiks4y05p3" path="res://Scripts/Menu/main_menu.gd" id="2_03h3j"]
+[ext_resource type="Theme" uid="uid://cfr83i8fuq5tj" path="res://Assets/Themes/Start_theme.tres" id="3_ce3w2"]
+[ext_resource type="FontFile" uid="uid://7m7b0fytxky" path="res://Assets/Font/Audiowide/Audiowide-Regular.ttf" id="3_n45e2"]
+[ext_resource type="PackedScene" uid="uid://4ewxqnlu6qf1" path="res://Scenes/Enviroment/background.tscn" id="3_wqsap"]
+[ext_resource type="Script" uid="uid://dpyf25n3iu6ni" path="res://Scripts/Menu/simple_button.gd" id="4_elir1"]
+
+[sub_resource type="Theme" id="Theme_opfnp"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_03h3j")
+
+[node name="Background" parent="." instance=ExtResource("3_wqsap")]
+layout_mode = 1
+offset_left = -11.5
+offset_right = 860.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_right = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_opfnp")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -30
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.301961, 0.0980392, 0.113725, 1)
+theme_override_fonts/font = ExtResource("3_n45e2")
+theme_override_font_sizes/font_size = 153
+text = "Mine Digger"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_constants/separation = 15
+
+[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("3_ce3w2")
+text = "Start"
+script = ExtResource("4_elir1")
+targetScenePath = "uid://b1d377qbu0m2h"
+textAlignment = 1
+hasInitialFocus = true
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_ce3w2")
+text = "Settings"
+script = ExtResource("4_elir1")
+targetScenePath = "uid://dty22uu0yvdqy"
+textAlignment = 1
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_ce3w2")
+text = "Credits"
+script = ExtResource("4_elir1")
+targetScenePath = "uid://bm3gpslv131w0"
+textAlignment = 1

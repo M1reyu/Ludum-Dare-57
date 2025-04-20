@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3 uid="uid://dso056m18q1im"]
+
+[ext_resource type="Script" uid="uid://bjvo0o85w6gcu" path="res://Scripts/Player/player_ui.gd" id="1_m5vge"]
+[ext_resource type="Texture2D" uid="uid://dbb5wgyw42nat" path="res://Assets/Ui/Hub.png" id="2_4r83l"]
+[ext_resource type="Texture2D" uid="uid://dec3xlix87io4" path="res://Assets/Ui/Icon Cargo.png" id="3_7x5ta"]
+[ext_resource type="Theme" uid="uid://dpulc4qy1orno" path="res://Assets/Themes/Player_bars.tres" id="3_njtxh"]
+[ext_resource type="Texture2D" uid="uid://dhv4yaymkktnx" path="res://Assets/Ui/IconCoin.png" id="4_cutnq"]
+[ext_resource type="Texture2D" uid="uid://djtkwud5x348r" path="res://Assets/Ui/IconFuel.png" id="5_njtxh"]
+[ext_resource type="Texture2D" uid="uid://cvmgp1nbij7bl" path="res://Assets/Ui/ Icon Heath.png" id="6_s8btb"]
+[ext_resource type="Texture2D" uid="uid://cfrmrg7c3n3gw" path="res://Assets/ShopIcons/ShopiconTNT.png" id="7_0ck7p"]
+[ext_resource type="Texture2D" uid="uid://b365uue3ib0sw" path="res://Assets/ShopIcons/ShopiconAutominer.png" id="8_c1xew"]
+[ext_resource type="PackedScene" uid="uid://of6mo3qryxfv" path="res://Scenes/Player/player_ui_skill.tscn" id="9_njtxh"]
+[ext_resource type="Theme" uid="uid://f8r1yxwiwbks" path="res://Assets/Themes/Player_lable.tres" id="9_s8btb"]
+[ext_resource type="Texture2D" uid="uid://bkc4fom7rcbxa" path="res://Assets/ShopIcons/ShopiconFlag.png" id="11_cutnq"]
+[ext_resource type="Texture2D" uid="uid://b5mt30blfjb6p" path="res://Assets/ShopIcons/ShopiconScanner.png" id="12_njtxh"]
+
+[node name="PlayerUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_m5vge")
+
+[node name="HUD" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_4r83l")
+centered = false
+
+[node name="healthBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 42.0
+offset_right = 185.0
+offset_bottom = 55.0
+theme = ExtResource("3_njtxh")
+show_percentage = false
+
+[node name="cargoBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 78.0
+offset_right = 186.0
+offset_bottom = 91.0
+theme = ExtResource("3_njtxh")
+show_percentage = false
+
+[node name="fuleBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 111.0
+offset_right = 186.0
+offset_bottom = 124.0
+theme = ExtResource("3_njtxh")
+show_percentage = false
+
+[node name="IconHeath" type="Sprite2D" parent="HUD"]
+position = Vector2(39, 48)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_s8btb")
+
+[node name="IconCargo" type="Sprite2D" parent="HUD"]
+position = Vector2(37, 82)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_7x5ta")
+
+[node name="IconFuel" type="Sprite2D" parent="HUD"]
+position = Vector2(37, 121)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_njtxh")
+
+[node name="IconCoin" type="Sprite2D" parent="HUD"]
+position = Vector2(61, 167)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_cutnq")
+
+[node name="moneyLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 155.0
+offset_right = 168.0
+offset_bottom = 181.0
+theme = ExtResource("9_s8btb")
+text = "99999"
+
+[node name="Skills" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 222.0
+offset_top = 7.0
+offset_right = 262.0
+offset_bottom = 47.0
+scale = Vector2(0.5, 0.5)
+
+[node name="SkillTnt" parent="Skills" instance=ExtResource("9_njtxh")]
+offset_left = 0.0
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+icon_image = ExtResource("7_0ck7p")
+btn_info = 1
+countable = true
+
+[node name="SkillMiner" parent="Skills" instance=ExtResource("9_njtxh")]
+offset_left = 244.0
+offset_top = 4.0
+offset_right = 284.0
+offset_bottom = 44.0
+icon_image = ExtResource("8_c1xew")
+btn_info = 2
+countable = true
+
+[node name="SkillScanner" parent="Skills" instance=ExtResource("9_njtxh")]
+offset_left = 488.0
+offset_top = 2.0
+offset_right = 528.0
+offset_bottom = 42.0
+icon_image = ExtResource("12_njtxh")
+btn_info = 3
+
+[node name="SkillFlag" parent="Skills" instance=ExtResource("9_njtxh")]
+offset_left = 732.0
+offset_top = 1.0
+offset_right = 772.0
+offset_bottom = 41.0
+icon_image = ExtResource("11_cutnq")
+btn_info = 4

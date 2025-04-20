@@ -19,7 +19,7 @@ config/icon="uid://dwurb7gsrfo2s"
 [autoload]
 
 AudioPlayer="*res://Scenes/AudioPlayer.tscn"
-GlobalVars="*res://globalVars.gd"
+GlobalVars="*res://Scripts/globalVars.gd"
 
 [display]
 
