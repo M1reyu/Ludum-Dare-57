@@ -30,7 +30,7 @@ func isDamaged() -> bool:
 	return healthPoints < _baseHealth && isMined() == false
 	
 func drill(damage: int = 1) -> void:
-	if isFlagged == true:
+	if isFlagged == true || _resistance < 0:
 		return
 
 	damage -= _resistance
