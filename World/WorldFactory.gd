@@ -111,12 +111,16 @@ func drill(cellPosition: Vector2i, damage: int) -> void:
         AudioPlayer.play_sfx('explosion')
         var tileGlobalPos : Vector2 = ground.to_global(ground.map_to_local(cellPosition))
         explosion.emit(tileGlobalPos, cell.damage, Mine.DAMAGE_RADIUS)
+        GlobalVars.minesHit += 1
         var dust : AnimatedSprite2D = explotionDust.instantiate()
         dust.global_position = tileGlobalPos
         ground.get_parent().add_sibling(dust)
     elif cell is Ore:
         AudioPlayer.play_sfx('pickupOre')
         minedValuable.emit(cell.value)
+        GlobalVars.oreMined += 1
+    else:
+        GlobalVars.tilesMined += 1
 
 func printWorld() -> void:
     #print("World state:")

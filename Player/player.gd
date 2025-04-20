@@ -21,7 +21,6 @@ var inMenu : bool = false
 var canOpen : bool = false
 
 var curMoney : int = 0
-var totalMoney: int = 0
 var curHealth : int = 1
 var curTank : float = 100.0
 var curCargo : int = 0
@@ -56,11 +55,19 @@ func _ready() -> void:
 	curTank = maxTank
 	playerStrength = strength
 	playerSpeed = speed
+	
+	GlobalVars.timePlayed = 0
+	GlobalVars.tilesMined = 0
+	GlobalVars.minesHit = 0
+	GlobalVars.oreMined = 0
+	
 	sendStatSignal()
 
 var scanTimeout = 0
 var tntTimeout = 0
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
+	GlobalVars.timePlayed += delta
+	
 	if scanTimeout > 0: scanTimeout -= delta
 	if tntTimeout > 0: tntTimeout -= delta
 	if (canOpen && !menuHud.visible && Input.is_action_just_pressed("MenuTrigger")): 
@@ -226,7 +233,6 @@ func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	canOpen = true
 	var moneyEarned: int = curCargo * 100
 	curMoney += moneyEarned
-	totalMoney += moneyEarned
 	curCargo = 0
 	shopPrompt.visible = true
 	
@@ -249,7 +255,7 @@ func _on_explosion(coordinates: Vector2i, damage: int, radius: int) -> void:
 		curHealth -= damage
 	
 	if curHealth <= 0: 
-		GlobalVars.playerFunds = totalMoney
+		GlobalVars.playerFunds = curMoney
 		get_tree().change_scene_to_file(deathScenePath)
 	
 	animations.play("playerDmg")

@@ -1,5 +1,11 @@
 extends Node
 
+var playerFunds : int = 0
+var minesHit : int = 0
+var oreMined : int = 0
+var tilesMined : int = 0
+var timePlayed : float = 0
+
 enum shopBuyables {
 	Repair = 1,
 	Refuel = 2,
@@ -15,8 +21,6 @@ enum shopBuyables {
 	Flag = 12,
 	RangeMine = 13
 }
-
-var playerFunds : int = 0
 
 const itemNames = {
 	shopBuyables.Repair : "Repair",
