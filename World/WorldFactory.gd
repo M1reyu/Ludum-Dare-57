@@ -13,7 +13,7 @@ var yCenter: int
 var globalSection: int
 var scanTimer: Timer
 
-var explotionDust = preload("res://Scenes/DustCloud.tscn")
+var explosionDust = preload("res://Scenes/DustCloud.tscn")
 
 const SECTION_ROWS: int = 5
 const SECTION_COUNT = 5
@@ -122,7 +122,7 @@ func drill(cellPosition: Vector2i, damage: int, spread : bool = false) -> void:
         var tileGlobalPos : Vector2 = ground.to_global(ground.map_to_local(cellPosition))
         explosion.emit(tileGlobalPos, cell.damage, Mine.DAMAGE_RADIUS)
         GlobalVars.minesHit += 1
-        var dust : AnimatedSprite2D = explotionDust.instantiate()
+        var dust : AnimatedSprite2D = explosionDust.instantiate()
         dust.global_position = tileGlobalPos
         ground.get_parent().add_sibling(dust)
     elif cell is Ore:
