@@ -1,6 +1,7 @@
 extends Object
 class_name Cell
 
+var _section : int = 0
 var _baseHealth: int = 2
 var _resistance: int = 1
 
@@ -10,6 +11,8 @@ var tileVariant: int = 0
 var isFlagged: bool = false
 
 func _init(section: int = 0) -> void:
+	_section = section
+	
 	# if no section is give, that means the cell should be mined
 	if section == 0: return
 	section -= 1

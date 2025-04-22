@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqlspaewywbux"]
+
+[ext_resource type="Script" uid="uid://did1h4yjn2663" path="res://Scripts/Misc/asterioid_viewer.gd" id="1_ed24d"]
+[ext_resource type="PackedScene" uid="uid://bf06x6e6dsvi" path="res://Scenes/Enviroment/Asteroid.tscn" id="2_oxxo5"]
+
+[node name="AsterioidViewer" type="Node2D"]
+script = ExtResource("1_ed24d")
+
+[node name="Asteroid" parent="." instance=ExtResource("2_oxxo5")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.4, 0.4)

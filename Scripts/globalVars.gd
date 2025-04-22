@@ -8,6 +8,8 @@ var timePlayed : float = 0
 
 var drillSpreading : bool = false
 
+var asteroides : Array[Node2D]
+
 enum shopBuyables {
 	Repair = 1,
 	Refuel = 2,

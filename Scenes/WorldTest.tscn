@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs4javg0l5ikc"]
+
+[ext_resource type="PackedScene" uid="uid://bf06x6e6dsvi" path="res://Scenes/Enviroment/Asteroid.tscn" id="1_hkm8i"]
+[ext_resource type="PackedScene" uid="uid://d35ogjkebk0x6" path="res://Scenes/Enviroment/Shop.tscn" id="2_yyb55"]
+[ext_resource type="PackedScene" uid="uid://vq3ebi483wyn" path="res://Scenes/Player/player.tscn" id="3_jxptq"]
+
+[node name="WorldTest" type="Node2D"]
+
+[node name="Asteroid" parent="." instance=ExtResource("1_hkm8i")]
+originAnchorY = 0.5
+
+[node name="Shop" parent="." instance=ExtResource("2_yyb55")]
+position = Vector2(0, -750)
+
+[node name="Player" parent="." instance=ExtResource("3_jxptq")]
+position = Vector2(0, -250)

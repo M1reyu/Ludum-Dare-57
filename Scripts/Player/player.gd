@@ -8,7 +8,7 @@ signal activateSkill(skillType: int)
 @export var speed : int = 800
 @export var speedLimit : int = 1500
 @export var bounceForce : int = 1000
-#@export var gravity : int = 300
+@export var gravity : int = 1200
 
 @export var maxHealth : int = 2
 @export var maxTank : int = 100
@@ -19,6 +19,8 @@ signal activateSkill(skillType: int)
 var strength : int = 2
 var inMenu : bool = false
 var canOpen : bool = false
+var drillActive : bool = false
+var applyGrav : bool = true
 
 var curMoney : int = 0
 var curHealth : int = 1
@@ -76,11 +78,21 @@ func _process(delta: float) -> void:
 	flagmodeFlag.visible = true if (strength == -1) else false
 	autominerMode.visible = true if (strength < -1) else false
 	
+	if curTank <= 0:
+		curTank = 0
+		strength = 0
+		speed = playerSpeed / 2
+	else:
+		if strength == 0: strength = playerStrength
+		speed = playerSpeed
+	
 	var dirMod = directionMod(Input.get_vector("Left", "Right", "Up", "Down"))	
-	if (dirMod == Vector2.ZERO || menuHud.visible): 
+	if (dirMod == Vector2.ZERO || menuHud.visible):
+		drillActive = false 
 		playerSprite.rotation_degrees = 0
 		if (playerSprite.animation != "Idle"): playerSprite.play("Idle")
 	elif (strength >= 0):
+		drillActive = true
 		playerSprite.rotation = dirMod.angle() - Vector2.DOWN.angle()
 		if (playerSprite.animation == "Idle"): playerSprite.play("Drill 1")
 	
@@ -119,20 +131,27 @@ func _physics_process(delta: float) -> void:
 		if (dir != Vector2.ZERO && curTank > 0): 
 			if (int(curTank - delta) < int(curTank)): sendStatSignal()
 			curTank -= delta
-			if curTank <= 0:
-				curTank = 0
-				strength = 0
-				speed = playerSpeed / 2
-			else:
-				if strength == 0: strength = playerStrength
-				speed = playerSpeed
+		elif velocity.length() < gravity:
+			var closest : Node2D = null
+			var closestDist : float = 0
+			var dist : float = 0
+			for i in range(GlobalVars.asteroides.size()):
+				dist = position.distance_to(GlobalVars.asteroides[i].position) - GlobalVars.asteroides[i].radius
+				if dist < closestDist || closest == null: 
+					closest = GlobalVars.asteroides[i]
+					closestDist = position.distance_to(closest.position) - closest.radius
 			
+			if closest != null && applyGrav:
+				var gravityDir = position.direction_to(closest.position) * gravity * delta
+				velocity += gravityDir
+		
 		if (dir.x != 0):
 			dir.x *= speed * delta * 2
 			if((dir.x < 0 && velocity.x > 0) || (dir.x > 0 && velocity.x < 0)): dir.x += (velocity.x * 0.65)
 			else: dir.x += velocity.x
 			if (dir.x > speed): dir.x = speed
 			elif (dir.x < -speed): dir.x = -speed
+		elif applyGrav: dir.x = velocity.x * 0.8
 		elif (abs(velocity.x) > 10): dir.x = velocity.x * 0.8
 		else: dir.x = 0
 		
@@ -142,8 +161,9 @@ func _physics_process(delta: float) -> void:
 			else: dir.y += velocity.y
 			if (dir.y > speed): dir.y = speed
 			elif (dir.y < -speed): dir.y = -speed
+		elif applyGrav: dir.y = velocity.y * 0.8
 		elif (abs(velocity.y) > 10): dir.y = velocity.y * 0.8
-		else: dir.y = 0 
+		else: dir.y = 0
 	
 	dirMod = directionMod(dir)
 	if (abs(dir.x) > speedLimit): dir.x = speedLimit * dirMod.x
@@ -230,6 +250,7 @@ func _on_shop_hud_buy_shop_selection(itemType: int) -> void:
 
 func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 	canOpen = true
+	applyGrav = false
 	var moneyEarned: int = curCargo * 100
 	curMoney += moneyEarned
 	curCargo = 0
@@ -239,6 +260,7 @@ func _on_player_tig_area_area_entered(_area: Area2D) -> void:
 
 func _on_player_tig_area_area_exited(_area: Area2D) -> void:
 	canOpen = false
+	applyGrav = true
 	shopPrompt.visible = false
 	
 	sendStatSignal()
@@ -276,3 +298,9 @@ func _on_collect_valuable(value: int) -> void:
 func _on_tn_t_explode(coordinates: Vector2i, dmg: int) -> void:
 	_on_explosion(coordinates, dmg, 550)
 	tnt.emit(coordinates)
+
+func _onAntiGravEntered(body: Node2D) -> void:
+	applyGrav = false
+
+func _onAntiGravExited(body: Node2D) -> void:
+	applyGrav = true
